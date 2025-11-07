@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	td > div > span { color : #FF0000 }
+	
+	#div > span { background-color: #FFF5CC}
+</style>
+</head>
+<body>
+	어제는 <span>화요일</span> 입니다.
+	<div id="div">
+		오늘은 <span>수요일</span> 입니다.
+	</div>
+	<p>
+		내일은 <span>목요일</span> 입니다.
+	</p>
+	
+	<table>
+	<tr><!-- sub selector는 적용 되지 않아야 하는 태그에도 적용 된다. -->
+		<td><div>자바는 <span>객체지향</span> 언어 입니다.</div></td>
+	</tr>
+	
+	</table>
+</body>
+</html>

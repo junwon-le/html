@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon"	href="http://192.168.10.73/html_prj/common/images/favicon.ico">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 내가 만든 CSS -->
+<!-- <link rel="stylesheet" type = "text/css" href="http://192.168.10.73/html_prj/common/css/mian_ver251031.css"/> -->
+
+<!-- bootstrap CDN 시작 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<!-- bootstrap CDN 끝 -->
+<style type="text/css">
+#wrap{ margin : 0px auto ; width : 1200px; height : 1000px;
+      /* background-color: #ff0000 */ }
+#header{ height : 150px;  /* background-color: #4179C2 */ }
+#container{ height : 700px;  /* background-color: #71b75e ; */ }
+#footer{ height : 150px;  /* background-color: #fef6e1 ; */ }
+
+
+</style>
+<script type="text/javascript">
+alert(name2);// hoisting
+
+var name2 = "민병조";
+var name2 = "임성우";//var로 같은 이름의 변수를 여러 번 선언 할 수 있다.
+alert(name2);
+
+// alert(age ); //let으로 선언한 변수는 hoisting이 되지 않는다.
+let age =20;
+// let age =30; // let으로는 선언을 한번만 할 수 있다.
+age = 25; // 값할당은 여러번 가능
+alert(age);
+
+// alert(addr);//const 변수는 hoisting 되지 않는다.
+const addr="경기도 의정부시 민락동";
+// addr = "서울기 강남구 대치동"; //const 변수는 값 변경 불가.
+alert(addr);
+
+
+
+
+
+
+
+</script>
+</head>
+<body>
+<div id = "wrap" >
+	<div id="header">header 1200(w)x150(h) 
+				사이트로고, 주력 서비스, navigation bar
+	</div>
+	<div id="container">
+	<div>
+		
+	</div>
+	</div>
+	<div id="footer">footer 1200(w)x150(h)</div>
+</div>
+
+</body>
+</html>

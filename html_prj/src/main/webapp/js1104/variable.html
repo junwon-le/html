@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon"	href="http://192.168.10.73/html_prj/common/images/favicon.ico">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 내가 만든 CSS -->
+<!-- <link rel="stylesheet" type = "text/css" href="http://192.168.10.73/html_prj/common/css/mian_ver251031.css"/> -->
+
+<!-- bootstrap CDN 시작 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<!-- bootstrap CDN 끝 -->
+<style type="text/css">
+#wrap{ margin : 0px auto ; width : 1200px; height : 1000px;
+      /* background-color: #ff0000 */ }
+#header{ height : 150px;  /* background-color: #4179C2 */ }
+#container{ height : 700px;  /* background-color: #71b75e ; */ }
+#footer{ height : 150px;  /* background-color: #fef6e1 ; */ }
+
+
+</style>
+<script type="text/javascript">
+
+//지역 변수 
+//1. 선언 ) var : 변수명; //데이터 형을 알 수 없다. 
+var name2;
+
+//2. 값 할당)
+//alert("값 할당 전 :"+  typeof(name2));
+name2 = "민병조";
+//alert("값 할당 후 :"+  typeof(name2));
+//name2 = 25;
+//name2 = true;
+//alert("값 할당 후 :"+  typeof(name2));
+
+//3.값 사용
+document.write(name2 + "<br>");
+
+/* <br> : javascript 영역 에서는 html 태그를 정의 할 수 없다.*/
+//전역 변수
+//1. 선언 
+age = 20; 
+//2 . 사용
+document.write(age);
+
+function useVariable(){
+	document.write("지역 변수 : "+ name2+"<br>")
+	document.write("전역 변수 : "+ age+"<br>")
+
+	document.write("전역 변수 : "+ age+"<br>")
+}
+function useVariable2(){
+	var addr="경기도 의정부시 민락동";//지역  함수 안에서 사용할 수 없다.???
+	addr2="서울시 역삼동";//전역 함수 외부에서 사용할 수 있다. 
+	alert("지역 변수 : "+ addr+"<br>")
+	alert("전역 변수 : "+ addr2+"<br>")
+}
+function useVariable3(){
+	// alert("지역 변수 : "+ addr+"<br>") //외부에서 사용 불가
+	alert("전역 변수 : "+ addr2+"<br>") // 외부에서 사용 가능 
+}
+</script>
+</head>
+<body>
+<div id = "wrap" >
+	<div id="header">header 1200(w)x150(h) 
+				사이트로고, 주력 서비스, navigation bar
+	</div>
+	<div id="container">
+	<div>
+		<input type="button" value="변수의 사용" class="btn btn-warning"
+		onclick="useVariable()" />
+		<input type="button" value="변수의 사용2" class="btn btn-info"
+		onclick="useVariable2()" />
+		<input type="button" value="변수의 사용3" class="btn btn-success"
+		onclick="useVariable3()" />
+	</div>
+	</div>
+	<div id="footer">footer 1200(w)x150(h)</div>
+</div>
+
+</body>
+</html>

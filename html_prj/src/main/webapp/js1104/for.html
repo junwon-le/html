@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon"	href="http://192.168.10.73/html_prj/common/images/favicon.ico">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 내가 만든 CSS -->
+<!-- <link rel="stylesheet" type = "text/css" href="http://192.168.10.73/html_prj/common/css/mian_ver251031.css"/> -->
+
+<!-- bootstrap CDN 시작 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<!-- bootstrap CDN 끝 -->
+<style type="text/css">
+#wrap{ margin : 0px auto ; width : 1200px; height : 1000px;
+      /* background-color: #ff0000 */ }
+#header{ height : 150px;  /* background-color: #4179C2 */ }
+#container{ height : 700px;  /* background-color: #71b75e ; */ }
+#footer{ height : 150px;  /* background-color: #fef6e1 ; */ }
+.sumResult{ font-weight: bold; font-size: 20px; text-decoration: underline; font-style: italic; }
+thead>tr>td{border: 0px}
+.gab{width :200px;}
+.value{width :100px;}
+img{border-radius: 100px; width:200px; box-shadow: -10px -10px 10px #FF0000; margin: 10px}
+</style>
+<script type="text/javascript">
+	for(var i =1; i<7; i++){
+		document.write("<h"+i+">안녕하세요</h"+i+">");
+	}//end for
+	
+	//1~100까지 합 출력 ( 합을 진하게 , 20px, 밑줄, 이텔릭)
+	var sum=0;
+	for(var j=1; j< 101; j++){
+		sum+=j;
+	}
+	document.write("<span class='sumResult'>"+sum+"</span>");
+	//테이블을 만들고 구구단 2단을
+	var result=0;
+	document.write("<table class='table table-bordered border-primary'>")
+	
+	document.write("<thead>")
+	document.write("<tr><td>")
+	document.write("2단")
+	document.write("</td></tr>")
+	document.write("</thead>")
+	
+	document.write("<tbody>")
+	for(var i =1; i<10; i++){
+	document.write("<tr>")
+		for(var j=2;j<10;j++){
+			result=j*i;
+	document.write("<td class='gab'>")
+	document.write(j+" * "+i+"=")
+	document.write("</td>")
+	document.write("<td class='value'>")
+	document.write(result)
+	document.write("</td>")
+			
+		}
+	document.write("</tr>")
+	
+	}
+	document.write("</tbody>")
+	document.write("</table>")
+	
+	
+	for(var i=0; i<5; i++){
+		for(var j=0; j<i; j++){
+	document.write("<img src='../day1024/images/test.png' /> ")
+			
+		}	
+	document.write("<br>")
+		
+	}
+</script>
+</head>
+<body>
+<div id = "wrap" >
+	<div id="header">header 1200(w)x150(h) 
+				사이트로고, 주력 서비스, navigation bar
+	</div>
+	<div id="container">
+	<div>
+		
+	</div>
+	</div>
+	<div id="footer">footer 1200(w)x150(h)</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 공통디자인 외부 파일방식으로 사용 -->
+<link rel="stylesheet" type="text/css" href="http://192.168.10.68/html_prj/common/css/main_v251031.css"/>
+
+<style type="text/css">
+/* 이 페이지에서만 사용하는 디자인 정의 */
+#agreement{ border: 1px solid #E5E5E5; width: 1400px; height: 180px;	overflow: auto; margin-bottom: 20px }
+/* wrap을 가운데로 위치  */
+#wrap{ width: 1500px; margin:  0px auto }
+.star{ color : #FF0000 }
+#joinFrm{ border-top:4px solid #888888;border-spacing: 0px }
+td,th{ border-bottom: 1px solid #E1E3E4  }
+tr { height: 40px }
+.title{ background-color: #F9F8F8 ; width: 150px; font-weight: bold ;font-size: 16px}
+.input{ background-color: #FFFFFF; width: 1250px }
+#output{ border : 1px solid #333; width : 600px ; height: 400px; overflow:auto;}	
+</style>
+
+<script type="text/javascript">
+function setValue(){
+	//값
+	var obj = document.joinFrm;
+	obj.id.value="html5";
+	obj.pass.value="html5";
+	obj.birth.value="2025-11-07";
+	obj.email.value="이것은 이메일";
+	obj.domain.value="daum.net"; 
+	//<input type="file"은 value설정이 되지 않는다.
+	//obj.upfile.value="C:/dev/workspace/html_prj/src/main/webapp/js1105/images/dice_2.png"; 
+	obj.code.value="HTML5CSS3";//input type ="hidden" 
+	obj.intro.value="오늘은 목요일 입니다.";//input type ="textarea" 
+
+	//상태 변환 
+	//checked
+	//성별 남자 -0, 여자-1
+	obj.gender[0].checked = true;
+	
+	obj.img.src = "images/dog.png";
+	
+}
+function setChecked(flag){
+var obj = document.joinFrm;
+	if (flag=='A'){
+		for(var i=0; i<obj.hobby.length;i++)
+		obj.hobby[i].checked=true;
+	}
+	if (flag=='N'){
+		for(var i=0; i<obj.hobby.length;i++)
+		obj.hobby[i].checked=false;
+	}
+	
+}
+</script>
+</head>
+<body>
+<div id="wrap">
+<div id="agreement">
+            <div class="ScrollLy">
+            </div>
+            </div>
+	
+<hr/>
+<div id="joinFrmDiv">
+	<form name="joinFrm">
+	<table id="joinFrm">
+		<tr>
+			<td class="title"><label><span class="star">*</span>아이디</label></td>
+			<td class="input"><input type="text" class="inputBox" name="id" /></td>
+		</tr>
+
+		<tr>
+			<td class="title"><label><span class="star">*</span>비밀번호</label></td>
+			<td class="input"><input type="password" class="inputBox" name="pass" />
+		</tr>
+
+		<tr>
+			<td class="title"><label><span class="star">*</span>생일</label></td>
+			<td class="input"><input type="date" class="inputBox" name="birth" /></td>
+		</tr>
+	
+		<tr>
+			<td class="title"><label><span class="star">*</span>이메일</label></td>
+			<td class="input"><input type="email" style="width: 250px" class="inputBox" name="email" />@ 
+			<input type="text" list="domain"  class="inputBox" name="domain" ><input type="checkbox" value="수신"  >수신
+				<datalist id="domain">
+					<option value="naver.com" />
+					<option value="daum.net" />
+					<option value="gmail.com" />
+					<option value="hotmail.com" />
+					<option value="nate.com" />
+					<option value="korea.com" />
+				</datalist>
+		</tr>
+
+		<tr>
+			<td class="title"><label><span class="star">*</span>성별</label></td>
+			<td class="input"><input type="radio" name="gender" value="남자" />남자 <input
+				type="radio" name="gender" value="여자" />여자 <br /></td>
+		</tr>
+
+		<tr>
+			<td class="title"><label><span class="star">*</span>소재지</label></td>
+			<td class="input"><select  class="inputBox" style="width: 120px;height: 25px" name="loc" >
+					<option value="N/A">선택해주세요</option>
+					<option value="강원">강원</option>
+					<option value="경기">경기</option>
+					<option value="경남">경남</option>
+					<option value="경북">경북</option>
+					<option value="광주">광주</option>
+					<option value="대구">대구</option>
+					<option value="대전">대전</option>
+					<option value="부산">부산</option>
+					<option value="서울">서울</option>
+					<option value="울산">울산</option>
+					<option value="인천">인천</option>
+					<option value="전남">전남</option>
+					<option value="전북">전북</option>
+					<option value="제주">제주</option>
+					<option value="충남">충남</option>
+					<option value="충북">충북</option>
+					<option value="제주">제주</option>
+					<option value="해외">해외</option>
+			</select></td>
+		</tr>
+		<tr>
+		<td class="title">취미</td>
+		
+		<td>
+		<input type="checkbox" name="hobby" value="게임">게임
+		<input type="checkbox" name="hobby" value="운동">운동
+		<input type="checkbox" name="hobby" value="유튜브감상">유튜브
+		<input type="checkbox" name="hobby" value="음악감상">음악감상
+		<input type="checkbox" name="hobby" value="등산">등산
+		
+		</td>
+		</tr>
+		<tr>
+			<td class="title">파일 선택</td>
+			<td><input type="file" name="upfile"/></td>
+		</tr>
+		<tr>
+			<td class="title">소개</td>
+			<td><textarea name="intro" style="width : 400px; height: 100px" ></textarea></td>
+		</tr>
+		<tr>
+		<td colspan="2" style="text-align: center ">
+		<input type="hidden" name="code"/>
+		<input type="button" value="값 설정"  class="btnBox" onclick="setValue()"/> 
+		<input type="button" value="모든 체크박스 설정"  class="btnBox" onclick="setChecked('A')"/> 
+		<input type="button" value="모든 체크박스 해제"  class="btnBox" onclick="setChecked('N')"/> 
+		
+		</td>
+			</tr>
+
+	</table>
+	<img src="" name="img"/>
+	</form>
+	
+</div>
+</div>
+</body>
+</html>

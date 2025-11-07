@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon"	href="http://192.168.10.73/html_prj/common/images/favicon.ico">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- bootstrap CDN 시작 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<!-- bootstrap CDN 끝 -->
+<style type="text/css">
+#wrap{ margin : 0px auto ; width : 1200px; height : 1000px;/* background-color: #ff0000 */ }
+#header{ height : 150px;  /* background-color: #4179C2 */ }
+#container{ height : 700px;  /* background-color: #71b75e ; */ }
+#footer{ height : 150px;  /* background-color: #fef6e1 ; */ }
+</style>
+
+<script type="text/javascript">
+window.onload = function(){
+	document.getElementById("btn").addEventListener("click",back);
+	document.getElementById("btn2").addEventListener("click",go);
+	document.getElementById("btn3").addEventListener("click",go2);
+	document.getElementById("btn4").addEventListener("click",count);
+}//onload
+function back(){
+	history.back();
+}//back
+
+function go(){
+	history.go(1);
+}//go
+
+function go2(){
+	
+	history.go(-1);
+}//go2
+
+function count(){
+	alert( history.length+"개");
+}//count
+
+</script>
+</head>
+<body>
+<div id = "wrap" >
+	<div id="header">
+	</div>
+	<div id="container">
+	<div>
+		<input type="button" value="뒤로" id="btn" class = "btn btn-success"/>
+		<input type="button" value="앞으로" id="btn2" class = "btn btn-info"/>
+		<input type="button" value="앞으로를 사용한 뒤로"  id="btn3" class = "btn btn-danger"/>
+		<input type="button" value="히스토리 개수"  id="btn4" class = "btn btn-success"/>
+		
+	</div>
+	</div>
+	<div id="footer">
+	</div>
+</div>
+
+</body>
+</html>

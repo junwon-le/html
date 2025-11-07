@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon"	href="http://192.168.10.73/html_prj/common/images/favicon.ico">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- bootstrap CDN 시작 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<!-- bootstrap CDN 끝 -->
+<link rel="stylesheet" type = "text/css" href="http://192.168.10.73/html_prj/common/css/mian_ver251031.css"/>
+<style type="text/css">
+</style>
+<script type="text/javascript">
+//1. 배열 생성
+//빈배열
+var arr = new Array();
+//초기화된 배열
+var arr2 = [2025,"안녕",2025.11,false];
+
+//alert( typeof(arr)+ "/" + arr2)''
+
+//2.값 추가
+arr[0] = "배열";
+arr[1] = "가변 길이형";
+arr[2] = "모든 값을 추가할 수 있음";
+
+//3. 값 얻기
+document.write(arr[0]+"<br>");
+//backtick
+document.write(`${arr[0]} <br>`);
+
+document.write("<ul>");
+//일괄 처리
+for(var i=0; i<arr.length; i++){
+	document.write(`<li>${i}번째 방 : ${arr[i]} </li>`);
+}
+document.write("<ul>");
+
+//arr배열의 가장 마지막 방 뒤에 값을 추가
+arr.push("오늘은 수요일");
+arr.push("내일은 목요일");
+
+//배열을 추가
+arr.push(...arr2);
+
+for(var i=0; i<arr.length; i++){
+	document.write(`<li>${i}번째 방 : ${arr[i]} </li>`);
+}
+
+// 배열 방의 검색
+var ind = arr.indexOf(2025);
+document.write( `2025는 ${ind}번째 방에 존재 합니다.<br> `)
+
+var ind = arr.indexOf("잘가");//존재 하지 않으면 -1 반환
+	var msg="존재함";
+if(ind == -1){
+	var msg="존재하지 않음";
+}
+document.write( `잘가는 ${msg}<br>`)
+
+/* 
+0번째 배열의 방
+1번째 배열의 방
+2번째 배열의 방
+3번째 배열의 방
+4번째 배열의 방
+5번째 배열의 방
+6번째 배열의 방
+7번째 배열의 방
+8번째 배열의 방
+*/
+arr.splice(2,3);
+
+for(var i=0; i<arr.length; i++){
+	document.write(`${i}번째 방 : ${arr[i]} <br>`);
+}
+
+
+</script>
+</head>
+<body>
+
+</body>
+</html>
