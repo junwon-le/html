@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon"	href="http://192.168.10.73/html_prj/common/images/favicon.ico">
+<meta charset=UTF-8>
+<title>Insert title here</title>
+<!-- 내가 만든 CSS -->
+<!-- <link rel="stylesheet" type = "text/css" href="http://192.168.10.73/html_prj/common/css/mian_ver251031.css"/> -->
+
+<!-- bootstrap CDN 시작 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<!-- bootstrap CDN 끝 -->
+<style type="text/css">
+#wrap{ margin : 0px auto ; width : 1200px; height : 1000px;
+      /* background-color: #ff0000 */ }
+#header{ height : 150px;  /* background-color: #4179C2 */ }
+#container{ height : 700px;  /* background-color: #71b75e ; */ }
+#footer{ height : 150px;  /* background-color: #fef6e1 ; */ }
+</style>
+<!-- jQuery CDN 시작 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#btnAppend").click(addAppendNode);
+});//ready
+
+function addAppendNode(){
+	$("#div").append("<div>안녕하세요</div>");
+};
+//var cnt = 2;
+function append(){
+	var Arr = $("#licenseDiv>div").length+1;
+	if(Arr>5){
+		alert("자격증은 5개 까지만 추가 가능합니다.");
+		return;
+	}
+	var appendNode=`
+		<div style="margin-top : 10px;">
+		<label>${Arr}.</label>
+		<input type="text" name="license" style="width : 350px"/>
+		</div>`;
+	$("#licenseDiv").append(appendNode);
+//	cnt++;
+}//append
+
+function remove(){
+	if($("#licenseDiv>div").length==1){
+		alert("지울 수 없음 ");
+		return;
+	}
+//	$("#licenseDiv>div:first").remove();
+	$("#licenseDiv>div:last").remove();
+	
+}//remove
+
+function append2(){
+	var Arr = $("#comTob>tbody>tr").length+1;
+	if(Arr>5){
+		alert("5개 이상 추가할 수 없습니다.");
+		return;
+	}
+	var appendNode=`<tr>
+		<td>${Arr}.</td>
+		<td><input type="text" name="companyArr" style="width:380px"/></td>
+		<td><input type="text" name="jobArr" style="width:180px"/></td>
+	</tr>
+		`;
+	$("#comTob>tbody").append(appendNode);
+}//append2
+
+function remove2(){
+	if($("#comTob>tbody>tr").length==1){
+		alert("지울 수 없음 ");
+		return;
+	}
+//	$("#licenseDiv>div:first").remove();
+	$("#comTob>tbody>tr:last").remove();
+	
+}//remove2
+
+</script>
+</head>
+<body>
+<div id = "wrap" >
+	<div id="header">header 1200(w)x150(h) 
+				사이트로고, 주력 서비스, navigation bar
+	</div>
+	<div id="container">
+	<div>
+		<div id="div"></div>
+		<input type="button" value="자식노드 추가" class="btn btn-success" id="btnAppend"/>
+		<div style="width : 400px">
+		<div style="text-align  : right">
+			<a href="#void" onclick="append()"><img src="images/btn_append.png"/></a>
+			<a href="#void" onclick="remove()"><img src="images/btn_remove.png"/></a>
+		</div>	
+		<br>
+		<label>자격사항</label><br>
+		<div id="licenseDiv">
+		<div style="margin-top : 10px;">
+		<label>1.&nbsp</label><input type="text" name="license" style="width : 350px"/>
+		</div>
+		</div>
+		<hr>
+		<div>
+			<a href="#void" onclick="append2()"><img src="images/btn_append.png"/></a>
+			<a href="#void" onclick="remove2()"><img src="images/btn_remove.png"/></a>
+			<table class="table table-striped" id="comTob">
+			<thead>
+			<tr>
+				<th style="width:100px">번호</th>
+				<th style="width:400px">근무처</th>
+				<th style="width:200px">직무</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td>1.</td>
+				<td><input type="text" name="companyArr" style="width:380px"/></td>
+				<td><input type="text" name="jobArr" style="width:180px"/></td>
+			</tr>
+			</tbody>
+			</table>
+		</div>
+		</div>
+	</div>
+	
+	</div>
+	<div id="footer">footer 1200(w)x150(h)</div>
+</div>
+
+</body>
+</html>

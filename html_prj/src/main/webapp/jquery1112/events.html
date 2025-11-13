@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon"	href="http://192.168.10.73/html_prj/common/images/favicon.ico">
+<meta charset=UTF-8>
+<title>Insert title here</title>
+<!-- 내가 만든 CSS -->
+<!-- <link rel="stylesheet" type = "text/css" href="http://192.168.10.73/html_prj/common/css/mian_ver251031.css"/> -->
+
+<!-- bootstrap CDN 시작 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<!-- bootstrap CDN 끝 -->
+<style type="text/css">
+#wrap{ margin : 0px auto ; width : 1200px; height : 1000px;
+      /* background-color: #ff0000 */ }
+#header{ height : 150px;  /* background-color: #4179C2 */ }
+#container{ height : 700px;  /* background-color: #71b75e ; */ }
+#footer{ height : 150px;  /* background-color: #fef6e1 ; */ }
+</style>
+
+<!-- jQuery DNS 시작 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	//$("#btn").on("click",function(){
+	// 		alert("버튼이 클릭!!!");
+	//})
+
+	$("#btn").click(function(){
+		alert("버튼이 클릭!!!");
+	});
+	
+	$("#name").keydown(function( evt ){
+		alert("키가 눌림!!!!!"+ evt.which + "/ " + $("#name").val());
+		//눌린 키의 코드는 얻지만 값은 나오지 않는다. 
+	});
+	
+	$("#name2").keyup(function( evt ){
+		alert("키가 눌림!!!!!"+ evt.which + "/ " + $("#name2").val());
+		//눌린 키의 코드값과 입력된 값을 모두 얻을 수 있다. 
+		});
+	$("#txta").keyup(function( evt ){
+		$("#cnt").text($("#txta").val().length);
+		if($("#txta").val().length>101){
+		alert("100자 까지만 입력 가능합니다.")
+		$("#txta").val($("#txta").val().substr(0,101))
+		$("#cnt").text("100");
+		}
+	});
+	
+	$("#img").mouseover(function(){
+		$("#img").attr("src","../common/images/naver.png")
+	});
+
+	$("#img2").mouseout(function(){
+		$("#img2").attr("src","../common/images/naver.png")
+	});
+	
+	$("#name3").focusin(function(){
+		$("#output").html("커서가 들어감");
+	});
+
+//	$("#name4").focusout(function(){ // .blur() 함수로 처리할 수 있다. 
+	$("#name4").blur(function(){  
+		$("#output").html("커서가 나감");
+	});
+	
+	$("#sel").change(function(){  
+		$("#output").html($("#sel").val());
+	});
+	
+	$("#btn2").click(function(){  
+		$("#txta").focus(); // 커서 요청할 때 사용
+	});
+	
+		
+		//눌린 키의 코드값과 입력된 값을 모두 얻을 수 있다. 
+			
+});//ready
+</script>
+</head>
+<body>
+<div id = "wrap" >
+	<div id="header">header 1200(w)x150(h) 
+				사이트로고, 주력 서비스, navigation bar
+	</div>
+	<div id="container">
+	<div>
+		<label>클릭 할 때</label><input type="button" value="클릭" id="btn"/><br>
+		<label>키가 눌릴때</label><input type="text" name="txt" id="name"/><br>
+		<label>키가 올라 올 때</label><input type="text" name="txt" id="name2"/><br>
+		<div style="width : 400px; text-align: right">
+		<textarea style = "width : 400px; height: 100px" id="txta"></textarea>
+		<span id="cnt">0</span>/100
+		</div>
+		
+		<label>마우스가 올라올 때</label>
+		<img src="../common/images/google.png" id="img"/> <br>
+		<label>마우스가 나갔을 때</label>
+		<img src="../common/images/google.png" id="img2"/> <br>
+		
+		<label>커서가 들어갈 때</label>
+		<input type="text" name="txt" id="name3"/><br>
+		<label>커서가 나갔을 때</label>
+		<input type="text" name="txt" id="name4"/><br>
+		<div id="output"></div>
+		
+		<label> 다른 옵션이 선택</label>
+		<select id="sel">
+		<option value="Java">Java</option>
+		<option value="Oracle">Oracle</option>
+		<option value="JDBC">JDBC</option>
+		<option value="HTML">HTML</option>
+		<option value="JavaScript">JavaScript</option>
+		<option value="JavaScript Library">JavaScript Library</option>
+		</select><br>
+		
+		<label> 커서 두기 </label>
+		<input type="button" value="클릭" id="btn2"/><br>
+	</div>
+	</div>
+	<div id="footer">footer 1200(w)x150(h)</div>
+</div>
+
+
+
+</body>
+</html>
