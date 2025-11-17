@@ -8,12 +8,19 @@ body {
 
 /* 헤더 */
 #header {
-	background-color: #fff; position : fixed;
-	top: 0;
-	left: 0;
+	background-color: #fff; 
+	position : fixed;
+	top: 10px;
+	left: 0px;
 	height: 90px;
 	width: 100vw;
-	position: fixed;
+	display : flex;
+}
+hr {
+	margin: 0; position : absolute;
+	top: 100%;
+	width: 100%;
+	position: absolute;
 }
 
 #logImg {
@@ -40,6 +47,7 @@ body {
 }
 
 #mainBar {
+	min-width : 1500px;
 	width: 1500px;
 	height: 100%;
 	display: flex;
@@ -109,8 +117,13 @@ li {
 }
 
 a {
+	font-size : 15px;
 	color: #000;
 	text-decoration: none;
+}
+
+a:hover {
+	color: #3C25AB;
 }
 
 ul {
@@ -169,7 +182,7 @@ footer {
 /* 햄버거 메뉴  */
 /* 메뉴 목록 기본 스타일: 화면 밖으로 숨김 */
 .hamburger-list {
-	position: fixed;
+	position: absolute;
 	top: 90px;
 	right: -200vw; /* 왼쪽으로 숨김 */
 	transition: right 0.3s ease; /* 부드러운 애니메이션 효과 */
@@ -252,12 +265,20 @@ footer {
 	font-size: 17px;
 	font-weight:bold;
 }
-
+hr{
+	position:absolute;
+	top :100%;
+	width: 100%;
+}
+.close{
+	height:100%;
+	width:20px;
+}
 .menu-list div {
 	line-height: 32px;
 }
 
-@media screen and ( max-width : 1550px) {
+@media screen and ( max-width : 1000px) {
 	#nav {
 		display: none;
 	}
@@ -273,9 +294,16 @@ footer {
 		margin-top: 10px;
 	}
 	.hamburger-toggle {
-		display: block; position : fixed;
+		display: block; 
+		position : fixed;
 		top: 20px;
 		right: 0vw;
 		position: fixed;
 	}
+}
+@media screen and ( min-width : 1000px) {
+	.hamburger-list.is-open {
+	display:none;
+	}
+	
 }
