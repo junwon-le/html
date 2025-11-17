@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>드롭다운 메뉴</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: "Noto Sans KR", sans-serif;
+    }
+
+    .header {
+        width: 100%;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #eee;
+        background: #fff;
+        padding: 0 40px;
+        box-sizing: border-box;
+        position: relative;
+        z-index: 100;
+    }
+
+    .logo {
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .nav .menu {
+        display: flex;
+        list-style: none;
+        gap: 60px;
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav .menu > li {
+        position: relative;
+        cursor: pointer;
+        font-size: 18px;
+        padding: 25px 0;
+    }
+
+    /* ▼ 드롭다운 박스 기본값 (숨김) */
+    .dropdown {
+        position: absolute;
+        top: 80px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #faf3e4;
+        padding: 20px 30px;
+        border-radius: 4px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+    }
+
+    .dropdown a {
+        color: #444;
+        text-decoration: none;
+        font-size: 16px;
+    }
+
+    .dropdown a:hover {
+        color: #d9534f;
+    }
+
+    /* ▼ hover 시 드롭다운 활성화 */
+    #menu:hover > li> .dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(10px);
+    }
+</style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="logo">LOGO</div>
+
+    <nav class="nav">
+        <ul id="menu">
+            <li>
+                즐길거리
+                <div class="dropdown">
+                    <a href="#">어트랙션</a>
+                    <a href="#">공연</a>
+                    <a href="#">참여 프로그램</a>
+                    <a href="#">추천코스</a>
+                </div>
+            </li>
+
+                    </ul>
+    </nav>
+</header>
+
+</body>
+</html>
