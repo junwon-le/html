@@ -63,7 +63,7 @@ $(function(){
 	<div>
 	<!-- summernote안에 입력된 데이터를 back-end로 전송하기 위해서는 method가 반드시 POST되어야 한다. -->
 		<!--  <form method="GET" action="test.jsp" id="frm">-->  <!-- GET방식은 256 이상 보낼 수 없는데 이미지는 encoding된 값이 256을 넘어가서 POST로 넘겨야한다. -->
-		<form method="GET" action="test.jsp" id="frm">
+		<form method="POST" action="test.jsp" id="frm">
 			<textarea style="width : 500px ; height: 100px" name="intro" id="summernote">
 			
 			</textarea>
