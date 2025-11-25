@@ -4,8 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VIVA PARK</title>
-<link rel="stylesheet" type="text/css"
-	href="vivatemplet.css" />
 
 <!-- 공지 가져오기 -->
 <!-- 2024 경주월드 -->
@@ -24,6 +22,8 @@
 }
 </style>
 
+<link rel="stylesheet" type="text/css"
+   href="http://192.168.10.73/html_prj/practice/vivatemplet.css" />
 <!-- jQuery CDN 시작 -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -31,6 +31,8 @@
 </style>
 <script type="text/javascript">
 	$(function() {
+		
+		
 		$("#mainMenu>li").mouseover(function() {
 			$(".opensubMenu").slideDown(200);
 			$("#subBar").slideDown(200);
@@ -59,6 +61,7 @@
 		$('.hamburger-toggle').on('click', function() {
 			// 햄버거 버튼 클릭 시 메뉴 목록에 'is-open' 클래스를 토글합니다.
 			$('.hamburger-list').toggleClass('is-open');
+			$('.container').toggleClass('isClose');
 			// 아이콘 모양을 바꾸려면 버튼에도 클래스를 토글할 수 있습니다.
 			$(this).toggleClass('active');
 			
@@ -67,7 +70,7 @@
 </script>
 </head>
 <body>
-
+<div class="wrap">
 	<!-- 헤더 -->
 	<div class="close" style="width:100%; position:fixed;top:0;left:0; height : 10px;"></div>
 	<div id="header" >
@@ -97,8 +100,8 @@
 							행사
 							<div class="subItems">
 								<ul>
-									<li><a href="#void">행사 안내</a></li>
-									<li><a href="#void">행사 예약</a></li>
+									<li><a href="#void">공연</a></li>
+									<li><a href="#void">퍼레이드</a></li>
 								</ul>
 							</div>
 						</div>
@@ -109,8 +112,7 @@
 							<div class="subItems">
 								<ul>
 									<li><a href="#void">티켓 요금</a></li>
-									<li><a href="#void">연간 이용권</a></li>
-									<li><a href="#void">할인/제휴</a></li>
+									<li><a href="#void">할인/예매</a></li>
 								</ul>
 							</div>
 						</div>
@@ -143,7 +145,7 @@
 			</div>
 
 			<div class="header-btns">
-				<button class="btn">예약하기</button>
+				<button class="btn" style="color: #FF6124; border: 1.5px solid #FF6124; ">예약하기</button>
 				<button class="btn" style="color: #000; border: 1.5px solid #000;">로그인</button>
 			</div>
 		</div>
@@ -181,20 +183,21 @@
 					<div class="menu-title">행사</div>
 					<div class="menu-list">
 						<div>
-							<a href="#void">행사안내</a>
+							<a href="#void">공연</a>
 						</div>
 						<div style="margin-right : 100px">
-						 	<a href="#void">행사예약</a>
+						 	<a href="#void">퍼레이드</a>
 						 </div>
 					</div>
 
 					<div class="menu-title">요금/예매</div>
 					<div class="menu-list">
 						<div>
-							<a href="#void">티켓 요금</a><br><a href="#void">연간 이용권</a>
+							<a href="#void">티켓 요금</a><br>
+							
 						</div>
 						<div style="margin-right : 100px">
-							<a href="#void">할인/제휴</a>
+							<a href="#void">할인/예매</a>
 						</div>
 					</div>
 
@@ -210,7 +213,7 @@
 					
 					<div class="menu-title">소통 서비스</div>
 					<div class="menu-list">
-						<div>s
+						<div>
 							<a href="#void">공지</a><br><a href="#void">FAQ</a> 
 						</div>
 						<div style="margin-right : 100px">
@@ -224,218 +227,9 @@
 
 	<!-- 메인 공간(비어있는 흰 배경 영역) -->
 	<div class="container">
-			<div class="WrapWidth" style=" z-index : 0; height:100%" >
-		<div class="subWrap" style="z-index : 0">
-			<div id="subCon" style="z-index:0;">
-				<div>
-					<div class="page_navi">
-						<span> > 고객센터 > 공지사항</span>
-					</div>
-					<h1>공지사항</h1>
-				</div>
 				
-
-				<main class="conm0303">
-					<div class="cont_box">
-						<div class="searchbox">
-							<span class="total">TOTAL 15</span>
-							<form method="GET" name="search_frm" id="search_frm"
-								action="/Contents/contents.php?cmsNo=DD0100">
-								<input type='hidden' name='cmsNo' id='cmsNo' value='DD0100'>
-								<input type='hidden' name='bgrp' id='bgrp' value=''>
-
-								<div class="form">
-									<input type="text" placeholder="검색하기" class="formtxt"
-										name="stl" id="stl" placeholder="" value="">
-									<button type="submit"></button>
-								</div>
-							</form>
-
-						</div>
-						<ul class="list" style="z-index : 0;">
-							<li
-								onclick="location.href='#void'"
-								style="cursor: pointer"><span class="sort "> 공지 </span>
-								<div>
-									<span class="title"><a
-										href='#void'>경주월드
-											이용요금 조정 안내</a></span> <span class="date">2025-11-01</span>
-								</div></li>
-							<td></td>
-							<li
-								onclick="location.href='#void'"
-								style="cursor: pointer"><span class="sort "> 공지 </span>
-								<div>
-									<span class="title"><a
-										href='#void'>경주월드
-											이용요금 조정 안내</a></span> <span class="date">2025-11-01</span>
-								</div></li>
-							<td></td>
-							<li
-								onclick="location.href='#void'"
-								style="cursor: pointer"><span class="sort "> 공지 </span>
-								<div>
-									<span class="title"><a
-										href='#void'>경주월드
-											이용요금 조정 안내</a></span> <span class="date">2025-11-01</span>
-								</div></li>
-							<td></td>
-							<li
-								onclick="location.href='#void'"
-								style="cursor: pointer"><span class="sort "> 공지 </span>
-								<div>
-									<span class="title"><a
-										href='#void'>경주월드
-											이용요금 조정 안내</a></span> <span class="date">2025-11-01</span>
-								</div></li>
-							<td></td>
-							<li
-								onclick="location.href='#void'"
-								style="cursor: pointer"><span class="sort "> 공지 </span>
-								<div>
-									<span class="title"><a
-										href='#void'>경주월드
-											이용요금 조정 안내</a></span> <span class="date">2025-11-01</span>
-								</div></li>
-							<td></td>
-							<li
-								onclick="location.href='#void'"
-								style="cursor: pointer"><span class="sort "> 공지 </span>
-								<div>
-									<span class="title"><a
-										href='#void'>경주월드
-											이용요금 조정 안내</a></span> <span class="date">2025-11-01</span>
-								</div></li>
-							<td></td>
-							<li
-								onclick="location.href='#void'"
-								style="cursor: pointer"><span class="sort "> 공지 </span>
-								<div>
-									<span class="title"><a
-										href='#void'>경주월드
-											이용요금 조정 안내</a></span> <span class="date">2025-11-01</span>
-								</div></li>
-							<td></td>
-							<li
-								onclick="location.href='#void'"
-								style="cursor: pointer"><span class="sort "> 공지 </span>
-								<div>
-									<span class="title"><a
-										href='#void'>경주월드
-											이용요금 조정 안내</a></span> <span class="date">2025-11-01</span>
-								</div></li>
-							<td></td>
-							<li
-								onclick="location.href='#void'"
-								style="cursor: pointer"><span class="sort "> 공지 </span>
-								<div>
-									<span class="title"><a
-										href='#void'>경주월드
-											이용요금 조정 안내</a></span> <span class="date">2025-11-01</span>
-								</div></li>
-							<td></td>
-							<li
-								onclick="location.href='#void'"
-								style="cursor: pointer"><span class="sort "> 공지 </span>
-								<div>
-									<span class="title"><a
-										href='#void'>경주월드
-											이용요금 조정 안내</a></span> <span class="date">2025-11-01</span>
-								</div></li>
-							<td></td>
-							<li
-								onclick="location.href='#void'"
-								style="cursor: pointer"><span class="sort "> 공지 </span>
-								<div>
-									<span class="title"><a
-										href='#void'>경주월드
-											이용요금 조정 안내</a></span> <span class="date">2025-11-01</span>
-								</div></li>
-							<td></td>
-							<li
-								onclick="location.href='#void'"
-								style="cursor: pointer"><span class="sort "> 공지 </span>
-								<div>
-									<span class="title"><a
-										href='#void'>경주월드
-											이용요금 조정 안내</a></span> <span class="date">2025-11-01</span>
-								</div></li>
-							<td></td>
-							<li
-								onclick="location.href='#void'"
-								style="cursor: pointer"><span class="sort "> 공지 </span>
-								<div>
-									<span class="title"><a
-										href='#void'>경주월드
-											이용요금 조정 안내</a></span> <span class="date">2025-11-01</span>
-								</div></li>
-							<td></td>
-							<li
-								onclick="location.href='#void'"
-								style="cursor: pointer"><span class="sort "> 공지 </span>
-								<div>
-									<span class="title"><a
-										href='#void'>경주월드
-											이용요금 조정 안내</a></span> <span class="date">2025-11-01</span>
-								</div></li>
-							<td></td>
-							<li
-								onclick="location.href='#void'"
-								style="cursor: pointer"><span class="sort "> 공지 </span>
-								<div>
-									<span class="title"><a
-										href='#void'>경주월드
-											이용요금 조정 안내</a></span> <span class="date">2025-11-01</span>
-								</div></li>
-							<td></td>
-							<li
-								onclick="location.href='#void'"
-								style="cursor: pointer"><span class="sort "> 공지 </span>
-								<div>
-									<span class="title"><a
-										href='#void'>경주월드
-											이용요금 조정 안내</a></span> <span class="date">2025-11-01</span>
-								</div></li>
-							<td></td>
-						</ul>
-						<br />
-						<div id="BoardListPager">
-							<!--<div id="-->
-							<!--">-->
-							<div>
-								<ul class="pagination mt-2 mb-2 justify-content-center">
-									<div class="page-item">
-										<a class="page-link" href="#">&lt;&lt;</a>
-									</div>
-									<div class="page-item">
-										<a class="page-link" href="#">&lt;</a>
-									</div>
-									<div class="page-item active">
-										<a class="page-link" data-pagenumber="1" href="#">1</a>
-									</div>
-									<div class="page-item">
-										<a class="page-link" href="#">&gt;</a>
-									</div>
-									<div class="page-item">
-										<a class="page-link" href="?cmsNo=DD0100&bgrp&page=1">&gt;&gt;</a>
-									</div>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</main>
-			</div>
-		</div>
 	</div>
-	
-	
-	
-	
-	
-	
-	
-	</div>
-
+	<!-- container 끝 -->
 
 	<!-- 푸터 -->
 	<div id="footer"  >
@@ -462,6 +256,6 @@
 
 		</div>
 	</div>
-
+</div>
 </body>
 </html>
