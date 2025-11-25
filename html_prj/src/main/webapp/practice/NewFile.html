@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Input Field Example</title>
+<style>
+.input-container {
+    /* 부모 컨테이너 역할 */
+    width: 90%; 
+    max-width: 700px; /* 입력 필드의 최대 너비 설정 */
+    margin: 50px auto; /* 중앙 정렬 */
+}
+
+.input-container input {
+    /* 실제 입력 필드 스타일 */
+    width: 100%;
+    height: 50px; /* 높이 고정 (padding에 따라 조절 가능) */
+    padding: 10px 15px; /* 내부 여백 */
+    font-size: 1.1em; /* 폰트 크기 */
+
+    /* 모양 구현 */
+    border: 1px solid #ddd; /* 옅은 테두리 */
+    border-radius: 5px; /* 둥근 모서리 */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* 은은한 그림자 (선택 사항) */
+    background-color: #fff;
+    
+    /* 포커스 시 테두리 스타일 변경 */
+    transition: border-color 0.3s; /* 부드러운 전환 효과 */
+    outline: none; /* 기본 포커스 테두리 제거 */
+}
+
+.input-container input:focus {
+    border-color: #6a95ff; /* 포커스 시 파란색 테두리 */
+}
+
+/* 이미지에 보이는 "제목" 텍스트 스타일 */
+.input-container input::placeholder {
+    color: #888;
+    font-size: 0.9em;
+}
+</style>
+</head>
+<body>
+
+<div class="input-container">
+    <input type="text" placeholder="제목">
+</div>
+
+</body>
+</html>
