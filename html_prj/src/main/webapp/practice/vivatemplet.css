@@ -144,7 +144,7 @@ ul {
 .container {
 	height : auto;	
 	width:100vw;
-	margin-top: 200px;
+	margin-top: 100px;
 	z-index:0;
 }
 .container.isClose{

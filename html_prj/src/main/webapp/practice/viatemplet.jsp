@@ -75,7 +75,7 @@
 <body>
 <div class="wrap">
 	<!-- 헤더 -->
-	<div class="close" style="width:100%; position:fixed;top:0;left:0; height : 10px; "></div>
+	<div class="close" style="width: 100%; position: fixed; top: 0; left: 0; height: 10px; background-color: #fff; opacity: 1;"></div>
 	<div id="header" >
 	<div class="close"></div>
 		<div id="mainBar">
