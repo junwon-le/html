@@ -1,32 +1,35 @@
 @charset "UTF-8";
+
 html, body {
-    margin: 0;
-    padding: 0;
+	margin: 0;
+	padding: 0;
 }
+
 body {
-	margin: 0; font-family : "Noto Sans KR", sans-serif;
+	margin: 0;
+	font-family: "Noto Sans KR", sans-serif;
 	background: #ffffff;
 	font-family: "Noto Sans KR", sans-serif;
 }
 
 /* 헤더 */
 #header {
-	z-index : 999;
-	background-color: #fff; 
-	position : fixed;
+	z-index: 999;
+	background-color: #fff;
+	position: fixed;
 	top: 10px;
 	left: 0px;
 	height: 90px;
 	width: 100vw;
-	display : flex;
+	display: flex;
 }
+
 hr {
 	margin: 0;
 	top: 100%;
 	width: 100%;
 	position: absolute;
 }
-
 
 #logImg {
 	margin-right: 50px;
@@ -54,8 +57,8 @@ hr {
 }
 
 #mainBar {
-	background : #fff;
-	min-width : 1200px;
+	background: #fff;
+	min-width: 1200px;
 	width: 1300px;
 	height: 100%;
 	display: flex;
@@ -69,7 +72,6 @@ hr {
 	height: 100%;
 	margin-left: 20px;
 	margin-right: 20px;
-
 	display: flex;
 	gap: 15px;
 	align-items: center;
@@ -127,8 +129,8 @@ li {
 }
 
 a {
-	font-size : 15px;
-	color:#7c7c7c;
+	font-size: 15px;
+	color: #7c7c7c;
 	text-decoration: none;
 }
 
@@ -142,22 +144,23 @@ ul {
 
 /* 메인 컨텐츠 여백 */
 .container {
-	height : auto;	
-	width:100vw;
+	overflow: hidden;
+	height: auto;
+	width: 100vw;
 	margin-top: 100px;
-	z-index:0;
-}
-.container.isClose{
-	display:none;
-}
-/* 푸터 */
-#footer{
-	width: 100%;
-	background : #fafafa;
-	height : 200px;
-	margin-top: 40px;
+	z-index: 0;
 }
 
+.container.isClose {
+	display: none;
+}
+/* 푸터 */
+#footer {
+	width: 100%;
+	background: #fafafa;
+	height: 200px;
+	margin-top: 40px;
+}
 
 .footer-inner {
 	width: 100%;
@@ -181,7 +184,7 @@ ul {
 	display: flex;
 	gap: 25px;
 	font-size: 13px;
-	width : 100%;
+	width: 100%;
 }
 
 .footer-bottom {
@@ -198,7 +201,7 @@ ul {
 /* 햄버거 메뉴  */
 /* 메뉴 목록 기본 스타일: 화면 밖으로 숨김 */
 .hamburger-list {
-	background-color : #000;
+	background-color: #000;
 	position: absolute;
 	top: 60px;
 	right: 0; /* 왼쪽으로 숨김 */
@@ -206,25 +209,25 @@ ul {
 	background-color: #fff;
 	width: 100vw;
 	visibility: hidden;
-	z-index : 999;
+	z-index: 999;
 }
 
 /* 메뉴가 열렸을 때의 스타일: 화면 안으로 이동 */
 .hamburger-list.is-open {
 	visibility: visible;
-	background-color : #000;
+	background-color: #000;
 	position: absolute;
 	top: 63px;
 	right: 0; /* 왼쪽으로 숨김 */
 	transition: right 0.3s ease; /* 부드러운 애니메이션 효과 */
 	background-color: #fff;
 	width: 100vw;
-	z-index : 999;
+	z-index: 999;
 }
 
 .hamburger-toggle {
 	display: none;
-	cursor : pointer;
+	cursor: pointer;
 }
 /* 상단 언어/홈 영역 */
 .top-bar {
@@ -252,7 +255,7 @@ ul {
 	align-items: center;
 	font-size: 15px;
 	border: 1px solid #ddd;
-	cursor : pointer;
+	cursor: pointer;
 }
 
 /* 예매/등록 라인 */
@@ -290,31 +293,36 @@ ul {
 	column-gap: 120px; /* 좌우 간격(원하면 조절 가능) */
 	margin-bottom: 40px;
 	font-size: 17px;
-	font-weight:bold;
+	font-weight: bold;
 }
 
-hr{
-	margin : 0px;
-	position:absolute;
-	top :100%;
+hr {
+	margin: 0px;
+	position: absolute;
+	top: 100%;
 	width: 100%;
 }
-.close{
-	z-index:999;
-	opacity : 1;
-	background-color : #fff;
-	height:100%;
-	width:20px;
+
+.close {
+	z-index: 999;
+	opacity: 1;
+	background-color: #fff;
+	height: 100%;
+	width: 20px;
 }
+
 .menu-list div {
 	line-height: 32px;
 }
-.menu-list>div>a{
-	color : #000;
+
+.menu-list>div>a {
+	color: #000;
 }
+
 .menu-list>div>a:hover {
 	color: #3C25AB;
 }
+
 @media screen and ( max-width : 1200px) {
 	#nav {
 		display: none;
@@ -331,33 +339,33 @@ hr{
 		margin-top: 10px;
 	}
 	.hamburger-toggle {
-		display: block; 
-		position : fixed;
+		display: block;
+		position: fixed;
 		top: 20px;
 		right: 0vw;
 		position: fixed;
 	}
-	.footer-menu{
-	
-	flex-wrap: wrap;
-}
-		.footer-inner{ 
-	padding-top : 10px;
-	max-width: 1200px;
-	min-width: 0px;	
-}
-
-}
-@media screen and (min-width:1200px){
-.hamburger-list.is-open {
-	visibility: hidden;
-
-}
-.container.isClose{
-	display:block;
-}
+	.footer-menu {
+		flex-wrap: wrap;
+	}
+	.footer-inner {
+		padding-top: 10px;
+		max-width: 1200px;
+		min-width: 0px;
+	}
+	.page_navi {
+		display: none;
+	}
 }
 
+@media screen and (min-width:1200px) {
+	.hamburger-list.is-open {
+		visibility: hidden;
+	}
+	.container.isClose {
+		display: block;
+	}
+}
 
 
 

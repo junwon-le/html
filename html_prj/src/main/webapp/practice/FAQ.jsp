@@ -132,6 +132,14 @@
 }
 .container{
 margin-top : 100px;
+	overflow: hidden;
+
+}
+@media screen and ( max-width : 1200px) {
+
+	.page_navi {
+		display: none;
+	}
 }
 </style>
 <script type="text/javascript">
@@ -339,7 +347,7 @@ margin-top : 100px;
 
 		<!-- 메인 공간(비어있는 흰 배경 영역) -->
 		<div class="container">
-			<div class="page_navi" style="margin-bottom: 20px;">
+			<div class="page_navi" style="margin-bottom: 20px; margin-left: 100px; margin-top: 40px;">
 				<img src="images/house.png" />
 				<div class="btn-group">
 					<button type="button" class="btn btn-secondary dropdown-toggle"
@@ -347,9 +355,11 @@ margin-top : 100px;
 						style="background-color: #fff; color: #333; border: none; padding: 0px; margin-left: 10px; margin-bottom: 3px;">
 						소통 서비스</button>
 					<ul class="dropdown-menu dropdown-menu-end">
-						<li><button class="dropdown-item" type="button">공지</button></li>
-						<li><button class="dropdown-item" type="button">FAQ</button></li>
-						<li><button class="dropdown-item" type="button">문의</button></li>
+						<li><a href="#void" style="margin-left: 20px;">즐길거리</a></li>
+						<li><a href="#void" style="margin-left: 20px;">행사</a></li>
+						<li><a href="#void" style="margin-left: 20px;">요금/예매</a></li>
+						<li><a href="#void" style="margin-left: 20px;">이용정보</a></li>
+						<li><a href="#void" style="margin-left: 20px;">소통서비스</a></li>
 					</ul>
 				</div>
 
@@ -359,16 +369,16 @@ margin-top : 100px;
 						style="background-color: #fff; color: #333; border: none; padding: 0px; margin-left: 10px; margin-bottom: 3px;">
 						FAQ</button>
 					<ul class="dropdown-menu dropdown-menu-end">
-						<li><button class="dropdown-item" type="button">공지</button></li>
-						<li><button class="dropdown-item" type="button">FAQ</button></li>
-						<li><button class="dropdown-item" type="button">문의</button></li>
+						<li><a href="#void" style="margin-left: 20px;">공지</a></li>
+						<li><a href="#void" style="margin-left: 20px;">FAQ</a></li>
+						<li><a href="#void" style="margin-left: 20px;">문의</a></li>
 					</ul>
 				</div>
 			</div >
 			<h1 style="text-align: center; margin-bottom: 30px;">FAQ</h1>
 
-	<div style="display:flex; align-items: center; justify-content: center; border:1px solid #fff; 
-	border-radius: 10px; box-shadow: 10px 20px 10px #F5F5F5;margin-bottom: 40px; padding-top: 30px; padding-bottom: 30px;">
+	<div style="max-width:1000px; display:flex; align-items: center; justify-content: center; border:1px solid #fff; 
+	border-radius: 10px; box-shadow: 10px 20px 10px #F5F5F5; padding-bottom: 30px; margin: 60px auto;">
 		<div class="search-container">
         <input type="text" class="search-input" placeholder="키워드를 입력해 주세요.">
         <button type="submit" class="search-button">
@@ -376,7 +386,7 @@ margin-top : 100px;
     </div>
 	</div>
 			<!-- accordion -->
-			<div class="accordion" id="accordionExample">
+			<div class="accordion" id="accordionExample" style="max-width:1000px; margin:0px auto;">
 				<!--  -->
 				<%
 				for (int i = 0; i < 10; i++) {

@@ -240,7 +240,6 @@
 .subWrap {
 	padding: 0;
 }
-
 #inquiryNotice {
 	width: 800px;
 	margin: 0px auto;
@@ -262,6 +261,13 @@ a:hover {
 .container {
 	margin-top: 100px;
 }
+@media screen and ( max-width : 1200px) {
+
+	.page_navi {
+		display: none;
+	}
+}
+
 </style>
 </head>
 <body>
@@ -431,19 +437,19 @@ a:hover {
 
 		<!-- 메인 공간(비어있는 흰 배경 영역) -->
 		<div class="container">
-			<div class="page_navi" style="margin-bottom: 20px; margin-left: 100px;">
+				<div class="page_navi" style="margin-bottom: 20px; margin-left: 100px; margin-top: 40px; ">
 				<img src="images/house.png" />
 				<div class="btn-group">
 					<button type="button" class="btn btn-secondary dropdown-toggle"
 						data-bs-toggle="dropdown" aria-expanded="false"
-						style="background-color: #fff; color: #333; border: none; padding: 0px; margin-left: 10px; margin-bottom: 3px;">
+						style="background-color: #fff; color: #333; border: none; padding: 0px; margin-left: 10px; margin-bottom: 3px; ">
 						소통 서비스</button>
 					<ul class="dropdown-menu dropdown-menu-end">
-						<li><button class="dropdown-item" type="button">즐길거리</button></li>
-						<li><button class="dropdown-item" type="button">행사</button></li>
-						<li><button class="dropdown-item" type="button">요금/예매</button></li>
-						<li><button class="dropdown-item" type="button">이용정보</button></li>
-						<li><button class="dropdown-item" type="button">소통 서비스</button></li>
+						<li><a href="#void" style="margin-left: 20px;">즐길거리</a></li>
+						<li><a href="#void" style="margin-left: 20px;">행사</a></li>
+						<li><a href="#void" style="margin-left: 20px;">요금/예매</a></li>
+						<li><a href="#void" style="margin-left: 20px;">이용정보</a></li>
+						<li><a href="#void" style="margin-left: 20px;">소통서비스</a></li>
 					</ul>
 				</div>
 
@@ -451,14 +457,14 @@ a:hover {
 					<button type="button" class="btn btn-secondary dropdown-toggle"
 						data-bs-toggle="dropdown" aria-expanded="false"
 						style="background-color: #fff; color: #333; border: none; padding: 0px; margin-left: 10px; margin-bottom: 3px;">
-						문의</button>
+						FAQ</button>
 					<ul class="dropdown-menu dropdown-menu-end">
-						<li><button class="dropdown-item" type="button">공지</button></li>
-						<li><button class="dropdown-item" type="button">FAQ</button></li>
-						<li><button class="dropdown-item" type="button">문의</button></li>
+						<li><a href="#void" style="margin-left: 20px;">공지</a></li>
+						<li><a href="#void" style="margin-left: 20px;">FAQ</a></li>
+						<li><a href="#void" style="margin-left: 20px;">문의</a></li>
 					</ul>
 				</div>
-			</div>
+			</div >
 			<div id="inquiryNotice">
 				<img src="http://192.168.10.73/html_prj/practice/images/inquiry.png">
 			</div>

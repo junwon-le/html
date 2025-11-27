@@ -35,6 +35,17 @@
 .subWrap {
 	padding: 0;
 }
+
+.container {
+	margin-top: 100px;
+	overflow: hidden;
+}
+@media screen and ( max-width : 1200px) {
+
+	.page_navi {
+		display: none;
+	}
+}
 </style>
 
 <!-- jQuery CDN 시작 -->
@@ -247,40 +258,44 @@
 
 		<!-- 메인 공간(비어있는 흰 배경 영역) -->
 		<div class="container">
+				<div class="page_navi" style="margin-bottom: 20px; margin-left: 100px; margin-top: 40px; ">
+				<img src="images/house.png" />
+				<div class="btn-group">
+					<button type="button" class="btn btn-secondary dropdown-toggle"
+						data-bs-toggle="dropdown" aria-expanded="false"
+						style="border-radius : 10px;
+						 background-color: #fff; color: #333; border: none; padding: 0px; margin-left: 10px; font-size: 13px;">
+						소통 서비스</button>
+					<ul class="dropdown-menu dropdown-menu-end" >
+						<li><a href="#void" style="margin-left: 20px; color : #9FA19F; ">즐길거리</a></li>
+						<li><a href="#void" style="margin-left: 20px; color : #9FA19F;">행사</a></li>
+						<li><a href="#void" style="margin-left: 20px; color : #9FA19F;">요금/예매</a></li>
+						<li><a href="#void" style="margin-left: 20px; color : #9FA19F;">이용정보</a></li>
+						<li><a href="#void" style="margin-left: 20px; color : #9FA19F;">소통서비스</a></li>
+					</ul>
+				</div>
+
+				<div class="btn-group">
+					<button type="button" class="btn btn-secondary dropdown-toggle"
+						data-bs-toggle="dropdown" aria-expanded="false"
+						style="background-color: #fff; color: #333; border: none; padding: 0px; margin-left: 10px;  font-size: 13px;">
+						FAQ</button>
+					<ul class="dropdown-menu dropdown-menu-end">
+						<li><a href="#void" style="margin-left: 20px; color : #9FA19F;">공지</a></li>
+						<li><a href="#void" style="margin-left: 20px; color : #9FA19F;">FAQ</a></li>
+						<li><a href="#void" style="margin-left: 20px; color : #9FA19F;">문의</a></li>
+					</ul>
+				</div>
+			</div >
 			<div class="WrapWidth" style="z-index: 0; height: 100%">
 				<div class="subWrap" style="z-index: 0">
 					<div id="subCon" style="z-index: 0;">
 						<div>
-							<div class="page_navi" style="margin-bottom: 20px;">
-								<img src="images/house.png" />
-								<div class="btn-group">
-									<button type="button" class="btn btn-secondary dropdown-toggle"
-										data-bs-toggle="dropdown" aria-expanded="false"
-										style="background-color: #fff; color: #333; border: none; padding: 0px; margin-left: 10px; margin-bottom: 3px;">
-										소통 서비스</button>
-									<ul class="dropdown-menu dropdown-menu-end">
-										<li><button class="dropdown-item" type="button">공지</button></li>
-										<li><button class="dropdown-item" type="button">FAQ</button></li>
-										<li><button class="dropdown-item" type="button">문의</button></li>
-									</ul>
-								</div>
 
-								<div class="btn-group">
-									<button type="button" class="btn btn-secondary dropdown-toggle"
-										data-bs-toggle="dropdown" aria-expanded="false"
-										style="background-color: #fff; color: #333; border: none; padding: 0px; margin-left: 10px; margin-bottom: 3px;">
-										공지사항</button>
-									<ul class="dropdown-menu dropdown-menu-end">
-										<li><button class="dropdown-item" type="button">공지</button></li>
-										<li><button class="dropdown-item" type="button">FAQ</button></li>
-										<li><button class="dropdown-item" type="button">문의</button></li>
-									</ul>
-								</div>
-							</div>
 							<h1 style="text-align: center; margin-bottom: 30px;">공지사항</h1>
 						</div>
 						<!-- carousel -->
-						<div id="carouselExampleCaptions" class="carousel slide" >
+						<div id="carouselExampleCaptions" class="carousel slide" style="max-width: 1000px; margin: 0px auto;">
 							<div class="carousel-indicators">
 								<button type="button" data-bs-target="#carouselExampleCaptions"
 									data-bs-slide-to="0" class="active" aria-current="true"
@@ -290,7 +305,8 @@
 								<button type="button" data-bs-target="#carouselExampleCaptions"
 									data-bs-slide-to="2" aria-label="Slide 3"></button>
 							</div>
-							<div class="carousel-inner" style="border-radius: 20px; margin: 100px; width:auto;">
+							<div class="carousel-inner"
+								style="border-radius: 20px; margin: 100px; width: auto;">
 								<div class="carousel-item active">
 									<img src="images/carusal.png" class="d-block w-100" alt="...">
 									<div class="carousel-caption d-none d-md-block">
@@ -357,6 +373,8 @@
 									</form>
 
 								</div>
+								<div style="max-width: 1000px; margin: 0px auto;">
+		
 								<ul class="list" style="z-index: 0;">
 									<%
 									for (int i = 0; i < 5; i++) {
@@ -372,6 +390,7 @@
 									%>
 
 								</ul>
+								</div>
 								<br />
 								<!-- pagenation -->
 								<div id="BoardListPager">
