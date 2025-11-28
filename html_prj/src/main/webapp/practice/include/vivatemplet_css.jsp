@@ -188,8 +188,8 @@ overflow: hidden;
 	display: flex;
 	gap: 25px;
 	font-size: 13px;
-	width: 100%;
-}
+	max-width: 1200px;
+	}
 
 .footer-bottom {
 	font-size: 12px;

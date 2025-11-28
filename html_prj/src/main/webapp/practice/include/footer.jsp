@@ -4,8 +4,10 @@
 <div class="footer-inner">
 	
 			<div class="footer-top">
+				<div>
 				<img src="http://192.168.10.73/html_prj/practice/images/vivaLog.png"
 					alt="VIVA PARK Logo" style="height: 50px;" />
+				</div>
 
 				<div class="footer-menu">
 					<span>비바파크 어트랙션 소개</span> <span>비바파크 소개</span> <span>ESG</span> <span>이용약관</span>
