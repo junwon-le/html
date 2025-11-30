@@ -87,12 +87,12 @@
 		<!-- 메인 공간(비어있는 흰 배경 영역) -->
 		<div class="container">
 		<div style="margin:0px auto; width:1000px; display: flex; justify-content: center; margin-top: 30px;" >
-		<h2 style="align-content: center;">마이페이지</h2>
+		<h2 style="align-content: center; margin-top:150px;">마이페이지</h2>
 		</div>
 		<div style="margin:0px auto; width:1000px; display: flex; justify-content: center; margin-top: 30px;"><img src="images/hr.png"/>
 		</div>
 		<div style="margin:0px auto; width:1000px; display: flex; justify-content: center; margin-top: 30px;">
-		<img src="http://192.168.10.73/html_prj/practice/images/mypage_profile.png"/>
+		<img src="http://localhost/html_prj/practice/images/mypage_profile.png"/>
 		</div>
 		<%
 		String name = "DB이름";
@@ -104,20 +104,20 @@
 		<div class="my-page-container">
     <div class="section-column">
         <h3>나의 예매</h3>
-        <button class="btn-item">나의 티켓</button>
-        <button class="btn-item">예매 내역</button>
+        <button class="btn-item" onclick="location.href='http://localhost/html_prj/practice/MyticketCheck.jsp'">나의 티켓</button>
+        <button class="btn-item" onclick="location.href='http://localhost/html_prj/practice/ReserveHistory.jsp'">예매 내역</button>
     </div>
 
     <div class="section-column">
         <h3>나의 활동</h3>
-        <button class="btn-item">문의 내역</button>
-        <button class="btn-item">예약 내역</button>
+        <button class="btn-item" onclick="location.href='http://localhost/html_prj/practice/InquiryHistory.jsp'">문의 내역</button>
+        <button class="btn-item" onclick="location.href='http://localhost/html_prj/practice/ReserveHistory.jsp'">예약 내역</button>
     </div>
 
     <div class="section-column">
         <h3>내 정보</h3>
-        <button class="btn-item">내 정보 변경</button>
-        <button class="btn-item">회원 탈퇴</button>
+        <button class="btn-item" onclick="location.href='http://localhost/html_prj/practice/MypagePassCheck.jsp'">내 정보 변경</button>
+        <button class="btn-item" onclick="location.href='http://localhost/html_prj/practice/MypageWithdrawCheck.jsp'">회원 탈퇴</button>
     </div>
 </div>
 		</div>

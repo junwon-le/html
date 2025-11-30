@@ -4,14 +4,14 @@
 		<div id="mainBar">
 			<div class="logo">
 				<img src="http://192.168.10.73/html_prj/practice/images/vivaLog.png"
-					alt="VIVA PARK Logo" id="logImg" />
+					alt="VIVA PARK" id="logImg" />
 			</div>
 			<button class="hamburger-toggle" style="background-color:#fff; border : 0px;"><img src="http://192.168.10.73/html_prj/practice/images/hamburger_menu.png"/></button>
 			<div id="nav">
 				<ul id="mainMenu" class="">
 					<li>
 						<div class="liDiv">
-							즐길거리
+							<a href="">즐길거리</a>
 							<div class="subItems">
 								<ul>
 									<li><a href="#void">어트랙션</a></li>
@@ -23,7 +23,7 @@
 					</li>
 					<li>
 						<div class="liDiv">
-							행사
+							<a href="">행사</a>
 							<div class="subItems">
 								<ul>
 									<li><a href="#void">공연</a></li>
@@ -34,7 +34,7 @@
 					</li>
 					<li>
 						<div class="liDiv">
-							요금/예매
+							<a href="">요금/예매</a>
 							<div class="subItems">
 								<ul>
 									<li><a href="#void">티켓 요금</a></li>
@@ -45,7 +45,7 @@
 					</li>
 					<li>
 						<div class="liDiv">
-							이용정보
+							<a href="">이용정보</a>
 							<div class="subItems">
 								<ul>
 									<li><a href="#void">오시는 길</a></li>
@@ -57,12 +57,12 @@
 					</li>
 					<li>
 						<div class="liDiv">
-							소통 서비스
+							<a href="http://localhost/html_prj/practice/Noticei.jsp">소통 서비스</a>
 							<div class="subItems">
 								<ul>
-									<li><a href="#void">공지</a></li>
-									<li><a href="#void">FAQ</a></li>
-									<li><a href="#void">문의</a></li>
+									<li><a href="http://localhost/html_prj/practice/Noticei.jsp">공지</a></li>
+									<li><a href="http://localhost/html_prj/practice/FAQi.jsp">FAQ</a></li>
+									<li><a href="http://localhost/html_prj/practice/Inquiryi.jsp">문의</a></li>
 								</ul>
 							</div>
 						</div>

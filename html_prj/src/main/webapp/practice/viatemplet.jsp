@@ -26,7 +26,7 @@
 <body>
 	<div class="wrap">
 		<!-- 헤더 -->
-		<div id="closetop"></div>
+		<div id="closetop" class="close"></div>
 		<div id="header">
 			<jsp:include page="include/header.jsp"></jsp:include>
 		</div>

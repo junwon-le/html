@@ -7,6 +7,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VIVA PARK</title>
+<!-- bootstrap cdn -->
+<slink
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+	crossorigin="anonymous"></script>
 <!-- 2024 경주월드 -->
 <script src="https://www.gjw.co.kr/inc/gjw_2024/js/14jquery.min.js"></script>
 <link rel="stylesheet" type="text/css"
@@ -25,7 +35,7 @@
 .input-container {
 	/* 부모 컨테이너 역할 */
 	width: 100%;
-	max-width: 1000px; /* 입력 필드의 최대 너비 설정 */
+	max-width: 1200px; /* 입력 필드의 최대 너비 설정 */
 	margin: 30px auto; /* 중앙 정렬 */
 }
 
@@ -56,16 +66,6 @@
 }
 </style>
 
-<!-- bootstrap cdn -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-	crossorigin="anonymous"></script>
 <!-- summernote 가져오기 -->
 <link
 	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
@@ -162,11 +162,46 @@
 
 
 <jsp:include page="include/vivatemplet_css.jsp"></jsp:include>
+
+<script>
+	$(document).ready(function() {
+		// 1. 항목 전체를 클릭하면 상세 내용 토글
+		$("#agreementItem1").click(function(e) {
+			// 체크박스 클릭 이벤트는 제외하고 상세 내용 토글
+			if (!$(e.target).is('input[type="checkbox"]')) {
+				// 상세 내용 div와 화살표를 선택
+				var $detail = $("#detailContent1");
+				var $arrow = $(this).find('.detail-arrow');
+
+				// 내용 토글
+				$detail.toggleClass('is-open');
+				// 화살표 회전 토글
+				$arrow.toggleClass('rotated');
+			}
+		});
+
+		// 2. 화살표 버튼만 클릭해도 상세 내용 토글 (선택 사항)
+		$(".toggle-btn").click(function(e) {
+			e.stopPropagation(); // 중복 이벤트 방지
+			var $item = $(this).closest('.agreement-item');
+			var itemId = $item.attr('id');
+
+			var $detail = $("#" + itemId.replace("Item", "Content"));
+			var $arrow = $(this);
+
+			// 내용 토글
+			$detail.toggleClass('is-open');
+			// 화살표 회전 토글
+			$arrow.toggleClass('rotated');
+		});
+	});
+</script>
+
 </head>
 <body>
 	<div class="wrap">
 		<!-- 헤더 -->
-		<div id="closetop"></div>
+		<div id="closetop" class="close"></div>
 		<div id="header">
 			<jsp:include page="include/header.jsp"></jsp:include>
 		</div>
@@ -182,51 +217,50 @@
 				<div class="btn-group">
 					<button type="button" class="btn btn-secondary dropdown-toggle"
 						data-bs-toggle="dropdown" aria-expanded="false"
-						style="background-color: #fff; color: #333; border: none; padding: 0px; margin-left: 10px; margin-bottom: 3px;">
+						data-bs-offset="20, 0"
+						style="background-color: #fff; color: #333; border: none; padding: 0px; margin-left: 10px; font-size: 13px;">
 						소통 서비스</button>
-					<ul class="dropdown-menu dropdown-menu-end">
-						<li><a href="#void" style="margin-left: 20px;">즐길거리</a></li>
-						<li><a href="#void" style="margin-left: 20px;">행사</a></li>
-						<li><a href="#void" style="margin-left: 20px;">요금/예매</a></li>
-						<li><a href="#void" style="margin-left: 20px;">이용정보</a></li>
-						<li><a href="#void" style="margin-left: 20px;">소통서비스</a></li>
-					</ul>
+					<jsp:include page="page_navi.jsp"></jsp:include>
 				</div>
-
 				<div class="btn-group">
 					<button type="button" class="btn btn-secondary dropdown-toggle"
 						data-bs-toggle="dropdown" aria-expanded="false"
-						style="background-color: #fff; color: #333; border: none; padding: 0px; margin-left: 10px; margin-bottom: 3px;">
-						FAQ</button>
-					<ul class="dropdown-menu dropdown-menu-end">
-						<li><a href="#void" style="margin-left: 20px;">공지</a></li>
-						<li><a href="#void" style="margin-left: 20px;">FAQ</a></li>
-						<li><a href="#void" style="margin-left: 20px;">문의</a></li>
+						data-bs-offset="15, 0"
+						style="background-color: #fff; color: #333; border: none; padding: 0px; margin-left: 10px; font-size: 13px;">
+						문의</button>
+					<ul class="dropdown-menu dropdown-menu-end"
+						style="width: 55px !important; min-width: 55px !important;">
+						<li><a href="http://localhost/html_prj/practice/Noticei.jsp"
+							style="margin: 5px 10px; width:auto; heigh:auto; padding: 0px;">공지</a></li>
+						<li><a href="http://localhost/html_prj/practice/FAQi.jsp"
+							style="margin: 5px 10px; width:auto; heigh:auto; padding: 0px;">FAQ</a></li>
+						<li><a href="http://localhost/html_prj/practice/Inquiryi.jsp"
+							style="margin: 5px 10px; width:auto; heigh:auto; padding: 0px;">문의</a></li>
 					</ul>
 				</div>
 			</div>
-			<div id="inquiryNotice" style="margin:0px auto; width : 1000px; display : flex; justify-content: center; ">
-				<img src="http://192.168.10.73/html_prj/practice/images/inquiry.png" >
+			<div id="inquiryNotice" style="margin:0px auto; width : 1200px; display : flex; justify-content: center; ">
+				<img src="http://localhost/html_prj/practice/images/inquiry.png" style="width:900px;" >
 			</div>
-			<div style="max-width: 800px; margin: 0px auto;">
+			<div style="max-width: 1000px; margin: 0px auto;">
 				<div style="display: flex;">
 					<h4 style="margin-left: 40px; margin-top: 40px; margin-bottom: 0px">
 						<strong>문의 접수하기</strong>
 					</h4>
 				</div>
-				<div style="max-width: 800px; margin: 0px auto;">
+				<div style="max-width: 1000px; margin: 0px auto;">
 					<div class="input-container">
 						<input type="text" placeholder="제목">
 					</div>
 				</div>
-				<div style="min-height: 500px; max-width: 800px; margin: 0px auto;">
+				<div style="min-height: 500px; max-width: 1000px; margin: 0px auto;">
 					<div id="summernote">
 						<p></p>
 					</div>
 				</div>
 			</div>
 			<div class="agreement-section"
-				style="width: 800px; margin: 0px auto;">
+				style="max-width: 1000px; margin: 0px auto;">
 				<h4 class="section-title">약관 동의</h4>
 
 
@@ -253,7 +287,7 @@
 
 			</div>
 
-			<div style="width: 800px; margin: 20px auto;">
+			<div style="max-width: 1000px; margin: 20px auto;">
 				<button id="submitBtn">
 					<img src="images/inquirySubmitBtn.png" />
 				</button>

@@ -1,0 +1,236 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VIVA PARK</title>
+<!-- 2024 경주월드 -->
+<script src="https://www.gjw.co.kr/inc/gjw_2024/js/14jquery.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="https://www.gjw.co.kr/inc/gjw_2024/bs/bootstrap.min.css?ver=1763706557">
+<link rel="stylesheet" type="text/css"
+	href="https://www.gjw.co.kr/inc/gjw_2024/bs/bootstrap.min.js?ver=1763706557">
+<link rel="stylesheet"
+	href="https://www.gjw.co.kr/css/gjw_2024/reset.css?ver=1763706557">
+<link rel="stylesheet" type="text/css"
+	href="https://www.gjw.co.kr/css/gjw_2024/sub.css?ver=1763706557">
+<!-- jQuery CDN 시작 -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<jsp:include page="include/vivatemplet_css.jsp"></jsp:include>
+<style>
+/* 기본 스타일 및 컨테이너 */
+body {
+	font-family: Arial, sans-serif;
+	background-color: #fff;
+	padding: 50px 20px;
+}
+
+.inquiry-container {
+	max-width: 800px;
+	margin: 0 auto;
+	background-color: #fff;
+}
+
+/* 1. 헤더 (제목 및 필수 입력 안내) */
+.inquiry-header {
+	text-align: center;
+	margin-bottom: 40px;
+	position: relative;
+}
+
+.inquiry-header h1 {
+	font-size: 30px;
+	font-weight: bold;
+	color: #1a1a1a;
+	margin: 0;
+}
+
+.required-notice {
+	position: absolute;
+	top: 5px;
+	right: 0;
+	font-size: 13px;
+	color: #888;
+}
+
+.required-notice strong {
+	color: #d9534f; /* 빨간색 별표 */
+	font-weight: normal;
+}
+
+/* 2. 양식 그룹 */
+.form-group {
+	margin-bottom: 30px;
+}
+
+/* 라벨 스타일 */
+.form-label {
+	display: block;
+	font-size: 14px;
+	color: #333;
+	margin-bottom: 8px;
+	font-weight: bold;
+}
+
+.form-label .required {
+	color: #d9534f;
+	margin-right: 2px;
+}
+
+/* 제목 입력 필드 */
+.input-title {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	font-size: 16px;
+	box-sizing: border-box;
+	background-color: #f7f7f7; /* 배경색으로 읽기 전용 느낌 */
+}
+
+/* 텍스트 영역 (문의 내용, 답변) */
+.textarea-content {
+	width: 100%;
+	height: 200px; /* 높이 설정 */
+	padding: 15px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	font-size: 16px;
+	resize: vertical; /* 수직 크기 조절만 가능 */
+	box-sizing: border-box;
+	background-color: #f7f7f7;
+	color: #333;
+	line-height: 1.6;
+}
+
+/* 3. 문의 번호 */
+.inquiry-number-info {
+	font-size: 14px;
+	color: #777;
+	margin-top: 20px;
+}
+
+/* 4. 버튼 영역 */
+.action-buttons {
+	display: flex;
+	justify-content: flex-end; /* 버튼을 오른쪽으로 정렬 */
+	gap: 10px;
+	margin-top: 40px;
+}
+
+.action-button {
+	padding: 10px 25px;
+	font-size: 16px;
+	font-weight: bold;
+	border: 1px solid;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.2s, opacity 0.2s;
+}
+
+/* 수정 버튼 (주황색/오렌지색 계열) */
+.button-modify {
+	background-color: #fff;
+	color: #ff8c42; /* 오렌지색 */
+	border-color: #ff8c42;
+}
+
+.button-modify:hover {
+	opacity: 0.85;
+}
+
+/* 삭제 버튼 (회색 계열) */
+.button-delete {
+	background-color: #f0f0f0;
+	color: #555;
+	border-color: #ccc;
+}
+
+.button-delete:hover {
+	background-color: #e0e0e0;
+}
+
+/* Placeholder/입력된 내용 텍스트 스타일 */
+.content-placeholder {
+	color: #333;
+	font-weight: 500;
+}
+</style>
+<script type="text/javascript">
+function removeInquiry(){
+	
+	<%
+	//if(	){} //답변이 있다면 수정 불가능
+	//modifyInquiryDetail(int , MyInquiryDTO): int
+	%>
+	alert("수정");
+	}
+
+
+function modifyInquiry(){
+	alert("삭제");
+	<%
+	//removeInquiry(int ): int
+	%>
+}
+
+</script>
+</head>
+<body>
+	<div class="wrap">
+		<!-- 헤더 -->
+		<div id="closetop" class="close"></div>
+		<div id="header">
+			<jsp:include page="include/header.jsp"></jsp:include>
+		</div>
+		<!-- 햄버거 메뉴-->
+		<jsp:include page="include/hamberger.jsp"></jsp:include>
+
+		<!-- 메인 공간(비어있는 흰 배경 영역) -->
+		<div class="container">
+
+			<div class="inquiry-container">
+
+				<div class="inquiry-header">
+					<h1>문의</h1>
+				</div>
+				<div class="form-group">
+					<label for="inquiryTitle" class="form-label"> 제목 
+					</label> <input type="text" id="inquiryTitle" class="input-title"
+						value="<%="InquiryDTO.getXxx" %>" >
+				</div>
+
+				<div class="form-group">
+					<label for="inquiryContent" class="form-label"> 문의한 내용 </label>
+					<textarea id="inquiryContent" class="textarea-content" style="height: 300px;"><%="InquiryDTO.getXxx" %></textarea>
+				</div>
+
+				<div class="form-group">
+					<label for="inquiryAnswer" class="form-label"> 답변 </label>
+					<textarea id="inquiryAnswer" class="textarea-content" readonly style="height: 300px;"><%="InquiryDTO.getXxx" %>
+					</textarea>
+				</div>
+
+				<div class="inquiry-number-info">문의 번호 : <%="InquiryDTO.getXxx" %></div>
+
+				<div class="action-buttons">
+					<button type="button" class="action-button button-modify" onclick="modifyInquiry()">수정</button>
+					<button type="button" class="action-button button-delete" onclick="removeInquiry()">삭제</button>
+				</div>  
+
+			</div>
+
+		</div>
+		<!-- container 끝 -->
+
+		<div id="footer">
+			<jsp:include page="include/footer.jsp"></jsp:include>
+		</div>
+	</div>
+</body>
+</html>

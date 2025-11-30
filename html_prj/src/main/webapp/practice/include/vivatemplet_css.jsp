@@ -148,9 +148,10 @@ ul {
 
 /* 메인 컨텐츠 여백 */
 .container {
-overflow: hidden;
+	overflow: hidden;
+	min-height:1100px;
 	height: auto;
-	width: 100vw;
+	width: 100%;
 	margin-top: 100px;
 	z-index: 0;
 }

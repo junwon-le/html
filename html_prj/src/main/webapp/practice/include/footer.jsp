@@ -6,7 +6,7 @@
 			<div class="footer-top">
 				<div>
 				<img src="http://192.168.10.73/html_prj/practice/images/vivaLog.png"
-					alt="VIVA PARK Logo" style="height: 50px;" />
+					alt="VIVA PARK" style="height: 50px;" />
 				</div>
 
 				<div class="footer-menu">

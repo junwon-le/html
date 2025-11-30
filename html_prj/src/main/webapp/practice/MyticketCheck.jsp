@@ -7,6 +7,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VIVA PARK</title>
+<!-- bootstrap cdn -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+	crossorigin="anonymous"></script>
 <!-- 2024 경주월드 -->
 <script src="https://www.gjw.co.kr/inc/gjw_2024/js/14jquery.min.js"></script>
 <link rel="stylesheet" type="text/css"
@@ -28,12 +38,18 @@
 :root {
 	--primary-color: #E91E63; /* 핑크색 (예매번호 아이콘 색상) */
 	--background-color: #FFF;
-	--header-bg-color: #FFF9C4; /* 연한 노란색 헤더 배경 */
+	--header-bg-color: #FFe771; /* 연한 노란색 헤더 배경 */
+	--header-bg-color2: #FFFdf5; /* 연한 노란색 헤더 배경 */
 	--text-color: #333;
 	--border-color: #ddd;
 	--padding-base: 16px;
 }
-
+.ticketChDiv{
+visibility: hidden;
+}
+.ticketChDiv.open{
+visibility: visible;
+}
 /* 기본 스타일 및 모달 컨테이너 */
 .modal-container {
 	width: 100%;
@@ -42,13 +58,12 @@
 	border-radius: 8px;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 	overflow: hidden;
-	margin:0px auto;
-	
+	margin: 0px auto;
 }
 
 /* 모달 헤더 */
-.modal-header {
-	background-color: var(--header-bg-color);
+.modal-header2 {
+	background: linear-gradient(to right, var(--header-bg-color), var(--header-bg-color2));
 	padding: var(--padding-base);
 	font-weight: bold;
 	font-size: 1.1em;
@@ -306,7 +321,6 @@
 	background-color: #fccc00; /* 호버 시 색상 진하게 */
 }
 
-
 /* 작은 화면 대응 (선택 사항) */
 @media ( max-width : 850px) {
 	.ticket-list {
@@ -322,9 +336,15 @@
 <script type="text/javascript">
 	$(function() {
 		$(".ticket-details").click(function() {
-			//페이지 이동
+			$(".ticketChDiv").addClass("open");
 		});
+		
+		
 	})
+	
+	function closeDiv(){
+		$(".ticketChDiv").removeClass("open");
+	}
 </script>
 </head>
 <body>
@@ -342,7 +362,7 @@
 			<jsp:include page="page_navi.jsp"></jsp:include>
 
 			<div
-				style="max-width: 1000px; margin: 30px auto; background-color: #fff8f5; padding-top: 50px; padding-bottom: 80px; border-radius: 20px;">
+				style="max-width: 1000px; margin: 30px auto; background-color: #fff8e7; padding-top: 50px; padding-bottom: 80px; border-radius: 20px;">
 				<div class="ticket-container"
 					style="max-width: 1000px; margin: 0px auto;">
 					<h1 class="main-title">내 티켓 확인하기</h1>
@@ -389,55 +409,58 @@
 					</div>
 				</div>
 			</div>
-<!-- 상세 보기 모달 기능 -->
-<div style = "width: 100%; height:100%;position: absolute; top:0px; left:0px;">
-<div style = "width:100%; height: 100%; background-color: #000;  z-index:1; padding-bottom:100px; opacity: 0.3;position: absolute; top:0px; left:0px;"></div>
-			
-			<div class="modal-container " style="position : relative; z-index:  3; margin-top:200px;">
-				<div class="modal-header" >
-					<span>예매 상세</span>
-					<button class="close-button" onclick="alert('닫기 기능')">&times;</button>
-				</div>
+			<!-- 상세 보기 모달 기능 -->
+			<div class= "ticketChDiv"
+				style="width: 100%; height: 100%; position: absolute; top: 0px; left: 0px;">
+				<div
+					style="width: 100%; height: 100%; background-color: #000; z-index: 1; padding-bottom: 100px; opacity: 0.3; position: absolute; top: 0px; left: 0px;"></div>
 
-				<div class="modal-content" style="z-index: 2;">
-					<div class="detail-item">
-						<span class="icon ticket">🎟️</span>
-						<div class="detail-text">**예매번호:** A1234567</div>
-					</div>
-					<div class="detail-item">
-						<span class="icon ticket-name">🎠</span>
-						<div class="detail-text">**티켓명:** V!VAPark 1일 자유이용권</div>
-					</div>
-					<div class="detail-item">
-						<span class="icon date">🗓️</span>
-						<div class="detail-text">**이용일:** 2025-11-15</div>
-					</div>
-					<div class="detail-item">
-						<span class="icon people">👥</span>
-						<div class="detail-text">**인원:** 성인 2, 청소년 1</div>
-					</div>
-					<div class="detail-item">
-						<span class="icon payment">💳</span>
-						<div class="detail-text">**결제수단:** 신용카드</div>
-					</div>
-					<div class="detail-item">
-						<span class="icon time">⏰</span>
-						<div class="detail-text">**예매일시:** 2025-11-10 14:22</div>
+				<div class="modal-container "
+					style="position: relative; z-index: 3; margin-top: 200px;">
+					<div class="modal-header2">
+						<span>예매 상세</span>
+						<button class="close-button" onclick="closeDiv()">&times;</button>
 					</div>
 
-					<div class="qr-section">
-						<div class="qr-code"></div>
-						<div class="qr-instruction">QR 코드를 입장 시 제시하세요.</div>
+					<div class="modal-content" style="z-index: 2;">
+						<div class="detail-item">
+							<span class="icon ticket">🎟️</span>
+							<div class="detail-text">예매번호: A1234567</div>
+						</div>
+						<div class="detail-item">
+							<span class="icon ticket-name">🎠</span>
+							<div class="detail-text">티켓명: V!VAPark 1일 자유이용권</div>
+						</div>
+						<div class="detail-item">
+							<span class="icon date">🗓️</span>
+							<div class="detail-text">이용일: 2025-11-15</div>
+						</div>
+						<div class="detail-item">
+							<span class="icon people">👥</span>
+							<div class="detail-text">인원: 성인 2, 청소년 1</div>
+						</div>
+						<div class="detail-item">
+							<span class="icon payment">💳</span>
+							<div class="detail-text">결제수단: 신용카드</div>
+						</div>
+						<div class="detail-item">
+							<span class="icon time">⏰</span>
+							<div class="detail-text">예매일시: 2025-11-10 14:22</div>
+						</div>
+
+						<div class="qr-section">
+							<div class="qr-code"></div>
+							<div class="qr-instruction">QR 코드를 입장 시 제시하세요.</div>
+						</div>
+					</div>
+
+					<div class="button-group" style="padding: 10px;">
+						<button class="button cancel-button" onclick="alert('티켓 취소 기능')">
+							티켓 취소하기</button>
+						<button class="button close-action-button"
+							onclick="closeDiv()">닫기</button>
 					</div>
 				</div>
-
-				<div class="button-group">
-					<button class="button cancel-button" onclick="alert('티켓 취소 기능')">
-						티켓 취소하기</button>
-					<button class="button close-action-button" onclick="alert('닫기 기능')">
-						닫기</button>
-				</div>
-			</div>
 			</div>
 		</div>
 

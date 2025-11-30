@@ -139,7 +139,7 @@ margin-top : 100px;
 <body>
 	<div class="wrap">
 		<!-- 헤더 -->
-		<div id="closetop"></div>
+		<div id="closetop" class="close"></div>
 		<div id="header">
 			<jsp:include page="include/header.jsp"></jsp:include>
 		</div>
@@ -154,26 +154,25 @@ margin-top : 100px;
 				<div class="btn-group">
 					<button type="button" class="btn btn-secondary dropdown-toggle"
 						data-bs-toggle="dropdown" aria-expanded="false"
-						style="background-color: #fff; color: #333; border: none; padding: 0px; margin-left: 10px; margin-bottom: 3px;">
+						data-bs-offset="20, 0"
+						style="background-color: #fff; color: #333; border: none; padding: 0px; margin-left: 10px; font-size: 13px;">
 						소통 서비스</button>
-					<ul class="dropdown-menu dropdown-menu-end">
-						<li><a href="#void" style="margin-left: 20px;">즐길거리</a></li>
-						<li><a href="#void" style="margin-left: 20px;">행사</a></li>
-						<li><a href="#void" style="margin-left: 20px;">요금/예매</a></li>
-						<li><a href="#void" style="margin-left: 20px;">이용정보</a></li>
-						<li><a href="#void" style="margin-left: 20px;">소통서비스</a></li>
-					</ul>
+					<jsp:include page="page_navi.jsp"></jsp:include>
 				</div>
-
 				<div class="btn-group">
 					<button type="button" class="btn btn-secondary dropdown-toggle"
 						data-bs-toggle="dropdown" aria-expanded="false"
-						style="background-color: #fff; color: #333; border: none; padding: 0px; margin-left: 10px; margin-bottom: 3px;">
+						data-bs-offset="15, 0"
+						style="background-color: #fff; color: #333; border: none; padding: 0px; margin-left: 10px; font-size: 13px;">
 						FAQ</button>
-					<ul class="dropdown-menu dropdown-menu-end">
-						<li><a href="#void" style="margin-left: 20px;">공지</a></li>
-						<li><a href="#void" style="margin-left: 20px;">FAQ</a></li>
-						<li><a href="#void" style="margin-left: 20px;">문의</a></li>
+					<ul class="dropdown-menu dropdown-menu-end"
+						style="width: 55px !important; min-width: 55px !important;">
+						<li><a href="http://localhost/html_prj/practice/Noticei.jsp"
+							style="margin: 5px 10px">공지</a></li>
+						<li><a href="http://localhost/html_prj/practice/FAQi.jsp"
+							style="margin: 5px 10px">FAQ</a></li>
+						<li><a href="http://localhost/html_prj/practice/Inquiryi.jsp"
+							style="margin: 5px 10px">문의</a></li>
 					</ul>
 				</div>
 			</div>

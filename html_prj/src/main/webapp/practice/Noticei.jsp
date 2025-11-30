@@ -33,16 +33,9 @@
 
 <jsp:include page="include/vivatemplet_css.jsp"></jsp:include>
 <style>
-.subWrap {
-	padding: 0;
-}
 
-.container {
-	margin-top: 100px;
-	overflow: hidden;
-}
+
 @media screen and ( max-width : 1200px) {
-
 	.page_navi {
 		display: none;
 	}
@@ -61,7 +54,34 @@
 
 		<!-- 메인 공간(비어있는 흰 배경 영역) -->
 		<div class="container">
-			<jsp:include page="page_navi.jsp"></jsp:include>
+			<div class="page_navi"
+				style="margin-bottom: 20px; margin-left: 100px; margin-top: 40px;">
+				<img src="images/house.png" />
+				<div class="btn-group">
+					<button type="button" class="btn btn-secondary dropdown-toggle"
+						data-bs-toggle="dropdown" aria-expanded="false"
+						data-bs-offset="20, 0"
+						style="background-color: #fff; color: #333; border: none; padding: 0px; margin-left: 10px; font-size: 13px;">
+						소통 서비스</button>
+					<jsp:include page="page_navi.jsp"></jsp:include>
+				</div>
+				<div class="btn-group">
+					<button type="button" class="btn btn-secondary dropdown-toggle"
+						data-bs-toggle="dropdown" aria-expanded="false"
+						data-bs-offset="15, 0"
+						style="background-color: #fff; color: #333; border: none; padding: 0px; margin-left: 10px; font-size: 13px;">
+						공지</button>
+					<ul class="dropdown-menu dropdown-menu-end"
+						style="width: 55px !important; min-width: 55px !important;">
+						<li><a href="http://localhost/html_prj/practice/Noticei.jsp"
+							style="margin: 5px 10px">공지</a></li>
+						<li><a href="http://localhost/html_prj/practice/FAQi.jsp"
+							style="margin: 5px 10px">FAQ</a></li>
+						<li><a href="http://localhost/html_prj/practice/Inquiryi.jsp"
+							style="margin: 5px 10px">문의</a></li>
+					</ul>
+				</div>
+			</div>
 			<div class="WrapWidth" style="z-index: 0; height: 100%">
 				<div class="subWrap" style="z-index: 0">
 					<div id="subCon" style="z-index: 0;">
@@ -71,7 +91,7 @@
 						</div>
 						<!-- carousel -->
 						<div id="carouselExampleCaptions" class="carousel slide"
-							style="max-width: 1000px; margin: 0px auto;">
+							style="max-width: 1300px; margin: 0px auto;">
 							<div class="carousel-indicators">
 								<button type="button" data-bs-target="#carouselExampleCaptions"
 									data-bs-slide-to="0" class="active" aria-current="true"
@@ -128,8 +148,7 @@
 										<button type="button"
 											class="btn btn-secondary dropdown-toggle"
 											data-bs-toggle="dropdown" aria-expanded="false"
-											style="border-radius:10px; border:1px solid #333; 
-											background-color: #fff; color: #333; padding: 8px; margin-left: 10px; margin-bottom: 3px; margin-right: 20px">
+											style="border-radius: 10px; border: 1px solid #333; background-color: #fff; color: #333; padding: 8px; margin-left: 10px; margin-bottom: 3px; margin-right: 20px">
 											전체</button>
 										<ul class="dropdown-menu dropdown-menu-end">
 											<li><button class="dropdown-item" type="button">이용</button></li>
@@ -150,7 +169,7 @@
 									</form>
 
 								</div>
-								<div style="max-width: 1000px; margin: 0px auto;">
+								<div style="max-width: 1300px; margin: 0px auto;">
 
 									<ul class="list" style="z-index: 0;">
 										<%
