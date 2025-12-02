@@ -412,7 +412,7 @@ max-width: 800px;
 <script type="text/javascript">
 	$(function() {
 		$(".payment-table tbody tr ").click(function() {
-			$(".payHistoryDiv").addClass("open");
+			location.href="http://localhost/html_prj/practice/InquiryAnswer.jsp";
 		});
 
 		
@@ -443,38 +443,13 @@ max-width: 800px;
 			<div class="payment-history-container">
 
 				<div class="title-section">
-					<h1>결제내역</h1>
-					<p>
-						예매하신 티켓은 방문일자에 사용하실 수 있으며<br> <strong>사용 후에는 예매 취소가
-							불가</strong>하시니 유의하시기 바랍니다.
-					</p>
+					<h1>문의 내역</h1>
 				</div>
 
-				<div class="search-filter-box">
-					<div class="filter-group">
-						<button class="period-button">1개월</button>
-						<button class="period-button">3개월</button>
-						<button class="period-button">6개월</button>
-						<button class="period-button">12개월</button>
-
-						<div class="date-input-group">
-							<input type="date" value="2025-10-12">
-						</div>
-						<span>~</span>
-						<div class="date-input-group">
-							<input type="date" value="2025-11-12">
-						</div>
-
-						<button class="action-button search-button">검색</button>
-
-						<button class="action-button reset-button">초기화</button>
-					</div>
-				</div>
+	
 
 				<div class="tab-menu">
-					<button class="tab-button active">전체</button>
-					<button class="tab-button ">예매완료</button>
-					<button class="tab-button">취소/환불</button>
+					<button class="tab-button active" onclick="location.href='http://localhost/html_prj/practice/Inquiry.jsp'">글쓰기</button>
 				</div>
 
 				<div class="content-area">
@@ -484,11 +459,11 @@ max-width: 800px;
 							<thead>
 								<tr>
 									<th style="width: 5%;">NO.</th>
-									<th style="width: 15%;">결제일</th>
-									<th style="width: 30%;">결제명</th>
-									<th style="width: 10%;">인원</th>
-									<th style="width: 20%;">결제 금액</th>
-									<th style="width: 20%;">예매 상태</th>
+									<th style="width: 15%;">제목</th>
+									<th style="width: 30%;">답변 여부</th>
+									<th style="width: 10%;">수정</th>
+									<th style="width: 20%;">삭제</th>
+									<th style="width: 20%;">작성일</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -504,14 +479,14 @@ max-width: 800px;
 									dbPayState++;
 								%>
 								<tr>
-									<td class="col-no"><%=i%></td>
-									<td class="col-date"><%="pay_date"%></td>
-									<td class="col-product"><span class="product-badge"><%="type"%></span>
+									<td class="col-no"><%="list("+i+").InpuiryDTO.getXxx"%></td>
+									<td class="col-product"><span class="product-badge"><%="list("+i+").InpuiryDTO.getXxx"%></span>
 									</td>
-									<td class="col-people"><%="personCnt"%></td>
-									<td class="col-amount"><%="price"%></td>
 									<td class="col-status"><span
-										class="status-badge <%=payState%>"><%="payState"%></span></td>
+										class="status-badge <%=payState%>"><%="list("+i+").InpuiryDTO.getXxx"%></span></td>
+									<td class="col-date"><%="list("+i+").InpuiryDTO.getXxx"%></td>
+									<td class="col-people"><%="list("+i+").InpuiryDTO.getXxx"%></td>
+									<td class="col-amount"><%="list("+i+").InpuiryDTO.getXxx"%></td>
 								</tr>
 								<%
 								} //end for
@@ -540,51 +515,6 @@ max-width: 800px;
 							<a class="page-link" href="?cmsNo=DD0100&bgrp&page=1">&gt;&gt;</a>
 						</div>
 					</ul>
-				</div>
-			</div>
-			<!-- 모달 구현 -->
-			<div class="payHistoryDiv"
-				style="width: 100%; height: 100%; position: absolute; top: 0px; left: 0px;">
-				<div
-					style="width: 100%; height: 100%; background-color: #000; z-index: 2; padding-bottom: 100px; opacity: 0.3; position: absolute; top: 0px; left: 0px;"></div>
-
-				<div class="modal-container "
-					style="position: relative; z-index: 3; max-width: 500px; margin:200px auto;">
-					<div class="detail-container">
-						<div class="detail-header">결제 상세</div>
-
-						<ul class="detail-list">
-							<li class="detail-item"><span class="item-icon">📄</span> <span
-								class="item-label">상품명</span> <span class="item-value">1일
-									자유이용권</span></li>
-							<li class="detail-item"><span class="item-icon">⏱️</span> <span
-								class="item-label">결제 일시</span> <span class="item-value">2025년
-									11월 06일 22시 30분</span></li>
-							<li class="detail-item"><span class="item-icon">💳</span> <span
-								class="item-label">결제 수단</span> <span class="item-value">신용카드</span>
-							</li>
-							<li class="detail-item"><span class="item-icon">👥</span> <span
-								class="item-label">인원수</span> <span class="item-value">성인
-									2명 / 청소년 1명</span></li>
-							<li class="detail-item"><span class="item-icon">🏢</span> <span
-								class="item-label">결제 기관</span> <span class="item-value">삼성</span>
-							</li>
-							<li class="detail-item"><span class="item-icon">⚙️</span> <span
-								class="item-label">가맹점</span> <span class="item-value">(주)VIVAPARK</span>
-							</li>
-							<li class="detail-item"><span class="item-icon">💰</span> <span
-								class="item-label">결제 금액</span> <span class="item-value">36000</span>
-							</li>
-							<li class="detail-item"><span class="item-icon">🗑️</span> <span
-								class="item-label">할부개월</span> <span class="item-value">일시불</span>
-							</li>
-						</ul>
-
-						<div class="detail-footer">
-							<button class="close-button" onclick="closeDiv()">닫기</button>
-						</div>
-					</div>
-
 				</div>
 			</div>
 		</div>

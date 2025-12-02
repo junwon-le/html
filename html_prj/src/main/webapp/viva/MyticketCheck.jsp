@@ -209,7 +209,6 @@ visibility: visible;
 </style>
 
 <style type="text/css">
-/* 기본 스타일 초기화 */
 .ticket-container {
 	max-width: 900px;
 	width: 100%;
@@ -358,11 +357,11 @@ visibility: visible;
 		<jsp:include page="include/hamberger.jsp"></jsp:include>
 
 		<!-- 메인 공간(비어있는 흰 배경 영역) -->
-		<div class="container" style="height: auto; position: relative;">
+		<div class="container" style="height: 900px; position: relative;">
 			<jsp:include page="page_navi.jsp"></jsp:include>
 
 			<div
-				style="max-width: 1000px; margin: 30px auto; background-color: #fff8e7; padding-top: 50px; padding-bottom: 80px; border-radius: 20px;">
+				style="max-width: 1000px; margin: 80px auto; background-color: #fff8e7; padding-top: 50px; padding-bottom: 80px; border-radius: 20px;">
 				<div class="ticket-container"
 					style="max-width: 1000px; margin: 0px auto;">
 					<h1 class="main-title">내 티켓 확인하기</h1>
@@ -411,12 +410,12 @@ visibility: visible;
 			</div>
 			<!-- 상세 보기 모달 기능 -->
 			<div class= "ticketChDiv"
-				style="width: 100%; height: 100%; position: absolute; top: 0px; left: 0px;">
+				style="width: 100%; height: 900px; position: absolute; top: 0px; left: 0px;">
 				<div
-					style="width: 100%; height: 100%; background-color: #000; z-index: 1; padding-bottom: 100px; opacity: 0.3; position: absolute; top: 0px; left: 0px;"></div>
+					style="width: 100%; height: 900px; background-color: #000; z-index: 1; padding-bottom: 100px; opacity: 0.3; position: absolute; top: 0px; left: 0px;"></div>
 
 				<div class="modal-container "
-					style="position: relative; z-index: 3; margin-top: 200px;">
+					style="position: relative; z-index: 3; margin-top: 100px;">
 					<div class="modal-header2">
 						<span>예매 상세</span>
 						<button class="close-button" onclick="closeDiv()">&times;</button>

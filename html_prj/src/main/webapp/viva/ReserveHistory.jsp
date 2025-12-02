@@ -62,6 +62,11 @@
 
 /* 2. 검색 필터 섹션 */
 .search-filter-box {
+	display : flex;
+	margin : 0px auto;
+	max-width : 800px;
+	align-items : center;
+	justify-content : center;
 	background-color: #fff;
 	padding: 20px;
 	border-radius: 8px;
@@ -331,7 +336,7 @@
 
 /* 1. 헤더 스타일 */
 .modal-header {
-	background-color: #fcece3; /* 연한 주황색 계열 */
+	background: linear-gradient(to right, #FFe771, #FFFdf5);
 	padding: 15px 20px;
 	font-size: 18px;
 	font-weight: bold;
@@ -450,12 +455,10 @@
 <script type="text/javascript">
 	$(function() {
 		$(".payment-table tbody tr ").click(function() {
-			<%
-			//예약 상세 내역 가져오기
-			//searchReserveDetail(int ) :MyReserveDetailDTO
-			%>
-			$(".payHistoryDiv").addClass("open");
-		});
+<%//예약 상세 내역 가져오기
+//searchReserveDetail(int ) :MyReserveDetailDTO%>
+	$(".payHistoryDiv").addClass("open");
+						});
 
 	})
 
@@ -468,11 +471,8 @@
 	}
 	function cancleReserve() {
 		alert("예약 취소");
-		<%
-		//예약 취소
-		//cancleReserve(int, int) : int  
-		%>
-
+<%//예약 취소
+			//cancleReserve(int, int) : int%>
 	}
 </script>
 </head>
@@ -496,8 +496,11 @@
 				</div>
 
 				<div class="search-filter-box">
-
-					<button class="action-button search-button">검색</button>
+					<div class="input-container" style="width: 300px; ">
+						<input type="password" id="passwordConfirm" class="input-text" style="border: 1px solid #ADB5BD; border-radius: 5px"
+							placeholder="행사명을 입력하세요">
+					</div>
+					<button class="action-button search-button" style="padding:7px 20px;" >검색</button>
 
 				</div>
 
@@ -588,27 +591,28 @@
 								<tbody>
 									<tr>
 										<td class="label-cell">행사명</td>
-										<td class="value-cell"><%= "MyReserveDetailDTO.getXxx"%> </td>
+										<td class="value-cell"><%="MyReserveDetailDTO.getXxx"%>
+										</td>
 										<td class="label-cell">예약자</td>
-										<td class="value-cell"><%= "MyReserveDetailDTO.getXxx"%></td>
+										<td class="value-cell"><%="MyReserveDetailDTO.getXxx"%></td>
 									</tr>
 									<tr>
 										<td class="label-cell">행사일시</td>
-										<td class="value-cell"><%= "연산(2025-09-11 12:00~13:00)"%></td>
+										<td class="value-cell"><%="연산(2025-09-11 12:00~13:00)"%></td>
 										<td class="label-cell">장소</td>
-										<td class="value-cell"><%= "MyReserveDetailDTO.getXxx"%></td>
+										<td class="value-cell"><%="MyReserveDetailDTO.getXxx"%></td>
 									</tr>
 									<tr>
 										<td class="label-cell">예약 일시</td>
-										<td class="value-cell"><%= "MyReserveDetailDTO.getXxx"%></td>
+										<td class="value-cell"><%="MyReserveDetailDTO.getXxx"%></td>
 										<td class="label-cell">예약 번호</td>
-										<td class="value-cell"><%= "MyReserveDetailDTO.getXxx"%></td>
+										<td class="value-cell"><%="MyReserveDetailDTO.getXxx"%></td>
 									</tr>
 									<tr>
 										<td class="label-cell">인원수</td>
-										<td class="value-cell"><%= "MyReserveDetailDTO.getXxx"%></td>
+										<td class="value-cell"><%="MyReserveDetailDTO.getXxx"%></td>
 										<td class="label-cell">상태</td>
-										<td class="value-cell"><%= "MyReserveDetailDTO.getXxx"%></td>
+										<td class="value-cell"><%="MyReserveDetailDTO.getXxx"%></td>
 									</tr>
 								</tbody>
 							</table>
@@ -619,37 +623,37 @@
 							<ul class="payment-detail-list">
 								<li class="payment-detail-item"><span class="item-icon">📄</span>
 									<span class="item-label">상품명</span> <span class="item-value">
-									<%= "MyReserveDetailDTO.getXxx"%>
-									</span></li>
+										<%="MyReserveDetailDTO.getXxx"%>
+								</span></li>
 								<li class="payment-detail-item"><span class="item-icon">⏱️</span>
 									<span class="item-label">결제 일시</span> <span class="item-value">
-									<%= "MyReserveDetailDTO.getXxx"%>
-									</span></li>
+										<%="MyReserveDetailDTO.getXxx"%>
+								</span></li>
 								<li class="payment-detail-item"><span class="item-icon">💳</span>
 									<span class="item-label">결제 수단</span> <span class="item-value">
-									<%= "MyReserveDetailDTO.getXxx"%>	
-								</span>
-								</li>
+										<%="MyReserveDetailDTO.getXxx"%>
+								</span></li>
 								<li class="payment-detail-item"><span class="item-icon">🆔</span>
-									<span class="item-label">승인번호</span> <span class="item-value"><%= "MyReserveDetailDTO.getXxx"%></span>
+									<span class="item-label">승인번호</span> <span class="item-value"><%="MyReserveDetailDTO.getXxx"%></span>
 								</li>
 								<li class="payment-detail-item"><span class="item-icon">🏢</span>
-									<span class="item-label">결제 기관</span> <span class="item-value"><%= "MyReserveDetailDTO.getXxx"%></span>
+									<span class="item-label">결제 기관</span> <span class="item-value"><%="MyReserveDetailDTO.getXxx"%></span>
 								</li>
 								<li class="payment-detail-item"><span class="item-icon">⚙️</span>
 									<span class="item-label">가맹점</span> <span class="item-value">(주)VIVAPARK</span>
 								</li>
 								<li class="payment-detail-item"><span class="item-icon">💰</span>
-									<span class="item-label">결제 금액</span> <span class="item-value"><%= "MyReserveDetailDTO.getXxx"%></span>
+									<span class="item-label">결제 금액</span> <span class="item-value"><%="MyReserveDetailDTO.getXxx"%></span>
 								</li>
 								<li class="payment-detail-item"><span class="item-icon">🗑️</span>
-									<span class="item-label">할부개월</span> <span class="item-value"><%= "MyReserveDetailDTO.getXxx"%></span>
+									<span class="item-label">할부개월</span> <span class="item-value"><%="MyReserveDetailDTO.getXxx"%></span>
 								</li>
 							</ul>
 						</div>
 
 						<div class="modal-footer">
-							<button class="action-button button-cancel" onclick="cancleReserve() ">예약 취소</button>
+							<button class="action-button button-cancel"
+								onclick="cancleReserve() ">예약 취소</button>
 							<button class="action-button button-close" onclick="closeDiv()">닫기</button>
 						</div>
 

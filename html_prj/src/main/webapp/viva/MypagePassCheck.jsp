@@ -78,6 +78,12 @@
             font-size: 16px;
         }
     </style>
+    <script type="text/javascript">
+    function passChk(){
+    	//비밀번호 확인 한후 이동
+    	location.href="" //개인 정보 수정 url
+    }
+    </script>
 </head>
 <body>
 	<div class="wrap">
@@ -101,17 +107,19 @@
 		<div style="width :400px; margin:0px auto;text-align: center;"><h3>회원 정보 변경을 <br> 비밀번호 인증 후 가능합니다.</h3></div>
 		<div class="input-group">
         
-        <label for="passwordConfirm" class="input-label">
+        <label for="passwordConfirm" class="input-label" >
             비밀번호 확인 <span class="required">*</span>
         </label>
-        
-        <div class="input-container">
+        <div style="display:flex; margin:0px auto; width:100%;">
+        <div class="input-container" style="width:500px;" >
             <input 
                 type="password" 
                 id="passwordConfirm" 
                 class="input-text" 
-                placeholder="비밀번호 확인" 
-            >
+                placeholder="비밀번호 확인"> 
+        </div>
+            <input type="button" value="확인" onclick="passChk()" 
+            style="color: #FF6124; border: 1.5px solid #FF6124; border-radius: 10px; background-color: #fff; margin-left:20px;" />
         </div>
         
     </div>

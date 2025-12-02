@@ -230,11 +230,11 @@
 						문의</button>
 					<ul class="dropdown-menu dropdown-menu-end"
 						style="width: 55px !important; min-width: 55px !important;">
-						<li><a href="http://localhost/html_prj/practice/Noticei.jsp"
+						<li><a href="http://localhost/html_prj/viva/Notice.jsp"
 							style="margin: 5px 10px; width:auto; heigh:auto; padding: 0px;">공지</a></li>
-						<li><a href="http://localhost/html_prj/practice/FAQi.jsp"
+						<li><a href="http://localhost/html_prj/viva/FAQ.jsp"
 							style="margin: 5px 10px; width:auto; heigh:auto; padding: 0px;">FAQ</a></li>
-						<li><a href="http://localhost/html_prj/practice/Inquiryi.jsp"
+						<li><a href="http://localhost/html_prj/viva/Inquiry.jsp"
 							style="margin: 5px 10px; width:auto; heigh:auto; padding: 0px;">문의</a></li>
 					</ul>
 				</div>

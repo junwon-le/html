@@ -164,7 +164,7 @@ ul {
 	width: 100%;
 	background: #fafafa;
 	height: 200px;
-	margin-top: 40px;
+	margin-top: 0px;
 }
 
 .footer-inner {

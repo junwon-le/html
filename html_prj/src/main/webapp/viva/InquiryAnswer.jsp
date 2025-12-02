@@ -168,12 +168,12 @@ function removeInquiry(){
 	//if(	){} //답변이 있다면 수정 불가능
 	//modifyInquiryDetail(int , MyInquiryDTO): int
 	%>
-	alert("수정");
+	alert("삭제");
 	}
 
 
 function modifyInquiry(){
-	alert("삭제");
+	alert("수정");
 	<%
 	//removeInquiry(int ): int
 	%>

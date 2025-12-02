@@ -32,15 +32,130 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <jsp:include page="include/vivatemplet_css.jsp"></jsp:include>
+<!-- 검색 드롭다운 메뉴 CSS -->
 <style>
-
 
 @media screen and ( max-width : 1200px) {
 	.page_navi {
 		display: none;
 	}
 }
+.custom-dropdown-container {
+    position: relative; /* 메뉴를 버튼 아래에 정확히 배치하기 위함 */
+    display: inline-block;
+    font-family: Arial, sans-serif;
+}
+
+/* 1. 토글 버튼 스타일 (전체 ▼) */
+.search-dropdown-toggle {
+    padding: 8px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px; /* 둥근 모서리 */
+    background-color: #f8f8f8;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap; /* 내용이 줄바꿈되지 않도록 */
+}
+
+/* 화살표 아이콘 */
+.arrow-icon {
+    font-size: 10px;
+    margin-left: 5px;
+    transition: transform 0.3s;
+}
+
+/* 2. 드롭다운 메뉴 스타일 (기본적으로 숨김) */
+.dropdown-menu {
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+    position: absolute;
+    top: 100%; /* 버튼 바로 아래 배치 */
+    right: 0; /* 버튼 오른쪽 끝에 맞춤 */
+    min-width: 150px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    z-index: 1000;
+    
+    /* 기본적으로 숨기기 */
+    display: none;
+}
+
+/* 메뉴가 열렸을 때 */
+.dropdown-menu.show {
+    display: block;
+}
+
+/* 3. 메뉴 항목 스타일 */
+.menu-item {
+    padding: 8px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    white-space: nowrap;
+}
+
+.menu-item:hover {
+    background-color: #f0f0f0; /* 호버 시 배경색 변경 */
+}
+
+/* 현재 활성화된 항목 스타일 (선택적) */
+.menu-item.active {
+    font-weight: bold;
+    color: #000;
+}
 </style>
+<script type="text/javascript">
+
+$(document).ready(function() {
+    var $toggle = $('#search-dropdownToggle');
+    var $menu = $('#dropdownMenu');
+    var $items = $('.menu-item');
+
+    // 1. 토글 버튼 클릭 시 메뉴 보이기/숨기기
+    $toggle.on('click', function(e) {
+        // 메뉴의 show 클래스를 토글 (있으면 제거, 없으면 추가)
+        $menu.toggleClass('show');
+        // 화살표 방향 변경 (선택적)
+        $toggle.find('.arrow-icon').toggleClass('rotated');
+        e.stopPropagation(); // 이벤트 버블링 방지
+    });
+
+    // 2. 메뉴 항목 클릭 시 처리
+    $items.on('click', function() {
+        var selectedText = $(this).text();
+        var selectedValue = $(this).data('value');
+
+        // 1) 버튼 텍스트 변경
+        $toggle.html(selectedText + ' <span class="arrow-icon">▼</span>');
+        
+        // 2) active 클래스 업데이트 (선택된 항목 표시)
+        $items.removeClass('active');
+        $(this).addClass('active');
+
+        // 3) 메뉴 닫기
+        $menu.removeClass('show');
+        
+        // *******************************************
+        // TODO: 서버로 데이터 전송 또는 다른 로직 추가 (예: AJAX 호출)
+        console.log("선택된 값:", selectedValue);
+        // *******************************************
+    });
+
+    // 3. 메뉴 외부 클릭 시 메뉴 닫기
+    $(document).on('click', function(e) {
+        if (!$toggle.is(e.target) && $menu.hasClass('show')) {
+            $menu.removeClass('show');
+        }
+    });
+});
+ </script>
 </head>
 <body>
 	<div class="wrap">
@@ -73,11 +188,11 @@
 						공지</button>
 					<ul class="dropdown-menu dropdown-menu-end"
 						style="width: 55px !important; min-width: 55px !important;">
-						<li><a href="http://localhost/html_prj/practice/Noticei.jsp"
+						<li><a href="http://localhost/html_prj/viva/Notice.jsp"
 							style="margin: 5px 10px">공지</a></li>
-						<li><a href="http://localhost/html_prj/practice/FAQi.jsp"
+						<li><a href="http://localhost/html_prj/viva/FAQ.jsp"
 							style="margin: 5px 10px">FAQ</a></li>
-						<li><a href="http://localhost/html_prj/practice/Inquiryi.jsp"
+						<li><a href="http://localhost/html_prj/viva/Inquiry.jsp"
 							style="margin: 5px 10px">문의</a></li>
 					</ul>
 				</div>
@@ -144,29 +259,26 @@
 							<div class="cont_box">
 								<div class="searchbox"
 									style="display: flex; align-items: center; justify-content: center;">
-									<div class="btn-group">
-										<button type="button"
-											class="btn btn-secondary dropdown-toggle"
-											data-bs-toggle="dropdown" aria-expanded="false"
-											style="border-radius: 10px; border: 1px solid #333; background-color: #fff; color: #333; padding: 8px; margin-left: 10px; margin-bottom: 3px; margin-right: 20px">
-											전체</button>
-										<ul class="dropdown-menu dropdown-menu-end">
-											<li><button class="dropdown-item" type="button">이용</button></li>
-											<li><button class="dropdown-item" type="button">공지</button></li>
-											<li><button class="dropdown-item" type="button">이벤트</button></li>
-										</ul>
-									</div>
-									<form method="GET" name="search_frm" id="search_frm"
-										action="/Contents/contents.php?cmsNo=DD0100">
+										<div class="custom-dropdown-container">
+
+											<button class="search-dropdown-toggle" id="search-dropdownToggle">
+												전체 <span class="arrow-icon"></span>
+											</button>
+
+											<ul class="dropdown-menu" id="dropdownMenu">
+												<li data-value="all"  class="menu-item active">이용</li>
+												<li data-value="notice" class="menu-item">공지</li>
+												<li data-value="event" class="menu-item">이벤트</li>
+											</ul>
+										</div>
 										<input type='hidden' name='cmsNo' id='cmsNo' value='DD0100'>
 										<input type='hidden' name='bgrp' id='bgrp' value=''>
 
 										<div class="form">
 											<input type="text" placeholder="검색하기" class="formtxt"
-												name="stl" id="stl" placeholder="" value="">
+												name="stl" id="stl" >
 											<button type="submit"></button>
 										</div>
-									</form>
 
 								</div>
 								<div style="max-width: 1300px; margin: 0px auto;">

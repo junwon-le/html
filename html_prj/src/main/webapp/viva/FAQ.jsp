@@ -123,11 +123,7 @@
 .accordion-button:not(.collapsed)::after {
   filter: none !important; 
 }
-.container{
-margin-top : 100px;
-	overflow: hidden;
 
-}
 @media screen and ( max-width : 1200px) {
 
 	.page_navi {
@@ -147,7 +143,7 @@ margin-top : 100px;
 		<jsp:include page="include/hamberger.jsp"></jsp:include>
 
 		<!-- 메인 공간(비어있는 흰 배경 영역) -->
-		<div class="container">
+		<div class="container" >
 			<div class="page_navi"
 				style="margin-bottom: 20px; margin-left: 100px; margin-top: 40px;">
 				<img src="images/house.png" />
@@ -167,11 +163,11 @@ margin-top : 100px;
 						FAQ</button>
 					<ul class="dropdown-menu dropdown-menu-end"
 						style="width: 55px !important; min-width: 55px !important;">
-						<li><a href="http://localhost/html_prj/practice/Noticei.jsp"
+						<li><a href="http://localhost/html_prj/viva/Notice.jsp"
 							style="margin: 5px 10px">공지</a></li>
-						<li><a href="http://localhost/html_prj/practice/FAQi.jsp"
+						<li><a href="http://localhost/html_prj/viva/FAQ.jsp"
 							style="margin: 5px 10px">FAQ</a></li>
-						<li><a href="http://localhost/html_prj/practice/Inquiryi.jsp"
+						<li><a href="http://localhost/html_prj/viva/Inquiry.jsp"
 							style="margin: 5px 10px">문의</a></li>
 					</ul>
 				</div>

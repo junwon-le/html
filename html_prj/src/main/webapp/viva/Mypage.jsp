@@ -105,7 +105,7 @@
     <div class="section-column">
         <h3>나의 예매</h3>
         <button class="btn-item" onclick="location.href='http://localhost/html_prj/practice/MyticketCheck.jsp'">나의 티켓</button>
-        <button class="btn-item" onclick="location.href='http://localhost/html_prj/practice/ReserveHistory.jsp'">예매 내역</button>
+        <button class="btn-item" onclick="location.href='http://localhost/html_prj/practice/payhistory.jsp'">예매 내역</button>
     </div>
 
     <div class="section-column">
