@@ -6,6 +6,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -418,11 +419,7 @@ detail-container {
 </style>
 <script type="text/javascript">
 	$(function() {
-		$(".payment-table tbody tr ").click(function() {
-			$(".payHistoryDiv").addClass("open");
-		});
-
-		// 테이블 행 클릭 시 모달 열기 (기존 코드 유지)
+			// 테이블 행 클릭 시 모달 열기 (기존 코드 유지)
 		$(".payment-table tbody tr ").click(function() {
 			$(".payHistoryDiv").addClass("open");
 		});
@@ -514,13 +511,28 @@ detail-container {
 							<button class="action-button reset-button">초기화</button>
 						</div>
 					</div>
-				</form>
-
+				<c:if test="${empty param.button or param.button eq '전체' }">
 					<div class="tab-menu">
-						<button class="tab-button active" style="border-radius: 20px;">전체</button>
-						<button class="tab-button" style="border-radius: 20px;">예매완료</button>
-						<button class="tab-button" style="border-radius: 20px;">취소/환불</button>
+						<button class="tab-button active" name="button" value="전체" style="border-radius: 20px;">전체</button>
+						<button class="tab-button" name="button" value="예매완료" style="border-radius: 20px;">예매완료</button>
+						<button class="tab-button" name="button" value="취소" style="border-radius: 20px;">취소/환불</button>
 					</div>
+				</c:if>
+				<c:if test="${param.button eq '예매완료' }">
+					<div class="tab-menu">
+						<button class="tab-button" name="button" value="전체" style="border-radius: 20px;">전체</button>
+						<button class="tab-button active" name="button" value="예매완료" style="border-radius: 20px;">예매완료</button>
+						<button class="tab-button" name="button" value="취소" style="border-radius: 20px;">취소/환불</button>
+					</div>
+				</c:if>
+				<c:if test="${param.button eq '취소' }">
+					<div class="tab-menu">
+						<button class="tab-button " name="button" value="전체" style="border-radius: 20px;">전체</button>
+						<button class="tab-button" name="button" value="예매완료" style="border-radius: 20px;">예매완료</button>
+						<button class="tab-button active" name="button" value="취소" style="border-radius: 20px;">취소/환불</button>
+					</div>
+				</c:if>
+				</form>
 
 				<div class="content-area">
 					<div class="summary-count">총 **0**건</div>

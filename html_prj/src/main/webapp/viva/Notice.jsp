@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -55,9 +55,8 @@
     cursor: pointer;
     font-size: 16px;
     font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 5px;
+    width : 80px;
+    text-align : center;
     white-space: nowrap; /* 내용이 줄바꿈되지 않도록 */
 }
 
@@ -133,8 +132,9 @@ $(document).ready(function() {
         var selectedValue = $(this).data('value');
 
         // 1) 버튼 텍스트 변경
-        $toggle.html(selectedText + ' <span class="arrow-icon">▼</span>');
-        
+        $toggle.html(selectedText  );
+    	
+        $("#category").val(selectedText);
         // 2) active 클래스 업데이트 (선택된 항목 표시)
         $items.removeClass('active');
         $(this).addClass('active');
@@ -257,37 +257,46 @@ $(document).ready(function() {
 						<!-- carousel -->
 						<main class="conm0303">
 							<div class="cont_box">
+							<form>
 								<div class="searchbox"
 									style="display: flex; align-items: center; justify-content: center;">
 										<div class="custom-dropdown-container">
-
-											<button class="search-dropdown-toggle" id="search-dropdownToggle">
-												전체 <span class="arrow-icon"></span>
+											<c:if test="${empty param.category}">
+											<button type="button" class="search-dropdown-toggle" id="search-dropdownToggle" name="button" value="">
+												전체<span class="arrow-icon"></span>
 											</button>
-
+											</c:if>
+											<c:if test="${not empty param.category }">
+											<button type="button" class="search-dropdown-toggle" id="search-dropdownToggle" name="button" value="">
+												${param.category }<span class="arrow-icon"></span>
+											</button>
+											</c:if>
 											<ul class="dropdown-menu" id="dropdownMenu">
-												<li data-value="all"  class="menu-item active">이용</li>
+												<li data-value="all"  class="menu-item active" >전체</li>
+												<li data-value="all"  class="menu-item " >이용</li>
 												<li data-value="notice" class="menu-item">공지</li>
 												<li data-value="event" class="menu-item">이벤트</li>
 											</ul>
+											<input type="text" name="category" value="전체" id="category" style="display:none;"/>	
 										</div>
 										<input type='hidden' name='cmsNo' id='cmsNo' value='DD0100'>
 										<input type='hidden' name='bgrp' id='bgrp' value=''>
 
 										<div class="form">
 											<input type="text" placeholder="검색하기" class="formtxt"
-												name="stl" id="stl" >
+												name="stl" id="stl" style="margin-left:40px;">
 											<button type="submit"></button>
 										</div>
 
 								</div>
+							</form>
 								<div style="max-width: 1300px; margin: 0px auto;">
 
 									<ul class="list" style="z-index: 0;">
 										<%
 										for (int i = 0; i < 5; i++) {
 										%>
-										<li onclick="location.href='#void'" style="cursor: pointer"><span
+										<li onclick="location.href='http://localhost/html_prj/viva/NoticeDetail.jsp'" style="cursor: pointer"><span
 											class="sort ">공지</span>
 											<div>
 												<span class="title"><a href='#void'>DB에
