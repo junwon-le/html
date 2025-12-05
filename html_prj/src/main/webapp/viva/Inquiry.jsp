@@ -240,8 +240,9 @@
 				</div>
 			</div>
 			<div id="inquiryNotice" style="margin:0px auto; width : 1200px; display : flex; justify-content: center; ">
-				<img src="http://localhost/html_prj/practice/images/inquiry.png" style="width:900px;" >
+				<img src="http://localhost/html_prj/viva/images/inquiry.png" style="width:900px;" >
 			</div>
+			<form method="POST">
 			<div style="max-width: 1000px; margin: 0px auto;">
 				<div style="display: flex;">
 					<h4 style="margin-left: 40px; margin-top: 40px; margin-bottom: 0px">
@@ -254,9 +255,9 @@
 					</div>
 				</div>
 				<div style="min-height: 500px; max-width: 1000px; margin: 0px auto;">
-					<div id="summernote">
-						<p></p>
-					</div>
+					<textarea id="summernote" name="summer">
+						
+					</textarea>
 				</div>
 			</div>
 			<div class="agreement-section"
@@ -292,7 +293,8 @@
 					<img src="images/inquirySubmitBtn.png" />
 				</button>
 			</div>
-
+	<div>${param.summer }</div>
+			</form>
 
 		</div>
 		<!-- container 끝 -->

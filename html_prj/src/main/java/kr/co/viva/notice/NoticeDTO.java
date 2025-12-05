@@ -1,18 +1,19 @@
 package kr.co.viva.notice;
 
 public class NoticeDTO {
-	private String title, category, msg, inputDate;
+	private String title, category, msg, inputDate, num;
 
 	public NoticeDTO() {
 		super();
 	}
 
-	public NoticeDTO(String title, String category, String msg, String inputDate) {
+	public NoticeDTO(String title, String category, String msg, String inputDate, String num) {
 		super();
 		this.title = title;
 		this.category = category;
 		this.msg = msg;
 		this.inputDate = inputDate;
+		this.num = num;
 	}
 
 	public String getTitle() {
@@ -47,10 +48,19 @@ public class NoticeDTO {
 		this.inputDate = inputDate;
 	}
 
+	public String getNum() {
+		return num;
+	}
+
+	public void setNum(String num) {
+		this.num = num;
+	}
+
 	@Override
 	public String toString() {
 		return "NoticeDTO [title=" + title + ", category=" + category + ", msg=" + msg + ", inputDate=" + inputDate
-				+ "]";
+				+ ", num=" + num + "]";
 	}
+	
 	
 }
