@@ -1,3 +1,7 @@
+<%@page import="kr.co.viva.notice.RangeDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="kr.co.viva.notice.NoticeDTO"%>
+<%@page import="kr.co.viva.notice.NoticeService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -34,128 +38,131 @@
 <jsp:include page="include/vivatemplet_css.jsp"></jsp:include>
 <!-- 검색 드롭다운 메뉴 CSS -->
 <style>
-
 @media screen and ( max-width : 1200px) {
 	.page_navi {
 		display: none;
 	}
 }
+
 .custom-dropdown-container {
-    position: relative; /* 메뉴를 버튼 아래에 정확히 배치하기 위함 */
-    display: inline-block;
-    font-family: Arial, sans-serif;
+	position: relative; /* 메뉴를 버튼 아래에 정확히 배치하기 위함 */
+	display: inline-block;
+	font-family: Arial, sans-serif;
 }
 
 /* 1. 토글 버튼 스타일 (전체 ▼) */
 .search-dropdown-toggle {
-    padding: 8px 15px;
-    border: 1px solid #ccc;
-    border-radius: 8px; /* 둥근 모서리 */
-    background-color: #f8f8f8;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    width : 80px;
-    text-align : center;
-    white-space: nowrap; /* 내용이 줄바꿈되지 않도록 */
+	padding: 8px 15px;
+	border: 1px solid #ccc;
+	border-radius: 8px; /* 둥근 모서리 */
+	background-color: #f8f8f8;
+	cursor: pointer;
+	font-size: 16px;
+	font-weight: bold;
+	width: 80px;
+	text-align: center;
+	white-space: nowrap; /* 내용이 줄바꿈되지 않도록 */
 }
 
 /* 화살표 아이콘 */
 .arrow-icon {
-    font-size: 10px;
-    margin-left: 5px;
-    transition: transform 0.3s;
+	font-size: 10px;
+	margin-left: 5px;
+	transition: transform 0.3s;
 }
 
 /* 2. 드롭다운 메뉴 스타일 (기본적으로 숨김) */
 .dropdown-menu {
-    list-style: none;
-    padding: 10px 0;
-    margin: 0;
-    position: absolute;
-    top: 100%; /* 버튼 바로 아래 배치 */
-    right: 0; /* 버튼 오른쪽 끝에 맞춤 */
-    min-width: 150px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-    z-index: 1000;
-    
-    /* 기본적으로 숨기기 */
-    display: none;
+	list-style: none;
+	padding: 10px 0;
+	margin: 0;
+	position: absolute;
+	top: 100%; /* 버튼 바로 아래 배치 */
+	right: 0; /* 버튼 오른쪽 끝에 맞춤 */
+	min-width: 150px;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+	z-index: 1000;
+	/* 기본적으로 숨기기 */
+	display: none;
 }
 
 /* 메뉴가 열렸을 때 */
 .dropdown-menu.show {
-    display: block;
+	display: block;
 }
 
 /* 3. 메뉴 항목 스타일 */
 .menu-item {
-    padding: 8px 20px;
-    cursor: pointer;
-    font-size: 16px;
-    color: #333;
-    white-space: nowrap;
+	padding: 8px 20px;
+	cursor: pointer;
+	font-size: 16px;
+	color: #333;
+	white-space: nowrap;
 }
 
 .menu-item:hover {
-    background-color: #f0f0f0; /* 호버 시 배경색 변경 */
+	background-color: #f0f0f0; /* 호버 시 배경색 변경 */
 }
 
 /* 현재 활성화된 항목 스타일 (선택적) */
 .menu-item.active {
-    font-weight: bold;
-    color: #000;
+	font-weight: bold;
+	color: #000;
 }
 </style>
 <script type="text/javascript">
+	$(document).ready(function() {
+		var $toggle = $('#search-dropdownToggle');
+		var $menu = $('#dropdownMenu');
+		var $items = $('.menu-item');
 
-$(document).ready(function() {
-    var $toggle = $('#search-dropdownToggle');
-    var $menu = $('#dropdownMenu');
-    var $items = $('.menu-item');
+		// 1. 토글 버튼 클릭 시 메뉴 보이기/숨기기
+		$toggle.on('click', function(e) {
+			// 메뉴의 show 클래스를 토글 (있으면 제거, 없으면 추가)
+			$menu.toggleClass('show');
+			// 화살표 방향 변경 (선택적)
+			$toggle.find('.arrow-icon').toggleClass('rotated');
+			e.stopPropagation(); // 이벤트 버블링 방지
+		});
 
-    // 1. 토글 버튼 클릭 시 메뉴 보이기/숨기기
-    $toggle.on('click', function(e) {
-        // 메뉴의 show 클래스를 토글 (있으면 제거, 없으면 추가)
-        $menu.toggleClass('show');
-        // 화살표 방향 변경 (선택적)
-        $toggle.find('.arrow-icon').toggleClass('rotated');
-        e.stopPropagation(); // 이벤트 버블링 방지
-    });
+		// 2. 메뉴 항목 클릭 시 처리
+		$items.on('click', function() {
+			var selectedText = $(this).text();
+			var selectedVal = $(this).val();
+			var selectedValue = $(this).data('value');
 
-    // 2. 메뉴 항목 클릭 시 처리
-    $items.on('click', function() {
-        var selectedText = $(this).text();
-        var selectedValue = $(this).data('value');
+			// 1) 버튼 텍스트 변경
+			$toggle.html(selectedText);
 
-        // 1) 버튼 텍스트 변경
-        $toggle.html(selectedText  );
-    	
-        $("#category").val(selectedText);
-        // 2) active 클래스 업데이트 (선택된 항목 표시)
-        $items.removeClass('active');
-        $(this).addClass('active');
+			$("#category").val(selectedVal);
+			// 2) active 클래스 업데이트 (선택된 항목 표시)
+			$items.removeClass('active');
+			$(this).addClass('active');
 
-        // 3) 메뉴 닫기
-        $menu.removeClass('show');
-        
-        // *******************************************
-        // TODO: 서버로 데이터 전송 또는 다른 로직 추가 (예: AJAX 호출)
-        console.log("선택된 값:", selectedValue);
-        // *******************************************
-    });
+			// 3) 메뉴 닫기
+			$menu.removeClass('show');
 
-    // 3. 메뉴 외부 클릭 시 메뉴 닫기
-    $(document).on('click', function(e) {
-        if (!$toggle.is(e.target) && $menu.hasClass('show')) {
-            $menu.removeClass('show');
-        }
-    });
-});
- </script>
+			// *******************************************
+			// TODO: 서버로 데이터 전송 또는 다른 로직 추가 (예: AJAX 호출)
+			console.log("선택된 값:", selectedValue);
+			// *******************************************
+		});
+
+		// 3. 메뉴 외부 클릭 시 메뉴 닫기
+		$(document).on('click', function(e) {
+			if (!$toggle.is(e.target) && $menu.hasClass('show')) {
+				$menu.removeClass('show');
+			}
+		});
+	});
+
+	function noticeDetail() {
+		$("#noticeFrm").submit();
+	}
+</script>
 </head>
 <body>
 	<div class="wrap">
@@ -167,6 +174,31 @@ $(document).ready(function() {
 		<!-- 햄버거 메뉴-->
 		<jsp:include page="include/hamberger.jsp"></jsp:include>
 
+		<%
+		NoticeService ns = NoticeService.getInstance();
+		RangeDTO rDTO = new RangeDTO();
+		int NoticeTotalCnt = ns.searchNoticeTotalCnt();
+		int pageScale = ns.pageScale();
+		int totalPage = ns.totalPage(NoticeTotalCnt, pageScale);
+
+		String tempPage = request.getParameter("currentPage");
+		int currentPage = 1;
+		if (tempPage != null) {
+			currentPage = Integer.parseInt(tempPage);
+
+		}
+
+		int startNum = ns.startNum(currentPage, pageScale);
+		int endNum = ns.endNum(startNum, pageScale);
+
+		rDTO.setStartNum(startNum);
+		rDTO.setEndNum(endNum);
+
+		List<NoticeDTO> noticeList = ns.searchNotice(rDTO);
+
+		pageContext.setAttribute("noticeList", noticeList);
+		pageContext.setAttribute("totalPage", totalPage);
+		%>
 		<!-- 메인 공간(비어있는 흰 배경 영역) -->
 		<div class="container">
 			<div class="page_navi"
@@ -257,55 +289,55 @@ $(document).ready(function() {
 						<!-- carousel -->
 						<main class="conm0303">
 							<div class="cont_box">
-							<form>
-								<div class="searchbox"
-									style="display: flex; align-items: center; justify-content: center;">
+								<form>
+									<div class="searchbox"
+										style="display: flex; align-items: center; justify-content: center;">
 										<div class="custom-dropdown-container">
 											<c:if test="${empty param.category}">
-											<button type="button" class="search-dropdown-toggle" id="search-dropdownToggle" name="button" value="">
-												전체<span class="arrow-icon"></span>
-											</button>
+												<button type="button" class="search-dropdown-toggle"
+													id="search-dropdownToggle" name="button" value="">
+													전체<span class="arrow-icon"></span>
+												</button>
 											</c:if>
 											<c:if test="${not empty param.category }">
-											<button type="button" class="search-dropdown-toggle" id="search-dropdownToggle" name="button" value="">
-												${param.category }<span class="arrow-icon"></span>
-											</button>
+												<button type="button" class="search-dropdown-toggle"
+													id="search-dropdownToggle" name="button" value="">
+													${param.category }<span class="arrow-icon"></span>
+												</button>
 											</c:if>
 											<ul class="dropdown-menu" id="dropdownMenu">
-												<li data-value="all"  class="menu-item active" >전체</li>
-												<li data-value="all"  class="menu-item " >이용</li>
-												<li data-value="notice" class="menu-item">공지</li>
-												<li data-value="event" class="menu-item">이벤트</li>
+												<li value="all" class="menu-item active">전체</li>
+												<li value="1" class="menu-item ">이용</li>
+												<li value="2" class="menu-item">공지</li>
+												<li value="3" class="menu-item">이벤트</li>
 											</ul>
-											<input type="text" name="category" value="전체" id="category" style="display:none;"/>	
+											<input type="text" name="category" value="전체" id="category"
+												style="display: none;" />
 										</div>
-										<input type='hidden' name='cmsNo' id='cmsNo' value='DD0100'>
-										<input type='hidden' name='bgrp' id='bgrp' value=''>
 
 										<div class="form">
 											<input type="text" placeholder="검색하기" class="formtxt"
-												name="stl" id="stl" style="margin-left:40px;">
+												name="keyword" id="keyword" style="margin-left: 40px;">
 											<button type="submit"></button>
 										</div>
 
-								</div>
-							</form>
+									</div>
+								</form>
 								<div style="max-width: 1300px; margin: 0px auto;">
 
-									<ul class="list" style="z-index: 0;">
-										<%
-										for (int i = 0; i < 5; i++) {
-										%>
-										<li onclick="location.href='http://localhost/html_prj/viva/NoticeDetail.jsp'" style="cursor: pointer"><span
-											class="sort ">공지</span>
-											<div>
-												<span class="title"><a href='#void'>DB에
-														notic_Title</a></span> <span class="date">iunput_date</span>
-											</div></li>
-										<%
-										}
-										%>
 
+									<ul class="list" style="z-index: 0;">
+										<c:forEach var="nList" items="${noticeList}">
+											<li onclick="noticeDetail()" style="cursor: pointer"><span
+												class="sort ">${nList.category}</span>
+												<div>
+													<span class="title"><a
+														href='http://localhost/html_prj/viva/NoticeDetail.jsp?noticeNum=${nList.num}'>${nList.title }</a></span>
+													<span class="date">${nList.inputDate }</span> <input
+														type="text" style="display: none" name="${nList.num}"
+														value="${nList.num}" />
+												</div></li>
+										</c:forEach>
 									</ul>
 								</div>
 								<br />
@@ -313,21 +345,14 @@ $(document).ready(function() {
 								<div id="BoardListPager">
 									<div>
 										<ul class="pagination mt-2 mb-2 justify-content-center">
-											<div class="page-item">
-												<a class="page-link" href="#">&lt;&lt;</a>
-											</div>
-											<div class="page-item">
-												<a class="page-link" href="#">&lt;</a>
-											</div>
-											<div class="page-item active">
-												<a class="page-link" data-pagenumber="1" href="#">1</a>
-											</div>
-											<div class="page-item">
-												<a class="page-link" href="#">&gt;</a>
-											</div>
-											<div class="page-item">
-												<a class="page-link" href="?cmsNo=DD0100&bgrp&page=1">&gt;&gt;</a>
-											</div>
+											<c:forEach var="tPage" begin="1" end="${totalPage}">
+												<div class="page-item">
+													<a class="page-link"
+														href="http://localhost/html_prj/viva/Notice.jsp?currentPage=${tPage}
+														&category=${param.category}&keyword=${param.keyword}">${tPage}</a>
+												</div>
+											</c:forEach>
+
 										</ul>
 									</div>
 								</div>

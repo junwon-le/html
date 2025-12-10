@@ -3,7 +3,7 @@
 <div class="close"></div>
 		<div id="mainBar">
 			<div class="logo">
-				<img src="http://192.168.10.73/html_prj/practice/images/vivaLog.png"
+				<img src="http://192.168.10.73/html_prj/viva/images/vivaLog.png"
 					alt="VIVA PARK" id="logImg" />
 			</div>
 			<button class="hamburger-toggle" style="background-color:#fff; border : 0px;"><img src="http://192.168.10.73/html_prj/practice/images/hamburger_menu.png"/></button>
@@ -57,12 +57,12 @@
 					</li>
 					<li>
 						<div class="liDiv">
-							<a href="http://localhost/html_prj/practice/Noticei.jsp">소통 서비스</a>
+							<a href="http://localhost/html_prj/viva/Notice.jsp">소통 서비스</a>
 							<div class="subItems">
 								<ul>
-									<li><a href="http://localhost/html_prj/practice/Noticei.jsp">공지</a></li>
-									<li><a href="http://localhost/html_prj/practice/FAQi.jsp">FAQ</a></li>
-									<li><a href="http://localhost/html_prj/practice/Inquiryi.jsp">문의</a></li>
+									<li><a href="http://localhost/html_prj/viva/Notice.jsp">공지</a></li>
+									<li><a href="http://localhost/html_prj/viva/FAQ.jsp">FAQ</a></li>
+									<li><a href="http://localhost/html_prj/viva/Inquiry.jsp">문의</a></li>
 								</ul>
 							</div>
 						</div>

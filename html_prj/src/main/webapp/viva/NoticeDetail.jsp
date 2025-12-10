@@ -47,24 +47,27 @@
 
 		<!-- 메인 공간(비어있는 흰 배경 영역) -->
 		<div class="container">
-		<%
-		NoticeService ms = NoticeService.getInstance();
-		NoticeDTO nDTO = new NoticeDTO();
-		nDTO=ms.searchNotice();
 		
+		<%
+		NoticeService ns = NoticeService.getInstance();
+		try{
+		NoticeDTO nDTO = ns.searchNoticeDetail(Integer.parseInt(request.getParameter("noticeNum")));
 		pageContext.setAttribute("nDTO", nDTO);
+		}catch(NumberFormatException nfe){
+		}
+		
 		%>
-			<jsp:include page="page_navi.jsp"></jsp:include>
-			<div>
-				<h1 style="text-align: center; margin-bottom: 30px;">공지사항</h1>
-			</div>
+		<jsp:include page="page_navi.jsp"></jsp:include>
+		<div>
+			<h1 style="text-align: center; margin: 50px;">공지사항</h1>
+		</div>
 		<div style="max-width:1000px; margin: 0px auto;">
-		<strong>notice_Title</strong><br>
-		<span style="font-size: 10px; color:#A0A0A0;">${nDTO. } &nbsp; |&nbsp; ${nDTO.inputDate }</span>
+		<strong>${nDTO.title }</strong><br>
+		<span style="font-size: 10px; color:#A0A0A0;">${nDTO.category} &nbsp; |&nbsp; ${nDTO.inputDate }</span>
 		<img src="images/hr.png"/>		
 		</div>
 		<div style="max-width:1000px; margin: 0px auto;">
-		<img src="${nDTO.msg}" Style="width:100%"/>
+		${nDTO.msg}
 		
 	
 		</div>

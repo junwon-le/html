@@ -250,7 +250,7 @@
 					</h4>
 				</div>
 				<div style="max-width: 1000px; margin: 0px auto;">
-					<div class="input-container">
+					<div class="input-container">                
 						<input type="text" placeholder="제목">
 					</div>
 				</div>

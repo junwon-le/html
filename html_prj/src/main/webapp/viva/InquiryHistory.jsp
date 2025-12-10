@@ -502,14 +502,8 @@ max-width: 800px;
 						<div class="page-item">
 							<a class="page-link" href="#">&lt;&lt;</a>
 						</div>
-						<div class="page-item">
-							<a class="page-link" href="#">&lt;</a>
-						</div>
 						<div class="page-item active">
 							<a class="page-link" data-pagenumber="1" href="#">1</a>
-						</div>
-						<div class="page-item">
-							<a class="page-link" href="#">&gt;</a>
 						</div>
 						<div class="page-item">
 							<a class="page-link" href="?cmsNo=DD0100&bgrp&page=1">&gt;&gt;</a>

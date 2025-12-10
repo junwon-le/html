@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%
+session.setAttribute("userId", "tempUser");
+%>
+<%@ include file="include/LoginChk.jsp" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -104,20 +107,20 @@
 		<div class="my-page-container">
     <div class="section-column">
         <h3>나의 예매</h3>
-        <button class="btn-item" onclick="location.href='http://localhost/html_prj/practice/MyticketCheck.jsp'">나의 티켓</button>
-        <button class="btn-item" onclick="location.href='http://localhost/html_prj/practice/payhistory.jsp'">예매 내역</button>
+        <button class="btn-item" onclick="location.href='http://localhost/html_prj/viva/MyticketCheck.jsp'">나의 티켓</button>
+        <button class="btn-item" onclick="location.href='http://localhost/html_prj/viva/payhistory.jsp'">예매 내역</button>
     </div>
 
     <div class="section-column">
         <h3>나의 활동</h3>
-        <button class="btn-item" onclick="location.href='http://localhost/html_prj/practice/InquiryHistory.jsp'">문의 내역</button>
-        <button class="btn-item" onclick="location.href='http://localhost/html_prj/practice/ReserveHistory.jsp'">예약 내역</button>
+        <button class="btn-item" onclick="location.href='http://localhost/html_prj/viva/InquiryHistory.jsp'">문의 내역</button>
+        <button class="btn-item" onclick="location.href='http://localhost/html_prj/viva/ReserveHistory.jsp'">예약 내역</button>
     </div>
 
     <div class="section-column">
         <h3>내 정보</h3>
-        <button class="btn-item" onclick="location.href='http://localhost/html_prj/practice/MypagePassCheck.jsp'">내 정보 변경</button>
-        <button class="btn-item" onclick="location.href='http://localhost/html_prj/practice/MypageWithdrawCheck.jsp'">회원 탈퇴</button>
+        <button class="btn-item" onclick="location.href='http://localhost/html_prj/viva/MypagePassCheck.jsp'">내 정보 변경</button>
+        <button class="btn-item" onclick="location.href='http://localhost/html_prj/viva/MypageWithdrawCheck.jsp'">회원 탈퇴</button>
     </div>
 </div>
 		</div>
