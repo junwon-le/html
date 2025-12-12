@@ -26,9 +26,8 @@ public class NoticeDAO {
 	}
 	
 	
-	public int selectNoticeTotalCnt() throws SQLException, IOException {
+	public int selectNoticeTotalCnt(RangeDTO rDTO) throws SQLException, IOException {
 		int totalCnt = 0 ;
-		
 		DbConn db = DbConn.getInstance("jdbc/dbcp");
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -37,9 +36,37 @@ public class NoticeDAO {
 		try {
 			con = db.getConn();
 			
-			String select = "select count(*) cnt from notice";
+			StringBuilder selectTotalCnt = new StringBuilder();
+			selectTotalCnt
+			.append(" select count(*) cnt from notice ");
+			if(rDTO.getCategory() !=null && !rDTO.getCategory().isEmpty()) {
+				if(!"전체".equals(rDTO.getCategory())) {
+					selectTotalCnt.append("where notice_type = ?");
+					if(rDTO.getKeyword() !=null && !rDTO.getKeyword().isEmpty()) {
+						selectTotalCnt.append("   and instr(notice_title,?)!=0");
+					}//end if
+				}else {
+					if(rDTO.getKeyword() !=null && !rDTO.getKeyword().isEmpty()) {
+						selectTotalCnt.append("where instr(notice_title,?)!=0");
+					}//end if
+				}//end else
+			}//end if
 			
-			pstmt = con.prepareStatement(select);
+			
+			int pstmtNum=0;
+			if(rDTO.getCategory() !=null && !rDTO.getCategory().isEmpty()) {
+				if(!"전체".equals(rDTO.getCategory())) {
+					pstmt.setString(++pstmtNum, rDTO.getCategory());
+					if(rDTO.getKeyword()!=null && !rDTO.getKeyword().isEmpty()) {
+					pstmt.setString(++pstmtNum, rDTO.getKeyword());
+					}//end if	
+				}else{
+					if(rDTO.getKeyword()!=null && !rDTO.getKeyword().isEmpty()) {
+					pstmt.setString(++pstmtNum, rDTO.getKeyword());
+					}//end if	
+				}
+			}//end if
+			pstmt = con.prepareStatement(selectTotalCnt.toString());
 			
 			rs= pstmt.executeQuery();
 			
@@ -68,16 +95,40 @@ public class NoticeDAO {
 			StringBuilder selectNotice = new StringBuilder();
 			selectNotice
 			.append("	select noticenum, notice_title, notice_views, notice_date,notice_type	")
-			.append("	from (select row_number() over(order by noticenum) rnum, noticenum,notice_title, notice_views, notice_date ,notice_type from notice	")
-			.append("  where ").append(rDTO.get)
-			.append("	)where rnum between ? and ?	");
+			.append("	from (select row_number() over(order by noticenum) rnum, noticenum,notice_title, notice_views, notice_date ,notice_type from notice ");
+			if(rDTO.getCategory() !=null && !rDTO.getCategory().isEmpty()) {
+				if(!"전체".equals(rDTO.getCategory())) {
+					selectNotice.append("where notice_type = ?");
+					if(rDTO.getKeyword() !=null && !rDTO.getKeyword().isEmpty()) {
+						selectNotice.append("   and instr(notice_title,?)!=0");
+					}//end if
+				}else {
+					if(rDTO.getKeyword() !=null && !rDTO.getKeyword().isEmpty()) {
+						selectNotice.append("where instr(notice_title,?)!=0");
+					}//end if
+				}
+			}//end if
+			selectNotice.append("	)where rnum between ? and ?	");
+			
 			pstmt = con.prepareStatement( selectNotice.toString());
 			
-			pstmt.setInt(1, rDTO.getStartNum());
-			pstmt.setInt(2, rDTO.getEndNum());
+			int pstmtNum=0;
+			if(rDTO.getCategory() !=null && !rDTO.getCategory().isEmpty()) {
+				if(!"전체".equals(rDTO.getCategory())) {
+					pstmt.setString(++pstmtNum, rDTO.getCategory());
+					if(rDTO.getKeyword()!=null && !rDTO.getKeyword().isEmpty()) {
+					pstmt.setString(++pstmtNum, rDTO.getKeyword());
+					}//end if	
+				}else{
+					if(rDTO.getKeyword()!=null && !rDTO.getKeyword().isEmpty()) {
+					pstmt.setString(++pstmtNum, rDTO.getKeyword());
+					}//end if	
+				}
+			}//end if
+			pstmt.setInt(++pstmtNum, rDTO.getStartNum());
+			pstmt.setInt(++pstmtNum, rDTO.getEndNum());
 			
 			rs= pstmt.executeQuery();
-			
 			while(rs.next()) {
 				NoticeDTO nDTO = new NoticeDTO();
 				nDTO.setNum(rs.getString("noticenum"));

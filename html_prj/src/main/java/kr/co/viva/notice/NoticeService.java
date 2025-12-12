@@ -25,7 +25,7 @@ public class NoticeService {
 	 * @return
 	 */
 	public int pageScale() {
-		return 10;
+		return 7;
 	}
 	
 	/**
@@ -58,11 +58,11 @@ public class NoticeService {
 		return startNum+pageScale-1;
 	}
 	
-	public int searchNoticeTotalCnt() {
+	public int searchNoticeTotalCnt(RangeDTO rDTO) {
 		int NoticeTotalCnt = 0;
 		NoticeDAO nDAO = NoticeDAO.getInstance();
 		try {
-			NoticeTotalCnt = nDAO.selectNoticeTotalCnt();
+			NoticeTotalCnt = nDAO.selectNoticeTotalCnt(rDTO);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -97,5 +97,45 @@ public class NoticeService {
 			}//end catch
 				return nDTO;
 	}//searchNotice
+	
+	
+	public String pagination(RangeDTO rDTO) {
+		StringBuilder pagination = new StringBuilder();
+
+		int pageNumber = 3;
+		
+		int startPage = ((rDTO.getCurrentPage()-1)/pageNumber)*pageNumber+1;
+		int endPage = startPage+pageNumber-1;
+		if(endPage > rDTO.getTotalPage()) {
+			endPage=rDTO.getTotalPage();
+		}
+		
+		int movePage = 0 ;
+		StringBuilder previewPage = new StringBuilder();
+		if(startPage>1) {
+		movePage = startPage - 1;
+		previewPage.append("<a class='page-link' href='Notice.jsp?currentPage=").append(movePage).append("'>&lt;&lt;</a>");
+		}//end if
+		
+		//if(rDTO.getTotalPage()>=endPage) {
+		StringBuilder pageLink = new StringBuilder();
+		movePage = startPage;
+		while(movePage <= endPage) {
+			pageLink.append("<a class='page-link' href='").append(rDTO.getUrl()).append("?currentPage=")
+			.append(movePage).append("&keyword=").append(rDTO.getKeyword())
+			.append("&category=").append(rDTO.getCategory())
+			.append("'>").append(movePage).append("</a>");
+			movePage++;
+		}//end for
+		StringBuilder nextPage = new StringBuilder();
+		if(endPage < rDTO.getTotalPage()) {
+		movePage = endPage + 1;
+		nextPage.append("<a class='page-link' href='Notice.jsp?currentPage=").append(movePage).append("&keyword=").append(rDTO.getKeyword())
+		.append("&category=").append(rDTO.getCategory()).append("'>&gt;&gt;</a>");
+		}//end if
+		//}//end if
+		pagination.append(previewPage).append(pageLink).append(nextPage);
+		return pagination.toString();
+	}
 	
 }//NoticeService

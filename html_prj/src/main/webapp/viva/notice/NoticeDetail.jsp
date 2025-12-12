@@ -33,17 +33,17 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-<jsp:include page="include/vivatemplet_css.jsp"></jsp:include>
+<jsp:include page="../include/vivatemplet_css.jsp"></jsp:include>
 </head>
 <body>
 	<div class="wrap">
 		<!-- 헤더 -->
 		<div id="closetop"></div>
 		<div id="header">
-			<jsp:include page="include/header.jsp"></jsp:include>
+			<jsp:include page="../include/header.jsp"></jsp:include>
 		</div>
 		<!-- 햄버거 메뉴-->
-		<jsp:include page="include/hamberger.jsp"></jsp:include>
+		<jsp:include page="../include/hamberger.jsp"></jsp:include>
 
 		<!-- 메인 공간(비어있는 흰 배경 영역) -->
 		<div class="container">
@@ -57,7 +57,7 @@
 		}
 		
 		%>
-		<jsp:include page="page_navi.jsp"></jsp:include>
+		<jsp:include page="../page_navi.jsp"></jsp:include>
 		<div>
 			<h1 style="text-align: center; margin: 50px;">공지사항</h1>
 		</div>
@@ -76,7 +76,7 @@
 		<!-- container 끝 -->
 
 		<div id="footer">
-			<jsp:include page="include/footer.jsp"></jsp:include>
+			<jsp:include page="../include/footer.jsp"></jsp:include>
 		</div>
 	</div>
 </body>

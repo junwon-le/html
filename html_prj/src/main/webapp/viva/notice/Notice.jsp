@@ -35,7 +35,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-<jsp:include page="include/vivatemplet_css.jsp"></jsp:include>
+<jsp:include page="../include/vivatemplet_css.jsp"></jsp:include>
 <!-- 검색 드롭다운 메뉴 CSS -->
 <style>
 @media screen and ( max-width : 1200px) {
@@ -59,7 +59,7 @@
 	cursor: pointer;
 	font-size: 16px;
 	font-weight: bold;
-	width: 80px;
+	width: 100px;
 	text-align: center;
 	white-space: nowrap; /* 내용이 줄바꿈되지 않도록 */
 }
@@ -131,13 +131,12 @@
 		// 2. 메뉴 항목 클릭 시 처리
 		$items.on('click', function() {
 			var selectedText = $(this).text();
-			var selectedVal = $(this).val();
 			var selectedValue = $(this).data('value');
 
 			// 1) 버튼 텍스트 변경
 			$toggle.html(selectedText);
 
-			$("#category").val(selectedVal);
+			$("#category").val(selectedText);
 			// 2) active 클래스 업데이트 (선택된 항목 표시)
 			$items.removeClass('active');
 			$(this).addClass('active');
@@ -169,48 +168,58 @@
 		<!-- 헤더 -->
 		<div id="closetop" class="close"></div>
 		<div id="header">
-			<jsp:include page="include/header.jsp"></jsp:include>
+			<jsp:include page="../include/header.jsp"></jsp:include>
 		</div>
 		<!-- 햄버거 메뉴-->
-		<jsp:include page="include/hamberger.jsp"></jsp:include>
+		<jsp:include page="../include/hamberger.jsp"></jsp:include>
 
 		<%
 		NoticeService ns = NoticeService.getInstance();
 		RangeDTO rDTO = new RangeDTO();
-		int NoticeTotalCnt = ns.searchNoticeTotalCnt();
+		int NoticeTotalCnt = ns.searchNoticeTotalCnt(rDTO);
 		int pageScale = ns.pageScale();
 		int totalPage = ns.totalPage(NoticeTotalCnt, pageScale);
-
+		rDTO.setTotalPage(totalPage);
 		String tempPage = request.getParameter("currentPage");
 		int currentPage = 1;
 		if (tempPage != null) {
 			currentPage = Integer.parseInt(tempPage);
+			rDTO.setCurrentPage(currentPage);
 
 		}
 
 		int startNum = ns.startNum(currentPage, pageScale);
 		int endNum = ns.endNum(startNum, pageScale);
-
 		rDTO.setStartNum(startNum);
 		rDTO.setEndNum(endNum);
-
+		if(request.getParameter("category")!=null){
+		rDTO.setCategory(request.getParameter("category"));
+		}
+		if(request.getParameter("keyword")!=null){
+		rDTO.setKeyword(request.getParameter("keyword"));
+		}
 		List<NoticeDTO> noticeList = ns.searchNotice(rDTO);
-
+		
+		
+		rDTO.setUrl("Notice.jsp");
+		String pagination = ns.pagination(rDTO);
+		
 		pageContext.setAttribute("noticeList", noticeList);
 		pageContext.setAttribute("totalPage", totalPage);
+		pageContext.setAttribute("pagination", pagination);
 		%>
 		<!-- 메인 공간(비어있는 흰 배경 영역) -->
 		<div class="container">
 			<div class="page_navi"
 				style="margin-bottom: 20px; margin-left: 100px; margin-top: 40px;">
-				<img src="images/house.png" />
+				<img src="http://localhost/html_prj/viva/images/house.png" />
 				<div class="btn-group">
 					<button type="button" class="btn btn-secondary dropdown-toggle"
 						data-bs-toggle="dropdown" aria-expanded="false"
 						data-bs-offset="20, 0"
 						style="background-color: #fff; color: #333; border: none; padding: 0px; margin-left: 10px; font-size: 13px;">
 						소통 서비스</button>
-					<jsp:include page="page_navi.jsp"></jsp:include>
+					<jsp:include page="../page_navi.jsp"></jsp:include>
 				</div>
 				<div class="btn-group">
 					<button type="button" class="btn btn-secondary dropdown-toggle"
@@ -251,7 +260,7 @@
 							<div class="carousel-inner"
 								style="border-radius: 20px; margin: 100px; width: auto;">
 								<div class="carousel-item active">
-									<img src="images/carusal.png" class="d-block w-100" alt="...">
+									<img style="width: 1000px; height: 400px;" src="../images/noticeCarusal1.png" class="d-block w-100" alt="...">
 									<div class="carousel-caption d-none d-md-block">
 										<h5>First slide label</h5>
 										<p>Some representative placeholder content for the first
@@ -259,7 +268,7 @@
 									</div>
 								</div>
 								<div class="carousel-item">
-									<img src="images/carusal2.png" class="d-block w-100" alt="...">
+									<img style="width: 1000px; height: 400px;" src="../images/noticeCarusal2.png" class="d-block w-100" alt="...">
 									<div class="carousel-caption d-none d-md-block">
 										<h5>Second slide label</h5>
 										<p>Some representative placeholder content for the second
@@ -267,7 +276,7 @@
 									</div>
 								</div>
 								<div class="carousel-item">
-									<img src="images/carusal3.png" class="d-block w-100" alt="...">
+									<img style="width: 1000px; height: 400px;" src="../images/noticeCarusal3.png" class="d-block w-100" alt="...">
 									<div class="carousel-caption d-none d-md-block">
 										<h5>Third slide label</h5>
 										<p>Some representative placeholder content for the third
@@ -289,7 +298,7 @@
 						<!-- carousel -->
 						<main class="conm0303">
 							<div class="cont_box">
-								<form>
+								<form action="http://localhost/html_prj/viva/notice/Notice.jsp?noticeNum=${nList.num}">
 									<div class="searchbox"
 										style="display: flex; align-items: center; justify-content: center;">
 										<div class="custom-dropdown-container">
@@ -302,18 +311,19 @@
 											<c:if test="${not empty param.category }">
 												<button type="button" class="search-dropdown-toggle"
 													id="search-dropdownToggle" name="button" value="">
-													${param.category }<span class="arrow-icon"></span>
+													${param.category }
 												</button>
 											</c:if>
 											<ul class="dropdown-menu" id="dropdownMenu">
 												<li value="all" class="menu-item active">전체</li>
-												<li value="1" class="menu-item ">이용</li>
+												<li value="1" class="menu-item ">업데이트</li>
 												<li value="2" class="menu-item">공지</li>
 												<li value="3" class="menu-item">이벤트</li>
 											</ul>
 											<input type="text" name="category" value="전체" id="category"
 												style="display: none;" />
-										</div>
+											<input type="hidden" name="currentPage" value="1" id="category" />								
+											</div>
 
 										<div class="form">
 											<input type="text" placeholder="검색하기" class="formtxt"
@@ -322,11 +332,22 @@
 										</div>
 
 									</div>
-								</form>
+								</form >
 								<div style="max-width: 1300px; margin: 0px auto;">
 
 
 									<ul class="list" style="z-index: 0;">
+										<c:choose>
+										<c:when test="${empty noticeList}">
+										<li style="cursor: pointer">
+										<span class="sort "></span>
+												<div>
+													<span class="title">검색된 데이터가 없습니다.</span>
+													<span class="date"></span> 
+													<input type="text" style="display: none"/>
+												</div></li>
+										</c:when>
+										<c:otherwise>
 										<c:forEach var="nList" items="${noticeList}">
 											<li onclick="noticeDetail()" style="cursor: pointer"><span
 												class="sort ">${nList.category}</span>
@@ -338,22 +359,19 @@
 														value="${nList.num}" />
 												</div></li>
 										</c:forEach>
+										</c:otherwise>
+										</c:choose>
 									</ul>
 								</div>
 								<br />
 								<!-- pagenation -->
 								<div id="BoardListPager">
-									<div>
-										<ul class="pagination mt-2 mb-2 justify-content-center">
-											<c:forEach var="tPage" begin="1" end="${totalPage}">
-												<div class="page-item">
-													<a class="page-link"
-														href="http://localhost/html_prj/viva/Notice.jsp?currentPage=${tPage}
-														&category=${param.category}&keyword=${param.keyword}">${tPage}</a>
+								<div>
+										<div class="pagination" style="margin : 0px auto; width:300px;" >
+												<div class="page-item" style="display:flex; justify-content: center;width:300px;">
+													${pagination}
 												</div>
-											</c:forEach>
-
-										</ul>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -367,7 +385,7 @@
 		<!-- container 끝 -->
 
 		<div id="footer">
-			<jsp:include page="include/footer.jsp"></jsp:include>
+			<jsp:include page="../include/footer.jsp"></jsp:include>
 		</div>
 	</div>
 </body>

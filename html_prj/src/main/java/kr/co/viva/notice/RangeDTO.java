@@ -3,7 +3,33 @@ package kr.co.viva.notice;
 public class RangeDTO {
 	private int startNum , endNum ;
 	private String category, keyword;
-	private String categoryStr;
+	private int currentPage = 1 ;
+	private int totalPage =0;
+	private String url;
+	
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public int getTotalPage() {
+		return totalPage;
+	}
+
+	public void setTotalPage(int totalPage) {
+		this.totalPage = totalPage;
+	}
+
+	public int getCurrentPage() {
+		return currentPage;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
 
 	public String getCategory() {
 		return category;
@@ -19,15 +45,6 @@ public class RangeDTO {
 
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
-	}
-
-	public String getCategoryStr() {
-		return categoryStr;
-	}
-
-	public void setCategoryStr(String categoryStr) {
-		String[] categoryArr = {"category"
-		this.categoryStr = categoryStr;
 	}
 
 	public int getStartNum() {
@@ -48,8 +65,9 @@ public class RangeDTO {
 
 	@Override
 	public String toString() {
-		return "RangeDTO [startNum=" + startNum + ", endNum=" + endNum + "]";
+		return "RangeDTO [startNum=" + startNum + ", endNum=" + endNum + ", category=" + category + ", keyword="
+				+ keyword + "]";
 	}
-	
+
 	
 }
