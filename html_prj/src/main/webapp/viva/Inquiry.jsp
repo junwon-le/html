@@ -242,7 +242,7 @@
 			<div id="inquiryNotice" style="margin:0px auto; width : 1200px; display : flex; justify-content: center; ">
 				<img src="http://localhost/html_prj/viva/images/inquiry.png" style="width:900px;" >
 			</div>
-			<form method="POST">
+			<form method="POST" action="inquiryProcess.jsp">
 			<div style="max-width: 1000px; margin: 0px auto;">
 				<div style="display: flex;">
 					<h4 style="margin-left: 40px; margin-top: 40px; margin-bottom: 0px">
@@ -251,11 +251,11 @@
 				</div>
 				<div style="max-width: 1000px; margin: 0px auto;">
 					<div class="input-container">                
-						<input type="text" placeholder="제목">
+						<input type="text" name="title" placeholder="제목">
 					</div>
 				</div>
 				<div style="min-height: 500px; max-width: 1000px; margin: 0px auto;">
-					<textarea id="summernote" name="summer">
+					<textarea id="summernote" name="msg">
 						
 					</textarea>
 				</div>
@@ -293,7 +293,6 @@
 					<img src="images/inquirySubmitBtn.png" />
 				</button>
 			</div>
-	<div>${param.summer }</div>
 			</form>
 
 		</div>

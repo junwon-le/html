@@ -38,7 +38,7 @@ public class NoticeDAO {
 			
 			StringBuilder selectTotalCnt = new StringBuilder();
 			selectTotalCnt
-			.append(" select count(*) cnt from notice ");
+			.append("	select count(*) cnt from notice	");
 			if(rDTO.getCategory() !=null && !rDTO.getCategory().isEmpty()) {
 				if(!"전체".equals(rDTO.getCategory())) {
 					selectTotalCnt.append("where notice_type = ?");
@@ -49,9 +49,9 @@ public class NoticeDAO {
 					if(rDTO.getKeyword() !=null && !rDTO.getKeyword().isEmpty()) {
 						selectTotalCnt.append("where instr(notice_title,?)!=0");
 					}//end if
-				}//end else
+				}
 			}//end if
-			
+			pstmt = con.prepareStatement(selectTotalCnt.toString());
 			
 			int pstmtNum=0;
 			if(rDTO.getCategory() !=null && !rDTO.getCategory().isEmpty()) {
@@ -66,7 +66,6 @@ public class NoticeDAO {
 					}//end if	
 				}
 			}//end if
-			pstmt = con.prepareStatement(selectTotalCnt.toString());
 			
 			rs= pstmt.executeQuery();
 			

@@ -5,6 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="../include/siteproperty.jsp" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -41,6 +42,9 @@
 @media screen and ( max-width : 1200px) {
 	.page_navi {
 		display: none;
+	}
+	#carouselExampleCaptions{
+	display: none;
 	}
 }
 
@@ -176,10 +180,8 @@
 		<%
 		NoticeService ns = NoticeService.getInstance();
 		RangeDTO rDTO = new RangeDTO();
-		int NoticeTotalCnt = ns.searchNoticeTotalCnt(rDTO);
+		
 		int pageScale = ns.pageScale();
-		int totalPage = ns.totalPage(NoticeTotalCnt, pageScale);
-		rDTO.setTotalPage(totalPage);
 		String tempPage = request.getParameter("currentPage");
 		int currentPage = 1;
 		if (tempPage != null) {
@@ -198,15 +200,20 @@
 		if(request.getParameter("keyword")!=null){
 		rDTO.setKeyword(request.getParameter("keyword"));
 		}
-		List<NoticeDTO> noticeList = ns.searchNotice(rDTO);
-		
 		
 		rDTO.setUrl("Notice.jsp");
+
+		
+		int NoticeTotalCnt = ns.searchNoticeTotalCnt(rDTO);
+		int totalPage = ns.totalPage(NoticeTotalCnt, pageScale);
+		rDTO.setTotalPage(totalPage);
+		List<NoticeDTO> noticeList = ns.searchNotice(rDTO);
 		String pagination = ns.pagination(rDTO);
 		
 		pageContext.setAttribute("noticeList", noticeList);
-		pageContext.setAttribute("totalPage", totalPage);
 		pageContext.setAttribute("pagination", pagination);
+		
+		
 		%>
 		<!-- 메인 공간(비어있는 흰 배경 영역) -->
 		<div class="container">
@@ -247,7 +254,7 @@
 						</div>
 						<!-- carousel -->
 						<div id="carouselExampleCaptions" class="carousel slide"
-							style="max-width: 1300px; margin: 0px auto;">
+							style="max-width: 1400px; margin: 0px auto;">
 							<div class="carousel-indicators">
 								<button type="button" data-bs-target="#carouselExampleCaptions"
 									data-bs-slide-to="0" class="active" aria-current="true"
@@ -285,7 +292,7 @@
 								</div>
 							</div>
 							<button class="carousel-control-prev" type="button"
-								data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+								data-bs-target="#carouselExampleCaptions" data-bs-slide="prev" >
 								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 								<span class="visually-hidden">Previous</span>
 							</button>
@@ -298,9 +305,9 @@
 						<!-- carousel -->
 						<main class="conm0303">
 							<div class="cont_box">
-								<form action="http://localhost/html_prj/viva/notice/Notice.jsp?noticeNum=${nList.num}">
+								<form action="${CommonURL}/notice/Notice.jsp?noticeNum=${nList.num}">
 									<div class="searchbox"
-										style="display: flex; align-items: center; justify-content: center;">
+										style="display: flex; align-items: center; justify-content: center; margin:0px auto; flex-wrap: nowrap;">
 										<div class="custom-dropdown-container">
 											<c:if test="${empty param.category}">
 												<button type="button" class="search-dropdown-toggle"
@@ -311,7 +318,7 @@
 											<c:if test="${not empty param.category }">
 												<button type="button" class="search-dropdown-toggle"
 													id="search-dropdownToggle" name="button" value="">
-													${param.category }
+													${param.category}
 												</button>
 											</c:if>
 											<ul class="dropdown-menu" id="dropdownMenu">
@@ -320,7 +327,7 @@
 												<li value="2" class="menu-item">공지</li>
 												<li value="3" class="menu-item">이벤트</li>
 											</ul>
-											<input type="text" name="category" value="전체" id="category"
+											<input type="text" name="category" value="${param.category }" id="category"
 												style="display: none;" />
 											<input type="hidden" name="currentPage" value="1" id="category" />								
 											</div>
@@ -340,12 +347,10 @@
 										<c:choose>
 										<c:when test="${empty noticeList}">
 										<li style="cursor: pointer">
-										<span class="sort "></span>
 												<div>
 													<span class="title">검색된 데이터가 없습니다.</span>
 													<span class="date"></span> 
-													<input type="text" style="display: none"/>
-												</div></li>
+												</div>
 										</c:when>
 										<c:otherwise>
 										<c:forEach var="nList" items="${noticeList}">
@@ -353,7 +358,7 @@
 												class="sort ">${nList.category}</span>
 												<div>
 													<span class="title"><a
-														href='http://localhost/html_prj/viva/NoticeDetail.jsp?noticeNum=${nList.num}'>${nList.title }</a></span>
+														href='${CommonURL }/notice/NoticeDetail.jsp?noticeNum=${nList.num}'>${nList.title }</a></span>
 													<span class="date">${nList.inputDate }</span> <input
 														type="text" style="display: none" name="${nList.num}"
 														value="${nList.num}" />

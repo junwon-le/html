@@ -1,20 +1,20 @@
-package kr.co.viva.notice;
+package kr.co.viva.faq;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NoticeService {
-	private static NoticeService ms;
+public class FaqService {
+	private static FaqService ms;
 	
-	private NoticeService() {
+	private FaqService() {
 		
 	}
 	
-	public static NoticeService getInstance() {
+	public static FaqService getInstance() {
 		if(ms==null) {
-			ms = new NoticeService();
+			ms = new FaqService();
 			
 		}
 		return ms;
@@ -34,8 +34,8 @@ public class NoticeService {
 	 * @param pageScale
 	 * @return
 	 */
-	public int totalPage(int NoticeTotalCnt, int pageScale) {
-		return (int)Math.ceil((double)NoticeTotalCnt/pageScale);
+	public int totalPage(int faqTotalCnt, int pageScale) {
+		return (int)Math.ceil((double)faqTotalCnt/pageScale);
 	}
 	
 	/**
@@ -58,11 +58,11 @@ public class NoticeService {
 		return startNum+pageScale-1;
 	}
 	
-	public int searchNoticeTotalCnt(RangeDTO rDTO) {
+	public int searchFaqTotalCnt(RangeDTO rDTO) {
 		int NoticeTotalCnt = 0;
-		NoticeDAO nDAO = NoticeDAO.getInstance();
+		FaqDAO nDAO = FaqDAO.getInstance();
 		try {
-			NoticeTotalCnt = nDAO.selectNoticeTotalCnt(rDTO);
+			NoticeTotalCnt = nDAO.selectFaqTotalCnt(rDTO);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -71,11 +71,11 @@ public class NoticeService {
 		return NoticeTotalCnt;
 	}
 	
-	public List<NoticeDTO> searchNotice(RangeDTO rDTO) {
-		List<NoticeDTO> list = new ArrayList<NoticeDTO>();
-		NoticeDAO nDAO = NoticeDAO.getInstance();
+	public List<FaqDTO> searchFaq(RangeDTO rDTO) {
+		List<FaqDTO> list = new ArrayList<FaqDTO>();
+		FaqDAO nDAO = FaqDAO.getInstance();
 			try {
-				list=nDAO.selectNotice(rDTO);
+				list=nDAO.selectFaq(rDTO);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -83,21 +83,6 @@ public class NoticeService {
 			}//end catch
 				return list;
 	}//searchNotice
-	
-	public NoticeDTO searchNoticeDetail(int noticeNum) {
-		NoticeDTO nDTO = new NoticeDTO();
-		NoticeDAO nDAO = NoticeDAO.getInstance();
-			try {
-				nDTO=nDAO.selectNoticeDetail(noticeNum);
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}//end catch
-				return nDTO;
-	}//searchNotice
-	
 	
 	public String pagination(RangeDTO rDTO) {
 		StringBuilder pagination = new StringBuilder();
@@ -114,7 +99,7 @@ public class NoticeService {
 		StringBuilder previewPage = new StringBuilder();
 		if(startPage>1) {
 		movePage = startPage - 1;
-		previewPage.append("<a class='page-link' href='Notice.jsp?currentPage=").append(movePage);
+		previewPage.append("<a class='page-link' href='").append(rDTO.getUrl()).append("?currentPage=").append(movePage);
 		if(rDTO.getKeyword()!=null) {
 			previewPage.append("&keyword=").append(rDTO.getKeyword());
 		}
@@ -153,7 +138,7 @@ public class NoticeService {
 		StringBuilder nextPage = new StringBuilder();
 		if(endPage < rDTO.getTotalPage()) {
 			movePage = endPage + 1;
-			nextPage.append("<a class='page-link' href='Notice.jsp?currentPage=").append(movePage);
+			nextPage.append("<a class='page-link' href='").append(rDTO.getUrl()).append("?currentPage=").append(movePage);
 			if(rDTO.getKeyword()!=null) {
 				nextPage.append("&keyword=").append(rDTO.getKeyword());
 			}

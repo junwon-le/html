@@ -3,7 +3,7 @@
 
 <div class="footer-inner">
 	
-			<div class="footer-top">
+			<div class="footer-top">		
 				<div>
 				<img src="http://192.168.10.73/html_prj/viva/images/vivaLog.png"
 					alt="VIVA PARK" style="height: 50px;" />
