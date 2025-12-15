@@ -1,3 +1,5 @@
+<%@page import="kr.co.viva.inquiry.InquiryDTO"%>
+<%@page import="kr.co.viva.inquiry.InquiryService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -191,6 +193,15 @@ function modifyInquiry(){
 		<!-- 햄버거 메뉴-->
 		<jsp:include page="include/hamberger.jsp"></jsp:include>
 
+
+		<%
+		InquiryService is = InquiryService.getInstance();
+		InquiryDTO iDTO = new InquiryDTO();
+		int inquiryNum =Integer.parseInt(String.valueOf(request.getParameter("inquiryNum"))) ;
+		iDTO = is.searchInquiryDetail(inquiryNum);
+		
+		pageContext.setAttribute("iDTO", iDTO);
+		%>
 		<!-- 메인 공간(비어있는 흰 배경 영역) -->
 		<div class="container">
 

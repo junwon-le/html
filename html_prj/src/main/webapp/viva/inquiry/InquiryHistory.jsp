@@ -1,5 +1,11 @@
+<%@page import="kr.co.viva.inquiry.InquiryDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="kr.co.viva.inquiry.RangeDTO"%>
+<%@page import="kr.co.viva.inquiry.InquiryService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="../include/siteproperty.jsp" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -31,7 +37,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-<jsp:include page="include/vivatemplet_css.jsp"></jsp:include>
+<jsp:include page="../include/vivatemplet_css.jsp"></jsp:include>
 <style>
 /* CSS Reset 및 기본 스타일 */
 
@@ -412,7 +418,8 @@ max-width: 800px;
 <script type="text/javascript">
 	$(function() {
 		$(".payment-table tbody tr ").click(function() {
-			location.href="http://localhost/html_prj/practice/InquiryAnswer.jsp";
+			var inquiryNum = $(this).find("td .num").val();
+			location.href="${CommonURL}/InquiryAnswer.jsp?inquiryNum="+inquiryNum;
 		});
 
 		
@@ -432,14 +439,48 @@ max-width: 800px;
 		<!-- 헤더 -->
 		<div id="closetop" class="close"></div>
 		<div id="header">
-			<jsp:include page="include/header.jsp"></jsp:include>
+			<jsp:include page="../include/header.jsp"></jsp:include>
 		</div>
 		<!-- 햄버거 메뉴-->
-		<jsp:include page="include/hamberger.jsp"></jsp:include>
+		<jsp:include page="../include/hamberger.jsp"></jsp:include>
+
+
+<%
+		InquiryService is = InquiryService.getInstance();
+		RangeDTO rDTO = new RangeDTO();
+		
+		int pageScale = is.pageScale();
+		String tempPage = request.getParameter("currentPage");
+		int currentPage = 1;
+		if (tempPage != null) {
+			currentPage = Integer.parseInt(tempPage);
+			rDTO.setCurrentPage(currentPage);
+
+		}
+
+		int startNum = is.startNum(currentPage, pageScale);
+		int endNum = is.endNum(startNum, pageScale);
+		rDTO.setStartNum(startNum);
+		rDTO.setEndNum(endNum);
+		rDTO.setUrl("InquiryHistory.jsp");
+		int num =Integer.parseInt(String.valueOf(session.getAttribute("num"))) ;
+					
+		int inquiryTotalCnt = is.searchInquiryTotalCnt(num);
+		
+		int totalPage = is.totalPage(inquiryTotalCnt, pageScale);
+		rDTO.setTotalPage(totalPage);
+		List<InquiryDTO> inquiryList = is.searchInquiry(rDTO,num);
+		String pagination = is.pagination(rDTO);
+		
+		pageContext.setAttribute("inquiryList", inquiryList);
+		pageContext.setAttribute("pagination", pagination);
+		
+		
+		%>
 
 		<!-- 메인 공간(비어있는 흰 배경 영역) -->
 		<div class="container" style="height: auto; position: relative;">
-			<jsp:include page="page_navi.jsp"></jsp:include>
+			<jsp:include page="../page_navi.jsp"></jsp:include>
 			<div class="payment-history-container">
 
 				<div class="title-section">
@@ -449,7 +490,7 @@ max-width: 800px;
 	
 
 				<div class="tab-menu">
-					<button class="tab-button active" onclick="location.href='http://localhost/html_prj/practice/Inquiry.jsp'">글쓰기</button>
+					<button class="tab-button active" onclick="location.href='${CommonURL}/inquiry/Inquiry.jsp'">글쓰기</button>
 				</div>
 
 				<div class="content-area">
@@ -461,61 +502,43 @@ max-width: 800px;
 									<th style="width: 5%;">NO.</th>
 									<th style="width: 15%;">제목</th>
 									<th style="width: 30%;">답변 여부</th>
-									<th style="width: 10%;">수정</th>
-									<th style="width: 20%;">삭제</th>
 									<th style="width: 20%;">작성일</th>
 								</tr>
 							</thead>
 							<tbody>
-								<%
-								//예매 상태 받아서 ui처리하는 코드
-								int dbPayState = 1;
-								String payState = null;
-								for (int i = 0; i < 5; i++) {
-									payState = "canceled";
-									if (dbPayState % 2 == 1) {
-										payState = "complete";
-									} //end if
-									dbPayState++;
-								%>
+							<c:forEach var="iDTO" items="${inquiryList }">
+							
 								<tr>
-									<td class="col-no"><%="list("+i+").InpuiryDTO.getXxx"%></td>
-									<td class="col-product"><span class="product-badge"><%="list("+i+").InpuiryDTO.getXxx"%></span>
+									<td class="col-no">${iDTO.inquiryNum}
+									<input type="hidden" value="${iDTO.inquiryNum}" class="num"/>
+									</td>
+									<td class="col-product"><span class="product-badge">${iDTO.title}</span>
 									</td>
 									<td class="col-status"><span
-										class="status-badge <%=payState%>"><%="list("+i+").InpuiryDTO.getXxx"%></span></td>
-									<td class="col-date"><%="list("+i+").InpuiryDTO.getXxx"%></td>
-									<td class="col-people"><%="list("+i+").InpuiryDTO.getXxx"%></td>
-									<td class="col-amount"><%="list("+i+").InpuiryDTO.getXxx"%></td>
+										class="status-badge">${iDTO.inquiryReturn}</span></td>
+									<td class="col-amount">${iDTO.inputDate}</td>
 								</tr>
-								<%
-								} //end for
-								%>
+							
+							</c:forEach>
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>
 			<div id="BoardListPager">
-				<div>
-					<ul class="pagination mt-2 mb-2 justify-content-center">
-						<div class="page-item">
-							<a class="page-link" href="#">&lt;&lt;</a>
-						</div>
-						<div class="page-item active">
-							<a class="page-link" data-pagenumber="1" href="#">1</a>
-						</div>
-						<div class="page-item">
-							<a class="page-link" href="?cmsNo=DD0100&bgrp&page=1">&gt;&gt;</a>
-						</div>
-					</ul>
-				</div>
-			</div>
+								<div>
+										<div class="pagination" style="margin : 0px auto; width:300px;" >
+												<div class="page-item" style="display:flex; justify-content: center;width:300px;">
+													${pagination}
+												</div>
+										</div>
+									</div>
+								</div>
 		</div>
 		<!-- container 끝 -->
 
 		<div id="footer">
-			<jsp:include page="include/footer.jsp"></jsp:include>
+			<jsp:include page="../include/footer.jsp"></jsp:include>
 		</div>
 	</div>
 </body>

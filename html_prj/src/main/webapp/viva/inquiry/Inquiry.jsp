@@ -161,7 +161,7 @@
 </style>
 
 
-<jsp:include page="include/vivatemplet_css.jsp"></jsp:include>
+<jsp:include page="../include/vivatemplet_css.jsp"></jsp:include>
 
 <script>
 	$(document).ready(function() {
@@ -203,10 +203,10 @@
 		<!-- 헤더 -->
 		<div id="closetop" class="close"></div>
 		<div id="header">
-			<jsp:include page="include/header.jsp"></jsp:include>
+			<jsp:include page="../include/header.jsp"></jsp:include>
 		</div>
 		<!-- 햄버거 메뉴-->
-		<jsp:include page="include/hamberger.jsp"></jsp:include>
+		<jsp:include page="../include/hamberger.jsp"></jsp:include>
 
 		<!-- 메인 공간(비어있는 흰 배경 영역) -->
 		<div class="container">
@@ -220,7 +220,7 @@
 						data-bs-offset="20, 0"
 						style="background-color: #fff; color: #333; border: none; padding: 0px; margin-left: 10px; font-size: 13px;">
 						소통 서비스</button>
-					<jsp:include page="page_navi.jsp"></jsp:include>
+					<jsp:include page="../page_navi.jsp"></jsp:include>
 				</div>
 				<div class="btn-group">
 					<button type="button" class="btn btn-secondary dropdown-toggle"
@@ -303,7 +303,7 @@
 
 
 				<div id="footer">
-					<jsp:include page="include/footer.jsp"></jsp:include>
+					<jsp:include page="../include/footer.jsp"></jsp:include>
 				</div>
 			</div>
 </body>

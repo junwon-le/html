@@ -1,9 +1,10 @@
+<%@page import="kr.co.viva.mypage.MypageDTO"%>
+<%@page import="kr.co.viva.mypage.MypageService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-session.setAttribute("userId", "tempUser");
-%>
-<%@ include file="include/LoginChk.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
+<%@ include file="../include/LoginChk.jsp" %>
+<%@ include file="../include/siteproperty.jsp" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -24,7 +25,7 @@ session.setAttribute("userId", "tempUser");
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-<jsp:include page="include/vivatemplet_css.jsp"></jsp:include>
+<jsp:include page="../include/vivatemplet_css.jsp"></jsp:include>
 <style type="text/css">
 /* 전체 컨테이너 설정: 세 개의 열을 가로로 정렬 */
 .my-page-container {
@@ -82,52 +83,57 @@ session.setAttribute("userId", "tempUser");
 		<!-- 헤더 -->
 		<div id="closetop" class="close"></div>
 		<div id="header">
-			<jsp:include page="include/header.jsp"></jsp:include>
+			<jsp:include page="../include/header.jsp"></jsp:include>
 		</div>
 		<!-- 햄버거 메뉴-->
-		<jsp:include page="include/hamberger.jsp"></jsp:include>
+		<jsp:include page="../include/hamberger.jsp"></jsp:include>
 
 		<!-- 메인 공간(비어있는 흰 배경 영역) -->
 		<div class="container">
 		<div style="margin:0px auto; width:1000px; display: flex; justify-content: center; margin-top: 30px;" >
 		<h2 style="align-content: center; margin-top:150px;">마이페이지</h2>
 		</div>
-		<div style="margin:0px auto; width:1000px; display: flex; justify-content: center; margin-top: 30px;"><img src="images/hr.png"/>
+		<div style="margin:0px auto; width:1000px; display: flex; justify-content: center; margin-top: 30px;"><img src="${CommonURL}/images/hr.png"/>
 		</div>
 		<div style="margin:0px auto; width:1000px; display: flex; justify-content: center; margin-top: 30px;">
 		<img src="http://localhost/html_prj/practice/images/mypage_profile.png"/>
 		</div>
 		<%
-		String name = "DB이름";
-	
+		MypageService ms = MypageService.getInstance();
+		MypageDTO mDTO = new MypageDTO();
+		String id = String.valueOf( session.getAttribute("userId"));
+		mDTO = ms.searchMemberName(id);
+		session.setAttribute("num", mDTO.getNum());
+		
+		pageContext.setAttribute("mDTO", mDTO);
 		%>
 		<div style="margin:0px auto; width:1000px; display: flex; justify-content: center; margin-top: 30px;">
-		<span style="font-size: 25px; font-weight: bold;"><%= name %> 님</span>
+		<span style="font-size: 25px; font-weight: bold;">${mDTO.name } 님</span>
 		</div>
 		<div class="my-page-container">
     <div class="section-column">
         <h3>나의 예매</h3>
-        <button class="btn-item" onclick="location.href='http://localhost/html_prj/viva/MyticketCheck.jsp'">나의 티켓</button>
-        <button class="btn-item" onclick="location.href='http://localhost/html_prj/viva/payhistory.jsp'">예매 내역</button>
+        <button class="btn-item" onclick="location.href='${CommonURL}/MyticketCheck.jsp'">나의 티켓</button>
+        <button class="btn-item" onclick="location.href='${CommonURL}/payhistory.jsp'">예매 내역</button>
     </div>
 
     <div class="section-column">
         <h3>나의 활동</h3>
-        <button class="btn-item" onclick="location.href='http://localhost/html_prj/viva/InquiryHistory.jsp'">문의 내역</button>
-        <button class="btn-item" onclick="location.href='http://localhost/html_prj/viva/ReserveHistory.jsp'">예약 내역</button>
+        <button class="btn-item" onclick="location.href='${CommonURL}/InquiryHistory.jsp'">문의 내역</button>
+        <button class="btn-item" onclick="location.href='${CommonURL}/ReserveHistory.jsp'">예약 내역</button>
     </div>
 
     <div class="section-column">
         <h3>내 정보</h3>
-        <button class="btn-item" onclick="location.href='http://localhost/html_prj/viva/MypagePassCheck.jsp'">내 정보 변경</button>
-        <button class="btn-item" onclick="location.href='http://localhost/html_prj/viva/MypageWithdrawCheck.jsp'">회원 탈퇴</button>
+        <button class="btn-item" onclick="location.href='${CommonURL}/MypagePassCheck.jsp'">내 정보 변경</button>
+        <button class="btn-item" onclick="location.href='${CommonURL}/MypageWithdrawCheck.jsp'">회원 탈퇴</button>
     </div>
 </div>
 		</div>
 		<!-- container 끝 -->
 
 		<div id="footer">
-			<jsp:include page="include/footer.jsp"></jsp:include>
+			<jsp:include page="../include/footer.jsp"></jsp:include>
 		</div>
 	</div>
 </body>

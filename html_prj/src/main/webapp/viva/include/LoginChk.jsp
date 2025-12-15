@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<%
+session.setAttribute("userId", "test");
+%>
+
 <c:if test="${sessionScope.userId == null }">
 <c:redirect url="http://localhost/html_prj/viva/tempLogin.jsp"/>
 </c:if>

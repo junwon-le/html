@@ -1,5 +1,11 @@
+<%@page import="kr.co.viva.mypage.PersonalDTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="kr.co.viva.mypage.MyTicketDTO"%>
+<%@page import="kr.co.viva.mypage.MypageService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -357,6 +363,15 @@ visibility: visible;
 		<jsp:include page="include/hamberger.jsp"></jsp:include>
 
 		<!-- 메인 공간(비어있는 흰 배경 영역) -->
+		
+		<%
+		MypageService ms = MypageService.getInstance();
+		List<MyTicketDTO> myticketList = new ArrayList<MyTicketDTO>();
+		int num =Integer.parseInt(String.valueOf(session.getAttribute("num")));
+		myticketList = ms.searchMyticket(num);
+		
+		pageContext.setAttribute("myticketList", myticketList);
+		%>
 		<div class="container" style="height: 900px; position: relative;">
 			<jsp:include page="page_navi.jsp"></jsp:include>
 
@@ -366,38 +381,23 @@ visibility: visible;
 					style="max-width: 1000px; margin: 0px auto;">
 					<h1 class="main-title">내 티켓 확인하기</h1>
 					<p class="subtitle">예매한 티켓의 상세 정보를 확인하고 입장하세요</p>
-
+					
+					<c:forEach var="mtDTO" items="${myticketList }" varStatus="i">
+					<%
+					
+					%>
 					<div class="ticket-list">
 						<div class="ticket-card">
 							<div class="image-placeholder">
 								<span class="icon-text">🎫 티켓 이미지</span>
 							</div>
 							<div class="ticket-details">
-								<h2 class="ticket-name">V!VAPark 1일 자유이용권</h2>
+								<h2 class="ticket-name">${mtDTO.ticketName}</h2>
 								<ul class="info-list">
-									<li><span class="icon">🗓️</span> 이용일 :&nbsp; <span><%="use_date"%></span>
+									<li><span class="icon">🗓️</span> 이용일 :&nbsp; <span>${mtDTO.useDate}</span>
 									</li>
 									<li><span class="icon">👥</span> 인원 :&nbsp; <span>성인
-											<%=1%>, 청소년 <%=2%>,어린이 <%=0%>
-									</span></li>
-									<li><span class="icon">💳</span> 결제금액 :&nbsp; <span>₩&nbsp;<%="pay_price"%></span>
-									</li>
-								</ul>
-								<button class="detail-button">상세보기</button>
-							</div>
-						</div>
-
-						<div class="ticket-card">
-							<div class="image-placeholder">
-								<span class="icon-text">🎫 티켓 이미지</span>
-							</div>
-							<div class="ticket-details">
-								<h2 class="ticket-name">V!VAPark 연간 이용권</h2>
-								<ul class="info-list">
-									<li><span class="icon">🗓️</span> 이용일 :&nbsp; <span><%="use_date"%></span>
-									</li>
-									<li><span class="icon">👥</span> 인원 :&nbsp; <span>성인
-											<%=1%>, 청소년 <%=0%>,어린이 <%=0%>
+											, 청소년 <%=2%>,어린이 <%=0%>
 									</span></li>
 									<li><span class="icon">💳</span> 결제금액 :&nbsp; <span>₩&nbsp;<%="pay_price"%></span>
 									</li>
@@ -406,6 +406,9 @@ visibility: visible;
 							</div>
 						</div>
 					</div>
+					</c:forEach>
+
+						
 				</div>
 			</div>
 			<!-- 상세 보기 모달 기능 -->

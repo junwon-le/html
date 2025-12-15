@@ -240,10 +240,10 @@ $(".tab-button").click(function(){
 		<jsp:include page="../include/hamberger.jsp"></jsp:include>
 
 		<!-- 메인 공간(비어있는 흰 배경 영역) -->
-		<div class="container" >
+		<div class="container" style=" min-height:1000px;" >
 			<div class="page_navi"
 				style="margin-bottom: 20px; margin-left: 100px; margin-top: 40px;">
-				<img src="images/house.png" />
+				<img src="${CommonURL}/images/house.png" />
 				<div class="btn-group">
 					<button type="button" class="btn btn-secondary dropdown-toggle"
 						data-bs-toggle="dropdown" aria-expanded="false"
@@ -385,8 +385,8 @@ $(".tab-button").click(function(){
 				<!--  -->
 				<c:choose>
 				<c:when test="${empty faqList}">
-					<div style="margin-top:50px; margin-left:50px;" >
-					<span class="title">검색된 데이터가 없습니다.</span>
+					<div style="margin:200px auto; width:800px;" >
+					<img src="${CommonURL}/images/nodata.png" style="width:800px; margin:0px auto;"/>
 					<span class="date"></span> 
 					</div>
 				</c:when>

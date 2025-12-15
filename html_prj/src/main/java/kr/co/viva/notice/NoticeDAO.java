@@ -77,7 +77,7 @@ public class NoticeDAO {
 			db.dbClose(rs, pstmt, con);
 		}//end finally
 		return totalCnt;
-	}//selectNotice
+	}//selectNoticeTotalCnt
 	
 	
 	public List<NoticeDTO> selectNotice(RangeDTO rDTO) throws SQLException, IOException {
