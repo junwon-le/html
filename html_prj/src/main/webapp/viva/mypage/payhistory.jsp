@@ -38,7 +38,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-<jsp:include page="include/vivatemplet_css.jsp"></jsp:include>
+<jsp:include page="../include/vivatemplet_css.jsp"></jsp:include>
 <style>
 /* CSS Reset 및 기본 스타일 */
 
@@ -452,14 +452,14 @@ detail-container {
 		<!-- 헤더 -->
 		<div id="closetop" class="close"></div>
 		<div id="header">
-			<jsp:include page="include/header.jsp"></jsp:include>
+			<jsp:include page="../include/header.jsp"></jsp:include>
 		</div>
 		<!-- 햄버거 메뉴-->
-		<jsp:include page="include/hamberger.jsp"></jsp:include>
+		<jsp:include page="../include/hamberger.jsp"></jsp:include>
 
 		<!-- 메인 공간(비어있는 흰 배경 영역) -->
 		<div class="container" style="height: auto; position: relative;">
-			<jsp:include page="page_navi.jsp"></jsp:include>
+			<jsp:include page="../page_navi.jsp"></jsp:include>
 			<div class="payment-history-container">
 
 				<div class="title-section">
@@ -648,7 +648,7 @@ detail-container {
 		<!-- container 끝 -->
 
 		<div id="footer">
-			<jsp:include page="include/footer.jsp"></jsp:include>
+			<jsp:include page="../include/footer.jsp"></jsp:include>
 		</div>
 	</div>
 </body>

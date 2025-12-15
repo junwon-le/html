@@ -1,5 +1,13 @@
+<%@page import="kr.co.viva.reserveHistory.ReserveDetailDTO"%>
+<%@page import="kr.co.viva.reserveHistory.ReserveHistoryDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="kr.co.viva.reserveHistory.RangeDTO"%>
+<%@page import="kr.co.viva.reserveHistory.ReserveHistoryService"%>
+<%@page import="kr.co.viva.reserveHistory.ReserveHistoryDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="../include/siteproperty.jsp" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -31,7 +39,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-<jsp:include page="include/vivatemplet_css.jsp"></jsp:include>
+<jsp:include page="../include/vivatemplet_css.jsp"></jsp:include>
 <style>
 /* CSS Reset 및 기본 스타일 */
 
@@ -302,13 +310,13 @@
 }
 
 /* 예매 완료 상태 스타일 */
-.status-badge.complete {
+.status-badge.N {
 	background-color: #e5f1ff; /* 매우 연한 파란색 배경 */
 	color: #2a6ce4; /* 파란색 텍스트 */
 }
 
 /* 취소 완료 상태 스타일 */
-.status-badge.canceled {
+.status-badge.Y {
 	background-color: #f5f5f7; /* 연한 회색 배경 */
 	color: #777; /* 회색 텍스트 */
 }
@@ -455,12 +463,41 @@
 <script type="text/javascript">
 	$(function() {
 		$(".payment-table tbody tr ").click(function() {
-<%//예약 상세 내역 가져오기
-//searchReserveDetail(int ) :MyReserveDetailDTO%>
-	$(".payHistoryDiv").addClass("open");
-						});
+			$(".payHistoryDiv").addClass("open");
+			var num =$(this).find("td .num").val();
+			detail(num);
+		});
 
 	})
+	
+	function detail(num){
+		var param = {num :num };
+		$.ajax({
+			url:"reserveDetailProcess.jsp",
+			type:"get",
+			data:param,
+			dataType:"json",
+			error:function(xhr){
+				alert("서버에서 문제가 발생 하였습니다.");
+				console.log(xhr.status);
+			},
+			success: function(jsonObj){
+				$("#price").html(jsonObj.price);
+				$("#title").html(jsonObj.title);
+				$("#resDate").html(jsonObj.resDate);
+				$("#perfDate").html(jsonObj.perfDate);
+				$("#personCnt").html(jsonObj.personCnt);
+				$("#reserveName").html(jsonObj.reserveName);
+				$("#loc").html(jsonObj.loc);
+				$("#resNum").html(jsonObj.resNum);
+				$("#state").html(jsonObj.state);
+				$("#payDate").html(jsonObj.payDate);
+				$("#payNum").html(jsonObj.payNum);
+				$("#agency").html(jsonObj.agency);
+				$("#installment").html(jsonObj.installment);
+			}
+		})
+	}
 
 	function closeDiv() {
 		$(".payHistoryDiv").removeClass("open");
@@ -481,35 +518,81 @@
 		<!-- 헤더 -->
 		<div id="closetop" class="close"></div>
 		<div id="header">
-			<jsp:include page="include/header.jsp"></jsp:include>
+			<jsp:include page="../include/header.jsp"></jsp:include>
 		</div>
 		<!-- 햄버거 메뉴-->
-		<jsp:include page="include/hamberger.jsp"></jsp:include>
+		<jsp:include page="../include/hamberger.jsp"></jsp:include>
 
 		<!-- 메인 공간(비어있는 흰 배경 영역) -->
 		<div class="container" style="height: auto; position: relative;">
-			<jsp:include page="page_navi.jsp"></jsp:include>
+			<jsp:include page="../page_navi.jsp"></jsp:include>
 			<div class="payment-history-container">
+			<%
+			ReserveHistoryService rhs = ReserveHistoryService.getInstance();
+			RangeDTO rDTO = new RangeDTO();
+			String tempNum = String.valueOf(session.getAttribute("num"));
+			int num = 0;
+			if(tempNum!=null && !tempNum.isEmpty()){
+			num = Integer.parseInt(tempNum);
+			}
+			
+			
+			int pageScale = rhs.pageScale();
+			String tempPage = request.getParameter("currentPage");
+			int currentPage = 1;
+			if (tempPage != null) {
+				currentPage = Integer.parseInt(tempPage);
+				rDTO.setCurrentPage(currentPage);
 
+			}
+
+			int startNum = rhs.startNum(currentPage, pageScale);
+			int endNum = rhs.endNum(startNum, pageScale);
+			rDTO.setStartNum(startNum);
+			rDTO.setEndNum(endNum);
+			if(request.getParameter("keyword")!=null){
+			rDTO.setKeyword(request.getParameter("keyword"));
+			}
+			
+			rDTO.setUrl("ReserveHistory.jsp");
+			
+			
+			int totalCnt = rhs.searchReserveTotalCnt(num, rDTO);
+			int totalPage = rhs.totalPage(totalCnt, pageScale);
+			rDTO.setTotalPage(totalPage);
+			List<ReserveHistoryDTO> reserveList = rhs.searchReserve(num, rDTO);
+			
+			String pagination = rhs.pagination(rDTO);
+
+			System.out.println(reserveList.size()+"/"+num+rDTO.getEndNum());
+			
+					
+			
+			pageContext.setAttribute("totalCnt", totalCnt);
+			pageContext.setAttribute("reserveList", reserveList);
+			pageContext.setAttribute("pagination", pagination);
+			
+			%> 
 				<div class="title-section">
 					<h1>예매 내역</h1>
 				</div>
-
+				<form>
 				<div class="search-filter-box">
 					<div class="input-container" style="width: 300px; ">
-						<input type="password" id="passwordConfirm" class="input-text" style="border: 1px solid #ADB5BD; border-radius: 5px"
-							placeholder="행사명을 입력하세요">
+						<input type="text" id="passwordConfirm" name="keyword" class="input-text" style="border: 1px solid #ADB5BD; border-radius: 5px"
+							placeholder="행사명을 입력하세요" value="${param.keyword}">
 					</div>
 					<button class="action-button search-button" style="padding:7px 20px;" >검색</button>
 
 				</div>
+				</form>
 
 				<div class="tab-menu">
 					<button class="tab-button active">공연 예약 내역</button>
 				</div>
 
 				<div class="content-area">
-					<div class="summary-count">총 0건</div>
+					<div class="summary-count">총 ${totalCnt}건</div>
 					<div class="table-container">
 						<table class="payment-table">
 							<thead>
@@ -519,60 +602,38 @@
 									<th style="width: 30%;">행사명</th>
 									<th style="width: 10%;">행사 일시</th>
 									<th style="width: 20%;">인원수</th>
-									<th style="width: 20%;">예약상태</th>
+									<th style="width: 20%;">환불 여부</th>
 								</tr>
 							</thead>
 							<tbody>
-								<%
-								//예매 상태 받아서 ui처리하는 코드
-								int dbPayState = 1;
-								String payState = null;
-								for (int i = 0; i < 5; i++) {
-									payState = "canceled";
-									if (dbPayState % 2 == 1) {
-										payState = "complete";
-									} //end if
-									dbPayState++;
-								%>
+							<c:forEach var="rhDTO" items="${reserveList }">
 								<tr>
-									<td class="col-no"><%=i%></td>
-									<td class="col-date"><%="pay_date"%></td>
-									<td class="col-product"><span class="product-badge"><%="type"%></span>
+									<td class="col-no" >${rhDTO.num }
+									<input type="hidden" value="${rhDTO.num }" class="num"/>
 									</td>
-									<td class="col-people"><%="personCnt"%></td>
-									<td class="col-amount"><%="price"%></td>
+									<td class="col-date">${rhDTO.payDate }</td>
+									<td class="col-product"><span class="product-badge">${rhDTO.title }</span>
+									</td>
+									<td class="col-people">${rhDTO.perfDate }</td>
+									<td class="col-amount">${rhDTO.personCnt }</td>
 									<td class="col-status"><span
-										class="status-badge <%=payState%>"><%="payState"%></span></td>
+										class="status-badge ${rhDTO.state}">${rhDTO.state }</span></td>
 								</tr>
-								<%
-								} //end for
-								%>
+							</c:forEach>
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>
 			<div id="BoardListPager">
-				<div>
-					<ul class="pagination mt-2 mb-2 justify-content-center">
-						<div class="page-item">
-							<a class="page-link" href="#">&lt;&lt;</a>
-						</div>
-						<div class="page-item">
-							<a class="page-link" href="#">&lt;</a>
-						</div>
-						<div class="page-item active">
-							<a class="page-link" data-pagenumber="1" href="#">1</a>
-						</div>
-						<div class="page-item">
-							<a class="page-link" href="#">&gt;</a>
-						</div>
-						<div class="page-item">
-							<a class="page-link" href="?cmsNo=DD0100&bgrp&page=1">&gt;&gt;</a>
-						</div>
-					</ul>
-				</div>
-			</div>
+								<div>
+										<div class="pagination" style="margin : 0px auto; width:300px;" >
+												<div class="page-item" style="display:flex; justify-content: center;width:300px;">
+													${pagination}
+												</div>
+										</div>
+									</div>
+								</div>
 			<!-- 모달 구현 -->
 			<div class="payHistoryDiv"
 				style="width: 100%; height: 100%; position: absolute; top: 0px; left: 0px;">
@@ -591,28 +652,28 @@
 								<tbody>
 									<tr>
 										<td class="label-cell">행사명</td>
-										<td class="value-cell"><%="MyReserveDetailDTO.getXxx"%>
+										<td class="value-cell" id="title">
 										</td>
 										<td class="label-cell">예약자</td>
-										<td class="value-cell"><%="MyReserveDetailDTO.getXxx"%></td>
+										<td class="value-cell" id="reserveName"></td>
 									</tr>
 									<tr>
 										<td class="label-cell">행사일시</td>
-										<td class="value-cell"><%="연산(2025-09-11 12:00~13:00)"%></td>
+										<td class="value-cell" id="perfDate"></td>
 										<td class="label-cell">장소</td>
-										<td class="value-cell"><%="MyReserveDetailDTO.getXxx"%></td>
+										<td class="value-cell" id="loc"></td>
 									</tr>
 									<tr>
 										<td class="label-cell">예약 일시</td>
-										<td class="value-cell"><%="MyReserveDetailDTO.getXxx"%></td>
+										<td class="value-cell" id="resDate">/td>
 										<td class="label-cell">예약 번호</td>
-										<td class="value-cell"><%="MyReserveDetailDTO.getXxx"%></td>
+										<td class="value-cell" id="resNum"></td>
 									</tr>
 									<tr>
 										<td class="label-cell">인원수</td>
-										<td class="value-cell"><%="MyReserveDetailDTO.getXxx"%></td>
-										<td class="label-cell">상태</td>
-										<td class="value-cell"><%="MyReserveDetailDTO.getXxx"%></td>
+										<td class="value-cell" id="personCnt"></td>
+										<td class="label-cell">환불 상태</td>
+										<td class="value-cell" id="state"></td>
 									</tr>
 								</tbody>
 							</table>
@@ -621,32 +682,28 @@
 						<div class="payment-detail-section">
 							<h2 class="section-title">결제 상세 내역</h2>
 							<ul class="payment-detail-list">
-								<li class="payment-detail-item"><span class="item-icon">📄</span>
-									<span class="item-label">상품명</span> <span class="item-value">
-										<%="MyReserveDetailDTO.getXxx"%>
-								</span></li>
 								<li class="payment-detail-item"><span class="item-icon">⏱️</span>
-									<span class="item-label">결제 일시</span> <span class="item-value">
-										<%="MyReserveDetailDTO.getXxx"%>
+									<span class="item-label">결제 일시</span> <span class="item-value" id="payDate">
+										
 								</span></li>
 								<li class="payment-detail-item"><span class="item-icon">💳</span>
 									<span class="item-label">결제 수단</span> <span class="item-value">
-										<%="MyReserveDetailDTO.getXxx"%>
+										신용카드
 								</span></li>
 								<li class="payment-detail-item"><span class="item-icon">🆔</span>
-									<span class="item-label">승인번호</span> <span class="item-value"><%="MyReserveDetailDTO.getXxx"%></span>
+									<span class="item-label">승인번호</span> <span class="item-value" id="payNum"></span>
 								</li>
 								<li class="payment-detail-item"><span class="item-icon">🏢</span>
-									<span class="item-label">결제 기관</span> <span class="item-value"><%="MyReserveDetailDTO.getXxx"%></span>
+									<span class="item-label">결제 기관</span> <span class="item-value" id="agency"></span>
 								</li>
 								<li class="payment-detail-item"><span class="item-icon">⚙️</span>
 									<span class="item-label">가맹점</span> <span class="item-value">(주)VIVAPARK</span>
 								</li>
 								<li class="payment-detail-item"><span class="item-icon">💰</span>
-									<span class="item-label">결제 금액</span> <span class="item-value"><%="MyReserveDetailDTO.getXxx"%></span>
+									<span class="item-label">결제 금액</span> <span class="item-value" id="price"></span>
 								</li>
 								<li class="payment-detail-item"><span class="item-icon">🗑️</span>
-									<span class="item-label">할부개월</span> <span class="item-value"><%="MyReserveDetailDTO.getXxx"%></span>
+									<span class="item-label">할부 개월</span> <span class="item-value" id="installment"></span>
 								</li>
 							</ul>
 						</div>
@@ -665,7 +722,7 @@
 		<!-- container 끝 -->
 
 		<div id="footer">
-			<jsp:include page="include/footer.jsp"></jsp:include>
+			<jsp:include page="../include/footer.jsp"></jsp:include>
 		</div>
 	</div>
 </body>

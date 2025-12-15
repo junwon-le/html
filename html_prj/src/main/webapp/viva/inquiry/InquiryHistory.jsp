@@ -1,3 +1,5 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.lang.reflect.Array"%>
 <%@page import="kr.co.viva.inquiry.InquiryDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="kr.co.viva.inquiry.RangeDTO"%>
@@ -470,10 +472,21 @@ max-width: 800px;
 		int totalPage = is.totalPage(inquiryTotalCnt, pageScale);
 		rDTO.setTotalPage(totalPage);
 		List<InquiryDTO> inquiryList = is.searchInquiry(rDTO,num);
+		List<String> returnStateList = new ArrayList<String>();
+		String returnState = "";
+		for(int i=0; i<inquiryList.size();i++){
+		returnState = "N";
+		if(inquiryList.get(i).getInquiryReturn()!=null){
+			returnState="Y";
+		}//end if
+		returnStateList.add(returnState);
+		}//end for
+		
 		String pagination = is.pagination(rDTO);
 		
 		pageContext.setAttribute("inquiryList", inquiryList);
 		pageContext.setAttribute("pagination", pagination);
+		pageContext.setAttribute("returnStateList", returnStateList);
 		
 		
 		%>
@@ -506,16 +519,16 @@ max-width: 800px;
 								</tr>
 							</thead>
 							<tbody>
-							<c:forEach var="iDTO" items="${inquiryList }">
+							<c:forEach var="iDTO" items="${inquiryList }" varStatus="i">
 							
 								<tr>
-									<td class="col-no">${iDTO.inquiryNum}
+									<td class="col-no">${iDTO.inquiryNum} 
 									<input type="hidden" value="${iDTO.inquiryNum}" class="num"/>
 									</td>
 									<td class="col-product"><span class="product-badge">${iDTO.title}</span>
 									</td>
 									<td class="col-status"><span
-										class="status-badge">${iDTO.inquiryReturn}</span></td>
+										class="status-badge"> </span>${returnStateList.get(i.index)}</td>
 									<td class="col-amount">${iDTO.inputDate}</td>
 								</tr>
 							

@@ -119,8 +119,8 @@
 
     <div class="section-column">
         <h3>나의 활동</h3>
-        <button class="btn-item" onclick="location.href='${CommonURL}/InquiryHistory.jsp'">문의 내역</button>
-        <button class="btn-item" onclick="location.href='${CommonURL}/ReserveHistory.jsp'">예약 내역</button>
+        <button class="btn-item" onclick="location.href='${CommonURL}/inquiry/InquiryHistory.jsp'">문의 내역</button>
+        <button class="btn-item" onclick="location.href='${CommonURL}/mypage/ReserveHistory.jsp'">예약 내역</button>
     </div>
 
     <div class="section-column">

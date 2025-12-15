@@ -2,7 +2,8 @@
 <%@page import="kr.co.viva.inquiry.InquiryService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="../include/siteproperty.jsp" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -23,7 +24,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-<jsp:include page="include/vivatemplet_css.jsp"></jsp:include>
+<jsp:include page="../include/vivatemplet_css.jsp"></jsp:include>
 <style>
 /* 기본 스타일 및 컨테이너 */
 body {
@@ -188,17 +189,19 @@ function modifyInquiry(){
 		<!-- 헤더 -->
 		<div id="closetop" class="close"></div>
 		<div id="header">
-			<jsp:include page="include/header.jsp"></jsp:include>
+			<jsp:include page="../include/header.jsp"></jsp:include>
 		</div>
 		<!-- 햄버거 메뉴-->
-		<jsp:include page="include/hamberger.jsp"></jsp:include>
+		<jsp:include page="../include/hamberger.jsp"></jsp:include>
 
 
 		<%
 		InquiryService is = InquiryService.getInstance();
 		InquiryDTO iDTO = new InquiryDTO();
+		if(request.getParameter("inquiryNum")!=null && !request.getParameter("inquiryNum").isEmpty()){
 		int inquiryNum =Integer.parseInt(String.valueOf(request.getParameter("inquiryNum"))) ;
 		iDTO = is.searchInquiryDetail(inquiryNum);
+		}
 		
 		pageContext.setAttribute("iDTO", iDTO);
 		%>
@@ -213,21 +216,24 @@ function modifyInquiry(){
 				<div class="form-group">
 					<label for="inquiryTitle" class="form-label"> 제목 
 					</label> <input type="text" id="inquiryTitle" class="input-title"
-						value="<%="InquiryDTO.getXxx" %>" >
+						value="${iDTO.title }" >
 				</div>
 
 				<div class="form-group">
 					<label for="inquiryContent" class="form-label"> 문의한 내용 </label>
-					<textarea id="inquiryContent" class="textarea-content" style="height: 300px;"><%="InquiryDTO.getXxx" %></textarea>
+					<div id="inquiryContent" class="textarea-content" style="height: 300px;">
+					<c:out value="${iDTO.msg }" escapeXml="false"/>
+					</div>
 				</div>
 
 				<div class="form-group">
 					<label for="inquiryAnswer" class="form-label"> 답변 </label>
-					<textarea id="inquiryAnswer" class="textarea-content" readonly style="height: 300px;"><%="InquiryDTO.getXxx" %>
-					</textarea>
+					<div id="inquiryAnswer" class="textarea-content" readonly style="height: 300px;">
+					<c:out value="${iDTO.inquiryReturn }"/>
+					</div>
 				</div>
 
-				<div class="inquiry-number-info">문의 번호 : <%="InquiryDTO.getXxx" %></div>
+				<div class="inquiry-number-info">문의 번호 : ${param.inquiryNum }</div>
 
 				<div class="action-buttons">
 					<button type="button" class="action-button button-modify" onclick="modifyInquiry()">수정</button>
@@ -240,7 +246,7 @@ function modifyInquiry(){
 		<!-- container 끝 -->
 
 		<div id="footer">
-			<jsp:include page="include/footer.jsp"></jsp:include>
+			<jsp:include page="../include/footer.jsp"></jsp:include>
 		</div>
 	</div>
 </body>
