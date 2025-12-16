@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ include file="../include/LoginChk.jsp" %>
+<%@ include file="../include/siteproperty.jsp" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -21,7 +22,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-<jsp:include page="include/vivatemplet_css.jsp"></jsp:include>
+<jsp:include page="../include/vivatemplet_css.jsp"></jsp:include>
   <style>
         .input-group {
             max-width: 600px;
@@ -83,6 +84,9 @@
     	//비밀번호 확인 한후 이동
     	location.href="" //개인 정보 수정 url
     }
+    function passChk(){
+    	alert("로그인 비번확인이랑 열결");
+    }
     </script>
 </head>
 <body>
@@ -90,19 +94,19 @@
 		<!-- 헤더 -->
 		<div id="closetop" class="close"></div>
 		<div id="header">
-			<jsp:include page="include/header.jsp"></jsp:include>
+			<jsp:include page="../include/header.jsp"></jsp:include>
 		</div>
 		<!-- 햄버거 메뉴-->
-		<jsp:include page="include/hamberger.jsp"></jsp:include>
+		<jsp:include page="../include/hamberger.jsp"></jsp:include>
 
 		<!-- 메인 공간(비어있는 흰 배경 영역) -->
 		<div class="container" style="min-height: 900px;">
 		<div style="position: relative;">
-		<div style="margin-top:90px;margin-bottom: 50px;"><img src="images/MypagePassCh.png"/></div>
+		<div style="margin-top:90px;margin-bottom: 50px;"><img src="${CommonURL}/images/MypagePassCh.png"/></div>
 		<div style="position: absolute; top:50%;left:50%; transform: translate(-50%, -20%);" >
 		<h2><strong>마이페이지</strong></h2></div>
 		</div>
-		<div style="width :400px; margin:20px auto;"><img src="images/vivaLogoX.png" 
+		<div style="width :400px; margin:20px auto;"><img src="${CommonURL}/images/vivaLogoX.png" 
 		style="width:400px;"/></div>
 		<div style="width :400px; margin:0px auto;text-align: center;"><h3>회원 정보 변경을 <br> 비밀번호 인증 후 가능합니다.</h3></div>
 		<div class="input-group">
@@ -127,7 +131,7 @@
 		<!-- container 끝 -->
 
 		<div id="footer">
-			<jsp:include page="include/footer.jsp"></jsp:include>
+			<jsp:include page="../include/footer.jsp"></jsp:include>
 		</div>
 	</div>
 </body>

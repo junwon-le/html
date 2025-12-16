@@ -2,7 +2,7 @@
 <%@page import="kr.co.viva.notice.NoticeService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ include file="../include/siteproperty.jsp" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -50,8 +50,21 @@
 		
 		<%
 		NoticeService ns = NoticeService.getInstance();
+		
 		try{
-		NoticeDTO nDTO = ns.searchNoticeDetail(Integer.parseInt(request.getParameter("noticeNum")));
+		int noticeNum = Integer.parseInt(request.getParameter("noticeNum"));
+		
+		Object obj = session.getAttribute("board"+noticeNum);
+		 
+		if(obj == null){
+		boolean flag = ns.modifyCnt(noticeNum);
+		}
+		
+		NoticeDTO nDTO = ns.searchNoticeDetail(noticeNum);
+
+
+		session.setAttribute("board"+noticeNum, true );
+		
 		pageContext.setAttribute("nDTO", nDTO);
 		}catch(NumberFormatException nfe){
 		}
@@ -64,7 +77,7 @@
 		<div style="max-width:1000px; margin: 0px auto;">
 		<strong>${nDTO.title }</strong><br>
 		<span style="font-size: 10px; color:#A0A0A0;">${nDTO.category} &nbsp; |&nbsp; ${nDTO.inputDate }</span>
-		<img src="images/hr.png"/>		
+		<img src="${CommonURL }/images/hr.png"/>		
 		</div>
 		<div style="max-width:1000px; margin: 0px auto;">
 		${nDTO.msg}

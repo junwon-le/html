@@ -98,6 +98,19 @@ public class NoticeService {
 				return nDTO;
 	}//searchNotice
 	
+	public boolean modifyCnt(int noticeNum) {
+		boolean flag = false;
+		NoticeDAO nDAO = NoticeDAO.getInstance();
+			try {
+				flag=nDAO.updateCnt(noticeNum)==1;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}//end catch
+				return flag;
+	}//searchNotice
+	
 	
 	public String pagination(RangeDTO rDTO) {
 		StringBuilder pagination = new StringBuilder();

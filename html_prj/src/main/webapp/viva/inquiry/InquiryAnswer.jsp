@@ -24,6 +24,38 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
+<!-- summernote 가져오기 -->
+<link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+	rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.js"></script>
+<script>
+	$(document).ready(
+			function() {
+				$('#summernote')
+						.summernote(
+								{
+									placeholder : 'write here...',
+									tabsize : 2,
+									height : 300,
+									toolbar : [
+											[
+													'font',
+													[ 'bold', 'underline',
+															'clear' ] ],
+											[ 'insert', [ 'picture' ] ] ]
+
+								});
+			});
+</script>	
+
 <jsp:include page="../include/vivatemplet_css.jsp"></jsp:include>
 <style>
 /* 기본 스타일 및 컨테이너 */
@@ -99,7 +131,6 @@ body {
 /* 텍스트 영역 (문의 내용, 답변) */
 .textarea-content {
 	width: 100%;
-	height: 200px; /* 높이 설정 */
 	padding: 15px;
 	border: 1px solid #ddd;
 	border-radius: 4px;
@@ -166,21 +197,22 @@ body {
 </style>
 <script type="text/javascript">
 function removeInquiry(){
-	
-	<%
-	//if(	){} //답변이 있다면 수정 불가능
-	//modifyInquiryDetail(int , MyInquiryDTO): int
-	%>
-	alert("삭제");
+	if($("#answer").val()!=0){
+	alert("이미 답변 달린 문의는 삭제할 수 없습니다.");
+	return;
+	}
+	$("#remove").submit()
 	}
 
 
 function modifyInquiry(){
-	alert("수정");
-	<%
-	//removeInquiry(int ): int
-	%>
-}
+	if($("#answer").val()!=0){
+		alert("이미 답변 달린 문의는 수정 할 수 없습니다.");
+		return;
+		}
+		$("#modify").submit()
+		}
+
 
 </script>
 </head>
@@ -195,6 +227,7 @@ function modifyInquiry(){
 		<jsp:include page="../include/hamberger.jsp"></jsp:include>
 
 
+		<!-- 메인 공간(비어있는 흰 배경 영역) -->
 		<%
 		InquiryService is = InquiryService.getInstance();
 		InquiryDTO iDTO = new InquiryDTO();
@@ -205,39 +238,47 @@ function modifyInquiry(){
 		
 		pageContext.setAttribute("iDTO", iDTO);
 		%>
-		<!-- 메인 공간(비어있는 흰 배경 영역) -->
 		<div class="container">
-
 			<div class="inquiry-container">
 
 				<div class="inquiry-header">
 					<h1>문의</h1>
 				</div>
+					<form id="modify" action="modifyInquiryProcess.jsp" method="post">
 				<div class="form-group">
 					<label for="inquiryTitle" class="form-label"> 제목 
-					</label> <input type="text" id="inquiryTitle" class="input-title"
-						value="${iDTO.title }" >
+					</label> 
+					<input type="text" id="inquiryTitle" name="title" class="input-title"
+						value="${iDTO.title}" >
 				</div>
 
 				<div class="form-group">
 					<label for="inquiryContent" class="form-label"> 문의한 내용 </label>
-					<div id="inquiryContent" class="textarea-content" style="height: 300px;">
+					<textarea id="summernote" name="msg">
 					<c:out value="${iDTO.msg }" escapeXml="false"/>
-					</div>
+						
+					</textarea>
 				</div>
 
 				<div class="form-group">
 					<label for="inquiryAnswer" class="form-label"> 답변 </label>
-					<div id="inquiryAnswer" class="textarea-content" readonly style="height: 300px;">
+					<div id="inquiryAnswer" class="textarea-content"  style="height: 300px;">
 					<c:out value="${iDTO.inquiryReturn }"/>
 					</div>
+					<input type="hidden"  id="answer" value="${iDTO.adminNum}"/>
+					<input type="hidden" name="inquiryNum" value="${param.inquiryNum }"/>
 				</div>
 
 				<div class="inquiry-number-info">문의 번호 : ${param.inquiryNum }</div>
+					</form>
 
 				<div class="action-buttons">
 					<button type="button" class="action-button button-modify" onclick="modifyInquiry()">수정</button>
+					<form id="remove" action="removeInquiryProcess.jsp">
 					<button type="button" class="action-button button-delete" onclick="removeInquiry()">삭제</button>
+					<input type="hidden" name="inquiryNum" value="${param.inquiryNum }"/>
+					<input type="hidden" name="inquiryReturn" value="${iDTO.inquiryReturn}"/>
+					</form>
 				</div>  
 
 			</div>

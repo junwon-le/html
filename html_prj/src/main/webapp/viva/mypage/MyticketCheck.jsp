@@ -37,7 +37,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-<jsp:include page="include/vivatemplet_css.jsp"></jsp:include>
+<jsp:include page="../include/vivatemplet_css.jsp"></jsp:include>
 <!-- 상세보기 모달 기능 css-->
 <style>
 /* 변수 설정 */
@@ -357,10 +357,10 @@ visibility: visible;
 		<!-- 헤더 -->
 		<div id="closetop" class="close"></div>
 		<div id="header">
-			<jsp:include page="include/header.jsp"></jsp:include>
+			<jsp:include page="../include/header.jsp"></jsp:include>
 		</div>
 		<!-- 햄버거 메뉴-->
-		<jsp:include page="include/hamberger.jsp"></jsp:include>
+		<jsp:include page="../include/hamberger.jsp"></jsp:include>
 
 		<!-- 메인 공간(비어있는 흰 배경 영역) -->
 		
@@ -373,7 +373,7 @@ visibility: visible;
 		pageContext.setAttribute("myticketList", myticketList);
 		%>
 		<div class="container" style="height: 900px; position: relative;">
-			<jsp:include page="page_navi.jsp"></jsp:include>
+			<jsp:include page="../page_navi.jsp"></jsp:include>
 
 			<div
 				style="max-width: 1000px; margin: 80px auto; background-color: #fff8e7; padding-top: 50px; padding-bottom: 80px; border-radius: 20px;">
@@ -469,7 +469,7 @@ visibility: visible;
 		<!-- container 끝 -->
 
 		<div id="footer">
-			<jsp:include page="include/footer.jsp"></jsp:include>
+			<jsp:include page="../include/footer.jsp"></jsp:include>
 		</div>
 	</div>
 </body>

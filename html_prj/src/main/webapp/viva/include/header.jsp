@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="../include/siteproperty.jsp" %>
 <div class="close"></div>
 		<div id="mainBar">
 			<div class="logo">
@@ -60,9 +61,9 @@
 							<a href="http://localhost/html_prj/viva/Notice.jsp">소통 서비스</a>
 							<div class="subItems">
 								<ul>
-									<li><a href="http://localhost/html_prj/viva/Notice.jsp">공지</a></li>
-									<li><a href="http://localhost/html_prj/viva/FAQ.jsp">FAQ</a></li>
-									<li><a href="http://localhost/html_prj/viva/Inquiry.jsp">문의</a></li>
+									<li><a href="${CommonURL}/notice/Notice.jsp">공지</a></li>
+									<li><a href="${CommonURL}/FAQ/FAQ.jsp">FAQ</a></li>
+									<li><a href="${CommonURL}/inquiry/Inquiry.jsp">문의</a></li>
 								</ul>
 							</div>
 						</div>
@@ -71,8 +72,8 @@
 			</div>
 
 			<div class="header-btns">
-				<button class="vivaheader_btn" style="color: #FF6124; border: 1.5px solid #FF6124; ">예약하기</button>
-				<button class="vivaheader_btn" style="color: #000; border: 1.5px solid #000;">로그인</button>
+				<a href="#void" class="vivaheader_btn" style="color: #FF6124; border: 1.5px solid #FF6124; ">예약하기</a>
+				<a href="#void" class="vivaheader_btn" style="color: #000; border: 1.5px solid #000;">로그인</a>
 			</div>	
 		</div>
 		<div id=subBar >

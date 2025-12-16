@@ -236,11 +236,11 @@
 						공지</button>
 					<ul class="dropdown-menu dropdown-menu-end"
 						style="width: 55px !important; min-width: 55px !important;">
-						<li><a href="http://localhost/html_prj/viva/Notice.jsp"
+						<li><a href="${CommonURL}/notice/Notice.jsp"
 							style="margin: 5px 10px">공지</a></li>
-						<li><a href="http://localhost/html_prj/viva/FAQ.jsp"
+						<li><a href="${CommonURL}/FAQ/FAQ.jsp"
 							style="margin: 5px 10px">FAQ</a></li>
-						<li><a href="http://localhost/html_prj/viva/Inquiry.jsp"
+						<li><a href="${CommonURL}/inquiry/Inquiry.jsp"
 							style="margin: 5px 10px">문의</a></li>
 					</ul>
 				</div>
@@ -347,8 +347,8 @@
 										<c:choose>
 										<c:when test="${empty noticeList}">
 										<li style="cursor: pointer">
-												<div>
-													<span class="title">검색된 데이터가 없습니다.</span>
+												<div  style="margin:50px auto; width:800px;">
+													<img src="${CommonURL}/images/nodata.png" style="width:800px; margin:0px auto;"/>
 													<span class="date"></span> 
 												</div>
 										</c:when>

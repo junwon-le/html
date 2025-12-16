@@ -306,13 +306,13 @@ max-width: 800px;
 }
 
 /* 예매 완료 상태 스타일 */
-.status-badge.complete {
+.status-badge.Y {
 	background-color: #e5f1ff; /* 매우 연한 파란색 배경 */
 	color: #2a6ce4; /* 파란색 텍스트 */
 }
 
 /* 취소 완료 상태 스타일 */
-.status-badge.canceled {
+.status-badge.N {
 	background-color: #f5f5f7; /* 연한 회색 배경 */
 	color: #777; /* 회색 텍스트 */
 }
@@ -421,7 +421,7 @@ max-width: 800px;
 	$(function() {
 		$(".payment-table tbody tr ").click(function() {
 			var inquiryNum = $(this).find("td .num").val();
-			location.href="${CommonURL}/InquiryAnswer.jsp?inquiryNum="+inquiryNum;
+			location.href="${CommonURL}/inquiry/InquiryAnswer.jsp?inquiryNum="+inquiryNum;
 		});
 
 		
@@ -512,9 +512,9 @@ max-width: 800px;
 						<table class="payment-table">
 							<thead>
 								<tr>
-									<th style="width: 5%;">NO.</th>
-									<th style="width: 15%;">제목</th>
-									<th style="width: 30%;">답변 여부</th>
+									<th style="width: 5%;">문의번호</th>
+									<th style="width: 30%;">제목</th>
+									<th style="width: 15%;">답변 여부</th>
 									<th style="width: 20%;">작성일</th>
 								</tr>
 							</thead>
@@ -528,8 +528,8 @@ max-width: 800px;
 									<td class="col-product"><span class="product-badge">${iDTO.title}</span>
 									</td>
 									<td class="col-status"><span
-										class="status-badge"> </span>${returnStateList.get(i.index)}</td>
-									<td class="col-amount">${iDTO.inputDate}</td>
+										class="status-badge ${returnStateList.get(i.index)}">${returnStateList.get(i.index)} </span></td>
+									<td class="col-amount ">${iDTO.inputDate}</td>
 								</tr>
 							
 							</c:forEach>

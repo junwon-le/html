@@ -195,4 +195,33 @@ public class NoticeDAO {
 		}//end finally
 		return nDTO;
 	}//selectNoticeDetail
+	
+	
+	public int updateCnt(int inquiryNum )  throws SQLException, IOException {
+		int cnt=0;
+		
+		DbConn db = DbConn.getInstance("jdbc/dbcp");
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = db.getConn();
+			
+			StringBuilder updateCnt = new StringBuilder();
+			updateCnt
+			.append("	update notice	")
+			.append("	set notice_views = notice_views+1	")
+			.append("	where noticeNum = ?	");
+			pstmt = con.prepareStatement( updateCnt.toString());
+			
+			pstmt.setInt(1, inquiryNum);
+			
+			cnt= pstmt.executeUpdate();
+			
+			
+		}finally{
+			db.dbClose(null, pstmt, con);
+		}//end finally
+		return cnt;
+	}//updateCnt
 }//class

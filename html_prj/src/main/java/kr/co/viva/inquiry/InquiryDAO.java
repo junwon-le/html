@@ -184,6 +184,7 @@ public class InquiryDAO {
 			if(rs.next()) {
 				iDTO.setTitle(rs.getString("inquiry_title"));
 				iDTO.setInquiryReturn(rs.getString("inquiry_return"));
+				iDTO.setAdminNum(rs.getInt("adminnum"));
 //clob 받기
 				StringBuilder intro = new StringBuilder();
 				Clob clob = rs.getClob("inquiry_msg");
@@ -209,6 +210,61 @@ public class InquiryDAO {
 		}//end finally
 		return iDTO;
 	}//selectInquiryDetail
+	
+	
+	public int deleteInquiry(int inqNum, int memberNum ) throws SQLException, IOException {
+		int cnt = 0 ;
+		DbConn db = DbConn.getInstance("jdbc/dbcp");
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = db.getConn();
+			
+			StringBuilder deleteInquiry = new StringBuilder();
+			deleteInquiry
+			.append("	delete from inquiry where inquiry_num=? and member_num=? ");
+			
+			pstmt = con.prepareStatement(deleteInquiry.toString());
+			
+			pstmt.setInt(1, inqNum);
+			pstmt.setInt(2, memberNum);
+			
+			cnt= pstmt.executeUpdate();
+			
+		}finally{
+			db.dbClose(null, pstmt, con);
+		}//end finally
+		return cnt;
+	}//selectNoticeTotalCnt
+
+	public int updateInquiry(InquiryDTO iDTO ) throws SQLException, IOException {
+		int cnt = 0 ;
+		DbConn db = DbConn.getInstance("jdbc/dbcp");
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = db.getConn();
+			
+			StringBuilder deleteInquiry = new StringBuilder();
+			deleteInquiry
+			.append("	update inquiry set INQUIRY_MSG=?, INQUIRY_TITLE=? where inquiry_num=? and member_num=? ");
+			
+			pstmt = con.prepareStatement(deleteInquiry.toString());
+			
+			pstmt.setString(1, iDTO.getMsg());
+			pstmt.setString(2, iDTO.getTitle());
+			pstmt.setInt(3, iDTO.getInquiryNum());
+			pstmt.setInt(4, iDTO.getMemberNum());
+			
+			cnt= pstmt.executeUpdate();
+			
+		}finally{
+			db.dbClose(null, pstmt, con);
+		}//end finally
+		return cnt;
+	}//updateInquiry
 	
 
 }//class

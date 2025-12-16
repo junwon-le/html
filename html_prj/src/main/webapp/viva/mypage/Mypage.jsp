@@ -113,8 +113,8 @@
 		<div class="my-page-container">
     <div class="section-column">
         <h3>나의 예매</h3>
-        <button class="btn-item" onclick="location.href='${CommonURL}/MyticketCheck.jsp'">나의 티켓</button>
-        <button class="btn-item" onclick="location.href='${CommonURL}/payhistory.jsp'">예매 내역</button>
+        <button class="btn-item" onclick="location.href='${CommonURL}/mypage/MyticketCheck.jsp'">나의 티켓</button>
+        <button class="btn-item" onclick="location.href='${CommonURL}/mypage/payhistory.jsp'">예매 내역</button>
     </div>
 
     <div class="section-column">
@@ -125,8 +125,8 @@
 
     <div class="section-column">
         <h3>내 정보</h3>
-        <button class="btn-item" onclick="location.href='${CommonURL}/MypagePassCheck.jsp'">내 정보 변경</button>
-        <button class="btn-item" onclick="location.href='${CommonURL}/MypageWithdrawCheck.jsp'">회원 탈퇴</button>
+        <button class="btn-item" onclick="location.href='${CommonURL}/mypage/MypagePassCheck.jsp'">내 정보 변경</button>
+        <button class="btn-item" onclick="location.href='${CommonURL}/mypage/MypageWithdrawCheck.jsp'">회원 탈퇴</button>
     </div>
 </div>
 		</div>

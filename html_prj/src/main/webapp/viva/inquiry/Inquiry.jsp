@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ include file="../include/LoginChk.jsp" %>
+<%@ include file="../include/siteproperty.jsp" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -213,7 +214,7 @@
 
 			<div class="page_navi"
 				style="margin-bottom: 20px; margin-left: 100px; margin-top: 40px;">
-				<img src="images/house.png" />
+				<img src="${CommonURL}/images/house.png" />
 				<div class="btn-group">
 					<button type="button" class="btn btn-secondary dropdown-toggle"
 						data-bs-toggle="dropdown" aria-expanded="false"
@@ -230,11 +231,11 @@
 						문의</button>
 					<ul class="dropdown-menu dropdown-menu-end"
 						style="width: 55px !important; min-width: 55px !important;">
-						<li><a href="http://localhost/html_prj/viva/Notice.jsp"
+						<li><a href="${CommonURL}/notice/Notice.jsp"
 							style="margin: 5px 10px; width:auto; heigh:auto; padding: 0px;">공지</a></li>
-						<li><a href="http://localhost/html_prj/viva/FAQ.jsp"
+						<li><a href="${CommonURL}/FAQ/FAQ.jsp"
 							style="margin: 5px 10px; width:auto; heigh:auto; padding: 0px;">FAQ</a></li>
-						<li><a href="http://localhost/html_prj/viva/Inquiry.jsp"
+						<li><a href="${CommonURL}/inquiry/Inquiry.jsp"
 							style="margin: 5px 10px; width:auto; heigh:auto; padding: 0px;">문의</a></li>
 					</ul>
 				</div>
@@ -290,7 +291,7 @@
 
 			<div style="max-width: 1000px; margin: 20px auto;">
 				<button id="submitBtn">
-					<img src="images/inquirySubmitBtn.png" />
+					<img src="${CommonURL }/images/inquirySubmitBtn.png" />
 				</button>
 			</div>
 			</form>

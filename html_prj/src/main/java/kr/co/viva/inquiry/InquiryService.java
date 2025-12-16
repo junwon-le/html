@@ -129,7 +129,7 @@ public class InquiryService {
 		StringBuilder previewPage = new StringBuilder();
 		if(startPage>1) {
 		movePage = startPage - 1;
-		previewPage.append("<a class='page-link' href='Notice.jsp?currentPage=").append(movePage);
+		previewPage.append("<a class='page-link' href='").append(rDTO.getUrl()).append("?currentPage=").append(movePage);
 		previewPage.append("'>&lt;&lt;</a>");
 		}//end if
 		
@@ -169,6 +169,32 @@ public class InquiryService {
 			}//end catch
 				return iDTO;
 	}//searchNotice
+	
+	public boolean deleteInquiry(int iquNum,int memberNum) {
+		boolean flag = false;
+		InquiryDAO iDAO = InquiryDAO.getInstance();
+		try {
+			flag = iDAO.deleteInquiry(iquNum,memberNum)==1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+		return flag;
+	}//deleteInquiry
+	
+	public boolean modifyInquiry(InquiryDTO iDTO) {
+		boolean flag = false;
+		InquiryDAO iDAO = InquiryDAO.getInstance();
+		try {
+			flag = iDAO.updateInquiry(iDTO)==1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+		return flag;
+	}//modifyInquiry
 	
 	
 }//InquiryService

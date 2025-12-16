@@ -260,11 +260,11 @@ $(".tab-button").click(function(){
 						FAQ</button>
 					<ul class="dropdown-menu dropdown-menu-end"
 						style="width: 55px !important; min-width: 55px !important;">
-						<li><a href="notice/Notice.jsp"
+						<li><a href="${CommonURL}/notice/Notice.jsp"
 							style="margin: 5px 10px">공지</a></li>
-						<li><a href="FAQ.jsp"
+						<li><a href="${CommonURL}/FAQ/FAQ.jsp"
 							style="margin: 5px 10px">FAQ</a></li>
-						<li><a href="Inquiry.jsp"
+						<li><a href="${CommonURL}/inquiry/Inquiry.jsp"
 							style="margin: 5px 10px">문의</a></li>
 					</ul>
 				</div>
