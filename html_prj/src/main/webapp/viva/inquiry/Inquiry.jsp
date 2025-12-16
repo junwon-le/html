@@ -240,8 +240,8 @@
 					</ul>
 				</div>
 			</div>
-			<div id="inquiryNotice" style="margin:0px auto; width : 1200px; display : flex; justify-content: center; ">
-				<img src="http://localhost/html_prj/viva/images/inquiry.png" style="width:900px;" >
+			<div id="inquiryNotice" style="margin:0px auto; min-width : 900px; display : flex; justify-content: center; ">
+				<img src="${CommonURL }/images/inquiry.png" style="width:900px;" >
 			</div>
 			<form method="POST" action="inquiryProcess.jsp">
 			<div style="max-width: 1000px; margin: 0px auto;">

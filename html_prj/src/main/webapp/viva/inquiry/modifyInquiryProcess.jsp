@@ -22,7 +22,9 @@ iDTO.setMemberNum(memberNum);
 
 boolean flag = is.modifyInquiry(iDTO);
 
+String url = flag?"http://localhost/html_prj/viva/inquiry/successMsg.jsp?type=2":"http://localhost/html_prj/viva/inquiry/successMsg.jsp?type=4";
 pageContext.setAttribute("iDTO", iDTO);
+pageContext.setAttribute("url", url);
 
 %>
-<c:redirect url="http://localhost/html_prj/viva/inquiry/successMsg.jsp"/>
+<c:redirect url="${url }"/>

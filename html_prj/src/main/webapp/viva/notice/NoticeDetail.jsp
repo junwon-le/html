@@ -81,8 +81,6 @@
 		</div>
 		<div style="max-width:1000px; margin: 0px auto;">
 		${nDTO.msg}
-		
-	
 		</div>
 		
 		</div>

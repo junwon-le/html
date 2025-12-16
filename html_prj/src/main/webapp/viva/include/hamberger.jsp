@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ include file="../include/siteproperty.jsp" %>
 <div class="hamburger-list">
 
 				<div class="login-box">
@@ -58,10 +58,11 @@
 					<div class="menu-title">소통 서비스</div>
 					<div class="menu-list">
 						<div>
-							<a href="#void">공지</a><br><a href="#void">FAQ</a> 
+							<a href="${CommonURL}/notice/Notice.jsp">공지</a><br>
+							<a href="${CommonURL}/FAQ/FAQ.jsp">FAQ</a> 
 						</div>
 						<div style="margin-right : 100px">
-							<a href="#void">문의</a>
+							<a href="${CommonURL}/inquiry/Inquiry.jsp">문의</a>
 						</div>
 					</div>
 

@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="../include/LoginChk.jsp" %>
 <%
 String num = request.getParameter("inquiryNum");
 try{
@@ -16,7 +17,7 @@ int memberNum = Integer.parseInt(tempMemberNum);
 String str = "";
 
 	boolean flag = is.deleteInquiry(iquNum, memberNum);
-	str = flag?"http://localhost/html_prj/viva/inquiry/suce.jsp":"http://localhost/html_prj/viva/inquiry/failMsg.jsp";
+	str = flag?"http://localhost/html_prj/viva/inquiry/successMsg.jsp?type=3":"http://localhost/html_prj/viva/inquiry/successMsg.jsp?type=4";
 
 	pageContext.setAttribute("str", str);
 }catch(NumberFormatException nfe){

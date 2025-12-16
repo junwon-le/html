@@ -8,6 +8,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="../include/siteproperty.jsp" %>
+<%@ include file="../include/LoginChk.jsp" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -487,6 +488,7 @@ max-width: 800px;
 		pageContext.setAttribute("inquiryList", inquiryList);
 		pageContext.setAttribute("pagination", pagination);
 		pageContext.setAttribute("returnStateList", returnStateList);
+		pageContext.setAttribute("inquiryTotalCnt", inquiryTotalCnt);
 		
 		
 		%>
@@ -507,7 +509,7 @@ max-width: 800px;
 				</div>
 
 				<div class="content-area">
-					<div class="summary-count">총 **0**건</div>
+					<div class="summary-count">총 **${inquiryTotalCnt }**건</div>
 					<div class="table-container">
 						<table class="payment-table">
 							<thead>

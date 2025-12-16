@@ -164,4 +164,33 @@ public class ReserveHistoryDAO {
 		}//end finally
 		return rdDTO;
 	}//selectNoticeDetail
+	
+	public int updateRefundState(int resNum) throws SQLException, IOException {
+		int cnt = 0 ;
+		DbConn db = DbConn.getInstance("jdbc/dbcp");
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = db.getConn();
+			
+			StringBuilder selectTotalCnt = new StringBuilder();
+			selectTotalCnt
+			.append(" 	update pay	 ")
+			.append("	set refund_state='Y' ")
+			.append("	where p_res_num = ? ");
+			
+			pstmt = con.prepareStatement(selectTotalCnt.toString());
+			pstmt.setInt(1, resNum);
+			
+			cnt= pstmt.executeUpdate();
+			
+			
+		}finally{
+			db.dbClose(null, pstmt, con);
+		}//end finally
+		return cnt;
+	}//selectNoticeTotalCnt
 }//class
+
+

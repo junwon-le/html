@@ -5,13 +5,13 @@ import java.sql.Date;
 public class ReserveDetailDTO {
 	private int resNum,personCnt, loc, payNum, payPrice, installment ;
 	private Date payDate, perfDate, resDate;
-	private String title,  state , reserveName, locStr, payAgency ;
+	private String title,  state , reserveName, locStr, payAgency,installmentStr ;
 	public ReserveDetailDTO() {
 		super();
 	}
 	public ReserveDetailDTO(int resNum, int personCnt, int loc, int payNum, int payPrice, int installment, Date payDate,
 			Date perfDate, Date resDate, String title, String state, String reserveName, String locStr,
-			String payAgency) {
+			String payAgency, String installmentStr) {
 		super();
 		this.resNum = resNum;
 		this.personCnt = personCnt;
@@ -27,6 +27,7 @@ public class ReserveDetailDTO {
 		this.reserveName = reserveName;
 		this.locStr = locStr;
 		this.payAgency = payAgency;
+		this.installmentStr = installmentStr;
 	}
 	public int getResNum() {
 		return resNum;
@@ -101,10 +102,9 @@ public class ReserveDetailDTO {
 		this.reserveName = reserveName;
 	}
 	public String getLocStr() {
+		String[] str= {"대형메인홀","소극장","콘서트홀	"};
+		locStr=str[loc];
 		return locStr;
-	}
-	public void setLocStr(String locStr) {
-		this.locStr = locStr;
 	}
 	public String getPayAgency() {
 		return payAgency;
@@ -112,14 +112,24 @@ public class ReserveDetailDTO {
 	public void setPayAgency(String payAgency) {
 		this.payAgency = payAgency;
 	}
+	public String getInstallmentStr() {
+		String[] str = {"일시불","개월"};
+		if(installment ==0 ) {
+			installmentStr=str[0];
+		}else {
+			installmentStr=installment+"개월";
+		}
+		return installmentStr;
+	}
 	@Override
 	public String toString() {
 		return "ReserveDetailDTO [resNum=" + resNum + ", personCnt=" + personCnt + ", loc=" + loc + ", payNum=" + payNum
 				+ ", payPrice=" + payPrice + ", installment=" + installment + ", payDate=" + payDate + ", perfDate="
 				+ perfDate + ", resDate=" + resDate + ", title=" + title + ", state=" + state + ", reserveName="
-				+ reserveName + ", locStr=" + locStr + ", payAgency=" + payAgency + "]";
+				+ reserveName + ", locStr=" + locStr + ", payAgency=" + payAgency + ", installmentStr=" + installmentStr
+				+ "]";
 	}
-
+	
 	
 
 }

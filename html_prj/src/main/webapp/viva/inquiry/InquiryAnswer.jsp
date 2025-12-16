@@ -201,7 +201,9 @@ function removeInquiry(){
 	alert("이미 답변 달린 문의는 삭제할 수 없습니다.");
 	return;
 	}
+	if(confirm("정말 문의를 삭제하시겠습니까?")){
 	$("#remove").submit()
+	}
 	}
 
 
@@ -210,7 +212,9 @@ function modifyInquiry(){
 		alert("이미 답변 달린 문의는 수정 할 수 없습니다.");
 		return;
 		}
+	if(confirm("수정하시겠습니까?")){
 		$("#modify").submit()
+	}
 		}
 
 

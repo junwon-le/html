@@ -460,11 +460,15 @@
 	border-color: #ccc;
 }
 </style>
+<%ReserveHistoryService rhs = ReserveHistoryService.getInstance(); %>
 <script type="text/javascript">
 	$(function() {
 		$(".payment-table tbody tr ").click(function() {
 			$(".payHistoryDiv").addClass("open");
 			var num =$(this).find("td .num").val();
+			var state =$(this).find("td .rstate").val();
+			$("#refundNum").val(num);
+			$("#refundState").val(state);
 			detail(num);
 		});
 
@@ -486,7 +490,7 @@
 				$("#title").html(jsonObj.title);
 				$("#resDate").html(jsonObj.resDate);
 				$("#perfDate").html(jsonObj.perfDate);
-				$("#personCnt").html(jsonObj.personCnt);
+				$("#personCnt").html(jsonObj.personCnt+"명");
 				$("#reserveName").html(jsonObj.reserveName);
 				$("#loc").html(jsonObj.loc);
 				$("#resNum").html(jsonObj.resNum);
@@ -507,9 +511,13 @@
 
 	}
 	function cancleReserve() {
-		alert("예약 취소");
-<%//예약 취소
-			//cancleReserve(int, int) : int%>
+		if($("#refundState").val()=="Y"){
+		alert("이미 취소된 예약입니다.");
+			return;
+		}
+		if(confirm("정말 취소하시겠습니까?")){
+		$("#refund").submit();
+		}
 	}
 </script>
 </head>
@@ -528,7 +536,7 @@
 			<jsp:include page="../page_navi.jsp"></jsp:include>
 			<div class="payment-history-container">
 			<%
-			ReserveHistoryService rhs = ReserveHistoryService.getInstance();
+			
 			RangeDTO rDTO = new RangeDTO();
 			String tempNum = String.valueOf(session.getAttribute("num"));
 			int num = 0;
@@ -563,10 +571,6 @@
 			List<ReserveHistoryDTO> reserveList = rhs.searchReserve(num, rDTO);
 			
 			String pagination = rhs.pagination(rDTO);
-
-			System.out.println(reserveList.size()+"/"+num+rDTO.getEndNum());
-			
-					
 			
 			pageContext.setAttribute("totalCnt", totalCnt);
 			pageContext.setAttribute("reserveList", reserveList);
@@ -597,7 +601,7 @@
 						<table class="payment-table">
 							<thead>
 								<tr>
-									<th style="width: 5%;">NO.</th>
+									<th style="width: 5%;">예약번호</th>
 									<th style="width: 15%;">예약일</th>
 									<th style="width: 30%;">행사명</th>
 									<th style="width: 10%;">행사 일시</th>
@@ -616,8 +620,12 @@
 									</td>
 									<td class="col-people">${rhDTO.perfDate }</td>
 									<td class="col-amount">${rhDTO.personCnt }</td>
-									<td class="col-status"><span
-										class="status-badge ${rhDTO.state}">${rhDTO.state }</span></td>
+									<td class="col-status">
+									<span
+										class="status-badge ${rhDTO.state}">${rhDTO.state }</span>
+									<input type="hidden" value="${rhDTO.state }" class="rstate"/>
+										</td>
+
 								</tr>
 							</c:forEach>
 							</tbody>
@@ -709,8 +717,11 @@
 						</div>
 
 						<div class="modal-footer">
-							<button class="action-button button-cancel"
-								onclick="cancleReserve() ">예약 취소</button>
+						<form action="resRefundProcess.jsp" id="refund">
+							<input type="button" onclick="cancleReserve()"  value="예약취소"class="action-button button-cancel"/>
+							<input type="hidden" value="" id="refundNum" name="refundNum"/>
+							<input type="hidden" value="" id="refundState"/>
+						</form>
 							<button class="action-button button-close" onclick="closeDiv()">닫기</button>
 						</div>
 

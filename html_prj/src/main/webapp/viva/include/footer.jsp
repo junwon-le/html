@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ include file="../include/siteproperty.jsp" %>
 <div class="footer-inner">
 	
 			<div class="footer-top">		
 				<div>
-				<img src="http://192.168.10.73/html_prj/viva/images/vivaLog.png"
+				<img src="${CommonURL}/images/vivaLog.png"
 					alt="VIVA PARK" style="height: 50px;" />
 				</div>
 

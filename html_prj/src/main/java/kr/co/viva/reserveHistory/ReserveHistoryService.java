@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class ReserveHistoryService {
 	private static ReserveHistoryService ms;
 	
@@ -76,6 +77,11 @@ public class ReserveHistoryService {
 		ReserveHistoryDAO rhDAO = ReserveHistoryDAO.getInstance();
 			try {
 				list=rhDAO.selectReserve(num ,rDTO);
+				for(ReserveHistoryDTO rhDTO : list) {
+					if(rhDTO.getTitle().length()>15) {
+						rhDTO.setTitle(rhDTO.getTitle().substring(0,13)+"...");
+					}//end if
+				}//end for
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -89,7 +95,6 @@ public class ReserveHistoryService {
 		ReserveHistoryDAO nDAO = ReserveHistoryDAO.getInstance();
 			try {
 				rdDTO=nDAO.selectReserveDetail(noticeNum);
-				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -155,4 +160,16 @@ public class ReserveHistoryService {
 		return pagination.toString();
 	}
 	
+	public boolean modifyRefundState(int resNum) {
+		boolean flag = false;
+		ReserveHistoryDAO nDAO = ReserveHistoryDAO.getInstance();
+			try {
+				flag=nDAO.updateRefundState(resNum)==1;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}//end catch
+				return flag;
+	}//searchNotice
 }//NoticeService

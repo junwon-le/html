@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import kr.co.viva.inquiry.InquiryDTO;
+
 public class NoticeService {
 	private static NoticeService ms;
 	
@@ -76,6 +78,11 @@ public class NoticeService {
 		NoticeDAO nDAO = NoticeDAO.getInstance();
 			try {
 				list=nDAO.selectNotice(rDTO);
+				for(NoticeDTO nDTO : list) {
+					if(nDTO.getTitle().length()>25) {
+						nDTO.setTitle(nDTO.getTitle().substring(0,23)+"...");
+					}
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} catch (IOException e) {

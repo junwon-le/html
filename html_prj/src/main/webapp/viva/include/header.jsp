@@ -4,10 +4,10 @@
 <div class="close"></div>
 		<div id="mainBar">
 			<div class="logo">
-				<img src="http://192.168.10.73/html_prj/viva/images/vivaLog.png"
+				<img src="${CommonURL }/images/vivaLog.png"
 					alt="VIVA PARK" id="logImg" />
 			</div>
-			<button class="hamburger-toggle" style="background-color:#fff; border : 0px;"><img src="http://192.168.10.73/html_prj/practice/images/hamburger_menu.png"/></button>
+			<button class="hamburger-toggle" style="background-color:#fff; border : 0px;"><img src="${CommonURL }/images/hamburger_menu.png"/></button>
 			<div id="nav">
 				<ul id="mainMenu" class="">
 					<li>
@@ -58,7 +58,7 @@
 					</li>
 					<li>
 						<div class="liDiv">
-							<a href="http://localhost/html_prj/viva/Notice.jsp">소통 서비스</a>
+							<a href="${CommonURL }/notice/Notice.jsp">소통 서비스</a>
 							<div class="subItems">
 								<ul>
 									<li><a href="${CommonURL}/notice/Notice.jsp">공지</a></li>

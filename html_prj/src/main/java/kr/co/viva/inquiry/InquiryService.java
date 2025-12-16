@@ -105,6 +105,11 @@ public class InquiryService {
 		InquiryDAO iDAO = InquiryDAO.getInstance();
 			try {
 				list=iDAO.selectInquiry(rDTO, num);
+				for(InquiryDTO iDTO : list) {
+					if(iDTO.getTitle().length()>15) {
+						iDTO.setTitle(iDTO.getTitle().substring(0,13)+"...");
+					}//end if
+				}//end for
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} catch (IOException e) {

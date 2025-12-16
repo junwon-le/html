@@ -19,14 +19,14 @@ jsonObj.put("title", rdDTO.getTitle());
 jsonObj.put("perfDate",new SimpleDateFormat("yyyy-MM-dd").format(rdDTO.getPerfDate()) );
 jsonObj.put("personCnt", rdDTO.getPersonCnt());
 jsonObj.put("resDate", new SimpleDateFormat("yyyy-MM-dd").format(rdDTO.getResDate()));
-jsonObj.put("loc", rdDTO.getLoc());
+jsonObj.put("loc", rdDTO.getLocStr());
 jsonObj.put("resNum", rdDTO.getResNum());
 jsonObj.put("state", rdDTO.getState());
 jsonObj.put("payDate", new SimpleDateFormat("yyyy-MM-dd").format(rdDTO.getPayDate()));
 jsonObj.put("payNum", rdDTO.getPayNum());
 jsonObj.put("agency", rdDTO.getPayAgency());
 jsonObj.put("price", rdDTO.getPayPrice());
-jsonObj.put("installment", rdDTO.getInstallment());
+jsonObj.put("installment", rdDTO.getInstallmentStr());
 
 
 //3.JSONObject을 출력
