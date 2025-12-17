@@ -181,13 +181,18 @@
 		NoticeService ns = NoticeService.getInstance();
 		RangeDTO rDTO = new RangeDTO();
 		
+		String tempPage ="";
 		int pageScale = ns.pageScale();
-		String tempPage = request.getParameter("currentPage");
 		int currentPage = 1;
+		try{
+			
+		tempPage = request.getParameter("currentPage");
 		if (tempPage != null) {
 			currentPage = Integer.parseInt(tempPage);
 			rDTO.setCurrentPage(currentPage);
-
+			}
+		}catch(NumberFormatException nfe){
+			
 		}
 
 		int startNum = ns.startNum(currentPage, pageScale);
@@ -347,9 +352,8 @@
 										<c:choose>
 										<c:when test="${empty noticeList}">
 										<li style="cursor: pointer">
-												<div  style="margin:50px auto; width:800px;">
-													<img src="${CommonURL}/images/nodata.png" style="width:800px; margin:0px auto;"/>
-													<span class="date"></span> 
+												<div  style="margin:50px auto; width:700px;">
+													<img src="${CommonURL}/images/nodata.png" style="width:700px; margin:0px auto;"/>
 												</div>
 										</c:when>
 										<c:otherwise>

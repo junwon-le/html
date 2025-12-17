@@ -277,9 +277,10 @@ $(".tab-button").click(function(){
 			
 			
 			int pageScale = fs.pageScale();
-			
 			String currentPageStr = request.getParameter("currentPage");
+			
 			String category ="전체";
+			
 			if(request.getParameter("category")!=null && !request.getParameter("category").isEmpty()){
 			String tempCategory=request.getParameter("category");
 			category = tempCategory.replaceAll("\u00A0"," ");
@@ -287,10 +288,14 @@ $(".tab-button").click(function(){
 			String keyword = request.getParameter("keyword");
 			rDTO.setCategory(category);
 			rDTO.setKeyword(keyword);
+			
 			int currentPage =1;
-			if( currentPageStr!=null && !currentPageStr.isEmpty()){
+			try{
+				if( currentPageStr!=null && !currentPageStr.isEmpty()){
 				currentPage = Integer.parseInt(currentPageStr);
 				rDTO.setCurrentPage(currentPage);
+				}
+			}catch(NumberFormatException nfe){
 			}
 			
 			int startNum = fs.startNum(currentPage, pageScale);

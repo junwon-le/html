@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../include/siteproperty.jsp" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="close"></div>
 		<div id="mainBar">
 			<div class="logo">
@@ -71,25 +70,11 @@
 					</li>
 				</ul>
 			</div>
-			<%
-			Object user = session.getAttribute("userId");
-			
-			pageContext.setAttribute("user", user);
-			%>
-			<c:choose>
-			<c:when test="${user!=null}" >
-				<div class="header-btns">
-				<a href="#void" class="vivaheader_btn" style="color: #FF6124; border: 1.5px solid #FF6124; ">예약하기</a>
-				<a href="#void" class="vivaheader_btn" style="color: #000; border: 1.5px solid #000;">로그아웃</a>
-			</div>
-			</c:when>
-			<c:otherwise>
+
 			<div class="header-btns">
 				<a href="#void" class="vivaheader_btn" style="color: #FF6124; border: 1.5px solid #FF6124; ">예약하기</a>
 				<a href="#void" class="vivaheader_btn" style="color: #000; border: 1.5px solid #000;">로그인</a>
 			</div>	
-			</c:otherwise>
-			</c:choose>
 		</div>
 		<div id=subBar >
 		<div class="close" style="float: right;" ></div>
