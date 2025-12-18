@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="../include/siteproperty.jsp" %>
+	
 	<!-- 로그인폼 디자인 시작 -->
 <style type="text/css">
 
@@ -16,21 +16,18 @@
     overflow: hidden;
 }
 
-
-/* .bg-img {
+/* 
+.bg-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-} */
+} */ 
 .bg-img {
     position: absolute;
-    top: 0;
+    top: 100px;
     left: 0;
 	bottom: 0;
-	
-    width: 100%;
-    height: 100%;
-
+	width : 1900px;
     object-fit: cover;   /* ← 핵심 */
     object-position: center;
 
@@ -47,7 +44,7 @@
     
     position: absolute;
     top: 50%;
-    right: 8%;
+    right: 15%;
     transform: translateY(-50%);
     z-index: 2;
 }
@@ -132,10 +129,6 @@
     background: #ff2f52;
 }
 
-.container {
-	min-height: 0px;
-	} 
-
 
 </style>
 <!-- 로그인폼 디자인 끝 -->
@@ -166,14 +159,13 @@ $(function(){
 </script>
 
 		<!-- 로그인 창 -->
-	    <div id="loginBgWrap">
-	       <img src="${CommonURL}/images/login/loginPg.png" class="bg-img" alt="로그인 배경">
+	      
 	   	
 	       <div class="loginFrm">
 	           <div class="page_tit">
 	               <h2>로그인</h2>
 	           </div>
-	           <form id="loginFrm" name="loginFrm" method="POST" action="login_user_process.jsp"> 
+	           <form id="loginFrm" name="loginFrm" method="POST" action="login/login_user_process.jsp"> 
 	           <div class="input_type">
 	               <input type="text" id="inputId" name="id" placeholder="아이디 입력">
 	           </div>
@@ -193,7 +185,6 @@ $(function(){
 	           </button>
 	           </form>
 	       </div>
-	    </div>
 	
 	    <!-- 로그인창 끝 -->
 

@@ -1,11 +1,12 @@
+<%@page import="kr.co.viva.login.LoginUserService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="../include/LoginChk.jsp" %>
 <%@ include file="../include/siteproperty.jsp" %>
+<%@ include file="../include/LoginChk.jsp" %>
 <!DOCTYPE html>
 <html lang="ko">
-<head>
 <meta charset="UTF-8">
+<head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VIVA PARK</title>
 <!-- 2024 경주월드 -->
@@ -81,11 +82,12 @@
     </style>
     <script type="text/javascript">
     function passChk(){
-    	//비밀번호 확인 한후 이동
-    	location.href="" //개인 정보 수정 url
-    }
-    function passChk(){
-    	alert("로그인 비번확인이랑 열결");
+    	if($("#passwordConfirm").val()==""){
+    		alert("비밀번호를 입력해주세요.");
+    		return;
+    	}
+    	$("#passChk").submit();
+    	
     }
     </script>
 </head>
@@ -115,6 +117,7 @@
             비밀번호 확인 <span class="required">*</span>
         </label>
         <div style="display:flex; margin:0px auto; width:100%;">
+        <form action="passChkProcess.jsp" method="post" id="passChk">
         <div class="input-container" style="width:500px;" >
             <input 
                 type="password" 
@@ -124,6 +127,7 @@
         </div>
             <input type="button" value="확인" onclick="passChk()" 
             style="color: #FF6124; border: 1.5px solid #FF6124; border-radius: 10px; background-color: #fff; margin-left:20px;" />
+        </form>
         </div>
         
     </div>

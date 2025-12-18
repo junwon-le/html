@@ -194,7 +194,7 @@
 			</a> <a href="info.jsp" class="menu-box"> <img
 				src="${CommonURL}/images/icon_info.png">
 				<span>운영/운휴</span>
-			</a> <a href="${CommonURL}/mypage/mypage.jsp" class="menu-box"> <img
+			</a> <a href="${CommonURL}/mypage/Mypage.jsp" class="menu-box"> <img
 				src="${CommonURL}/images/icon_mypage.png">
 				<span>마이페이지</span>
 			</a>

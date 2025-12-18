@@ -33,16 +33,19 @@
 		<!-- 햄버거 메뉴-->
 		<jsp:include page="../include/hamberger.jsp"></jsp:include>
 
+
+
+
 		<!-- 메인 공간(비어있는 흰 배경 영역) -->
-		<div class="container">
-		
+		<div class="container" style="min-height: 670px; max-height: 670px;">
+		 <img src="../images/vivaMain.png" class="bg-img" alt="로그인 배경" style="width:100%; ">
 		<!-- 로그인 페이지 -->
 		<jsp:include page="login_css.jsp"></jsp:include>
 		
 		</div>
 		<!-- container 끝 -->
 
-		<div id="footer">
+		<div id="footer" style="z-index: 88" >
 			<jsp:include page="../include/footer.jsp"></jsp:include>
 		</div>
 	</div>

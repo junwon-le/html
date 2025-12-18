@@ -231,7 +231,7 @@
 						data-bs-offset="20, 0"
 						style="background-color: #fff; color: #333; border: none; padding: 0px; margin-left: 10px; font-size: 13px;">
 						소통 서비스</button>
-					<jsp:include page="../page_navi.jsp"></jsp:include>
+					<jsp:include page="../include/page_navi.jsp"></jsp:include>
 				</div>
 				<div class="btn-group">
 					<button type="button" class="btn btn-secondary dropdown-toggle"

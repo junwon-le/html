@@ -2,64 +2,69 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../include/siteproperty.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<style>
+.headMenu{
+font-size : 17px;
+}
+</style>
 <div class="close"></div>
 		<div id="mainBar">
 			<div class="logo">
-				<img src="${CommonURL }/images/vivaLog.png"
-					alt="VIVA PARK" id="logImg" />
+				<button onclick="location.href='${CommonURL}/main/mainPg_Include.jsp'" ><img src="${CommonURL }/images/vivaLog.png"
+					alt="VIVA PARK" id="logImg" /></button>
 			</div>
 			<button class="hamburger-toggle" style="background-color:#fff; border : 0px;"><img src="${CommonURL }/images/hamburger_menu.png"/></button>
 			<div id="nav">
 				<ul id="mainMenu" class="">
 					<li>
 						<div class="liDiv">
-							<a href="">즐길거리</a>
+							<a class="headMenu" href="">즐길거리</a>
 							<div class="subItems">
 								<ul>
-									<li><a href="#void">어트랙션</a></li>
-									<li><a href="#void">푸드코트</a></li>
-									<li><a href="#void">기프트샵</a></li>
+									<li><a href="${CommonURL}/attraction/viva_Attraction_main.jsp">어트랙션</a></li>
+									<li><a href="${CommonURL}/restaurant/viva_Restaurant_main.jsp">푸드코트</a></li>
+									<li><a href="${CommonURL}/giftShop/viva_Gift_main.jsp">기프트샵</a></li>
 								</ul>
 							</div>
 						</div>
 					</li>
 					<li>
 						<div class="liDiv">
-							<a href="">행사</a>
+							<a class="headMenu" href="${CommonURL}/perf/perform.jsp?filter=all">행사</a>
 							<div class="subItems">
 								<ul>
-									<li><a href="#void">공연</a></li>
-									<li><a href="#void">퍼레이드</a></li>
+									<li><a href="${CommonURL}/perf/perform.jsp?filter=2">공연</a></li>
+									<li><a href="${CommonURL}/perf/perform.jsp?filter=1">퍼레이드</a></li>
 								</ul>
 							</div>
 						</div>
 					</li>
 					<li>
 						<div class="liDiv">
-							<a href="">요금/예매</a>
+							<a class="headMenu"  href="">요금/예매</a>
 							<div class="subItems">
 								<ul>
-									<li><a href="#void">티켓 요금</a></li>
-									<li><a href="#void">할인/예매</a></li>
+									<li><a href="${CommonURL}/reserve/">티켓 요금</a></li>
+									<li><a href="${CommonURL}/reserve/">할인/예매</a></li>
 								</ul>
 							</div>
 						</div>
 					</li>
 					<li>
 						<div class="liDiv">
-							<a href="">이용정보</a>
+							<a class="headMenu" href="">이용정보</a>
 							<div class="subItems">
 								<ul>
-									<li><a href="#void">오시는 길</a></li>
-									<li><a href="#void">영업 시간</a></li>
-									<li><a href="#void">파크 이용 안내</a></li>
+									<li><a href="${CommonURL}/info/user_guide2.jsp">오시는 길</a></li>
+									<li><a href="${CommonURL}/info/user_guide1.jsp">영업 시간</a></li>
+									<li><a href="${CommonURL}/info/user_guide3.jsp">파크 이용 안내</a></li>
 								</ul>
 							</div>
 						</div>
 					</li>
 					<li>
 						<div class="liDiv">
-							<a href="${CommonURL }/notice/Notice.jsp">소통 서비스</a>
+							<a class="headMenu" href="${CommonURL }/notice/Notice.jsp">소통 서비스</a>
 							<div class="subItems">
 								<ul>
 									<li><a href="${CommonURL}/notice/Notice.jsp">공지</a></li>
@@ -80,13 +85,13 @@
 			<c:when test="${user!=null}" >
 				<div class="header-btns">
 				<a href="#void" class="vivaheader_btn" style="color: #FF6124; border: 1.5px solid #FF6124; ">예약하기</a>
-				<a href="#void" class="vivaheader_btn" style="color: #000; border: 1.5px solid #000;">로그아웃</a>
+				<a href="${CommonURL}/login/loginPg_Include.jsp" class="vivaheader_btn" style="color: #000; border: 1.5px solid #000;">로그아웃</a>
 			</div>
 			</c:when>
 			<c:otherwise>
 			<div class="header-btns">
 				<a href="#void" class="vivaheader_btn" style="color: #FF6124; border: 1.5px solid #FF6124; ">예약하기</a>
-				<a href="#void" class="vivaheader_btn" style="color: #000; border: 1.5px solid #000;">로그인</a>
+				<a href="${CommonURL}/login/loginPg_Include.jsp" class="vivaheader_btn" style="color: #000; border: 1.5px solid #000;">로그인</a>
 			</div>	
 			</c:otherwise>
 			</c:choose>

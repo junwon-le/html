@@ -70,7 +70,7 @@
 		}
 		
 		%>
-		<jsp:include page="../page_navi.jsp"></jsp:include>
+		<jsp:include page="../include/page_navi.jsp"></jsp:include>
 		<div>
 			<h1 style="text-align: center; margin: 50px;">공지사항</h1>
 		</div>

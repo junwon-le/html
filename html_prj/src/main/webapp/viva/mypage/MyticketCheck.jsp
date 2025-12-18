@@ -373,7 +373,7 @@ visibility: visible;
 		pageContext.setAttribute("myticketList", myticketList);
 		%>
 		<div class="container" style="height: 900px; position: relative;">
-			<jsp:include page="../page_navi.jsp"></jsp:include>
+			<jsp:include page="../include/page_navi.jsp"></jsp:include>
 
 			<div
 				style="max-width: 1000px; margin: 80px auto; background-color: #fff8e7; padding-top: 50px; padding-bottom: 80px; border-radius: 20px;">

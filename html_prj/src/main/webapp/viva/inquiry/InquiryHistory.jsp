@@ -495,7 +495,7 @@ max-width: 800px;
 
 		<!-- 메인 공간(비어있는 흰 배경 영역) -->
 		<div class="container" style="height: auto; position: relative;">
-			<jsp:include page="../page_navi.jsp"></jsp:include>
+			<jsp:include page="../include/page_navi.jsp"></jsp:include>
 			<div class="payment-history-container">
 
 				<div class="title-section">

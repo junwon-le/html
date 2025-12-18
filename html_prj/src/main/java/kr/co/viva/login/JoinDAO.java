@@ -88,4 +88,43 @@ private static JoinDAO jDAO;
 			return flag;
 		
 	}//insertMember
+	
+	
+	
+	public JoinDTO selectInfo(String id) throws SQLException {
+			JoinDTO jDTO = new JoinDTO();
+			DbConn db = DbConn.getInstance("jdbc/dbcp");
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				con = db.getConn();
+				StringBuilder insertInquiry = new StringBuilder();
+				
+				insertInquiry
+				.append("	 select  name, birth, email, zipcode, addr, addrdetail, tell from member	")
+				.append("	where id=?");
+				
+	 			pstmt = con.prepareStatement(insertInquiry.toString());
+				
+	 			pstmt.setString(1, id);
+	 			
+				pstmt.executeQuery();
+				
+				if(rs.next()) {
+					jDTO.setName(rs.getString("name"));
+					jDTO.setBirth(rs.getString("birth"));
+					jDTO.setEmail(rs.getString("email"));
+					jDTO.setZipCode(rs.getInt("zipcode"));
+					jDTO.setAddr(rs.getString("addr"));
+					jDTO.setAddrDetail(rs.getString("addrdetail"));
+					jDTO.setTel(rs.getString("tell"));
+					
+				}
+			}finally{
+				db.dbClose(rs, pstmt, con);
+			}//end finally
+			return jDTO;
+		
+	}//insertMember
 }

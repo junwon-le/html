@@ -1,3 +1,7 @@
+<%@page import="kr.co.viva.payHistory.payHistoryDTO"%>
+<%@page import="kr.co.viva.payHistory.RangeDTO"%>
+<%@page import="kr.co.viva.payHistory.payHistoryService"%>
+<%@page import="java.util.List"%>
 <%@page import="javax.print.attribute.standard.RequestingUserName"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.beans.SimpleBeanInfo"%>
@@ -7,6 +11,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<%@ include file="../include/LoginChk.jsp" %>
+<%@ include file="../include/siteproperty.jsp" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -304,13 +310,13 @@
 }
 
 /* 예매 완료 상태 스타일 */
-.status-badge.complete {
+.status-badge.N {
 	background-color: #e5f1ff; /* 매우 연한 파란색 배경 */
 	color: #2a6ce4; /* 파란색 텍스트 */
 }
 
 /* 취소 완료 상태 스타일 */
-.status-badge.canceled {
+.status-badge.Y {
 	background-color: #f5f5f7; /* 연한 회색 배경 */
 	color: #777; /* 회색 텍스트 */
 }
@@ -419,10 +425,12 @@ detail-container {
 </style>
 <script type="text/javascript">
 	$(function() {
-			// 테이블 행 클릭 시 모달 열기 (기존 코드 유지)
-		$(".payment-table tbody tr ").click(function() {
-			$(".payHistoryDiv").addClass("open");
-		});
+ 			// 테이블 행 클릭 시 모달 열기 (기존 코드 유지)
+			$(".payment-table tbody tr ").click(function() {
+				$(".payHistoryDiv").addClass("open");
+				var num =$(this).find("td .num").val();
+				detail(num);
+			});
 
 		// 탭 버튼 클릭 이벤트 핸들러 추가
 		$(".tab-menu .tab-button").click(function() {
@@ -442,9 +450,27 @@ detail-container {
 	function closeDiv() {
 		$(".payHistoryDiv").removeClass("open");
 	}
-	function closeDiv() {
-		$(".payHistoryDiv").removeClass("open");
-	}
+	function detail(num){
+		var param = {num :num };
+		$.ajax({
+			url:"payDetailProcess.jsp",
+			type:"get",
+			data:param,
+			dataType:"json",
+			error:function(xhr){
+				alert("서버에서 문제가 발생 하였습니다.");
+				console.log(xhr.status);
+			},
+			success: function(jsonObj){
+				$("#tName").html(jsonObj.tName);
+				$("#price").html(jsonObj.price);
+				$("#personCnt").html("성인: "+jsonObj.adultCnt+"명 / 청소년: "+jsonObj.teenCnt+"명 / 어린이: "+jsonObj.kidsCnt+"명");
+				$("#payDate").html(jsonObj.payDate);
+				$("#agency").html(jsonObj.agency);
+				$("#installment").html(jsonObj.installment);
+			}
+		})
+}
 </script>
 </head>
 <body>
@@ -459,7 +485,7 @@ detail-container {
 
 		<!-- 메인 공간(비어있는 흰 배경 영역) -->
 		<div class="container" style="height: auto; position: relative;">
-			<jsp:include page="../page_navi.jsp"></jsp:include>
+			<jsp:include page="../include/page_navi.jsp"></jsp:include>
 			<div class="payment-history-container">
 
 				<div class="title-section">
@@ -469,14 +495,13 @@ detail-container {
 							불가</strong>하시니 유의하시기 바랍니다.
 					</p>
 				</div>
-				<form action="payhistory.jsp" method="get">
 					<div class="search-filter-box">
 						<div class="filter-group">
 
-							<button class="period-button" name="period" value="1">1개월</button>
+							<%--  <button class="period-button" name="period" value="1">1개월</button>
 							<button class="period-button" name="period" value="3">3개월</button>
 							<button class="period-button" name="period" value="6">6개월</button>
-							<button class="period-button" name="period" value="12">12개월</button>
+							<button class="period-button" name="period" value="12">12개월</button> 
 							<%
 							Calendar startCal = Calendar.getInstance();
 							Calendar endCal = Calendar.getInstance();
@@ -493,46 +518,94 @@ detail-container {
 							
 							String search = request.getParameter("search");
 							String searchStart = request.getParameter("startDate");
-							String searchEnd = request.getParameter("endDate");
+							String searchEnd = request.getParameter("endDate"); 
+							%> --%>
+							
+							<%
+							payHistoryService phs = payHistoryService.getInstance();
+							RangeDTO rDTO = new RangeDTO();
+							int num =1;
+							
+							int pageScale = phs.pageScale();
+							String tempPage = request.getParameter("currentPage");
+							int currentPage = 1;
+							if (tempPage != null) {
+								currentPage = Integer.parseInt(tempPage);
+								rDTO.setCurrentPage(currentPage);
+
+							}
+
+							int startNum = phs.startNum(currentPage, pageScale);
+							int endNum = phs.endNum(startNum, pageScale);
+							rDTO.setStartNum(startNum);
+							rDTO.setEndNum(endNum);
+							if(request.getParameter("endDate")!=null){
+							rDTO.setEndDate(request.getParameter("endDate"));
+							}
+							if(request.getParameter("startDate")!=null){
+							rDTO.setStartDate(request.getParameter("startDate"));
+							}
+							
+							rDTO.setUrl("payhistory.jsp");
+
+							
+							int payHistoryTotalCnt = phs.payHistoryTotalCnt(num, rDTO);
+							int totalPage = phs.totalPage(payHistoryTotalCnt, pageScale);
+							rDTO.setTotalPage(totalPage);
+							List<payHistoryDTO> payList = phs.searchPayHistory(num, rDTO);
+							String pagination = phs.pagination(rDTO);
+							
+							pageContext.setAttribute("payList", payList);
+							pageContext.setAttribute("pagination", pagination);
+							
 							%>
+							<form action="payhistory.jsp" method="get" class="filter-group" >
 							<div class="date-input-group">
-								<input type="date" id="startDate" name="startDate" value="${startDate}"
+								<input type="date" id="startDate" name="startDate" value="${param.startDate}"
 									style="width: 130px;" />
 
 							</div>
 							<span>~</span>
 							<div class="date-input-group">
-								<input type="date" id="endDate" name="endDate" value="${endDate}"
+								<input type="date" id="endDate" name="endDate" value="${param.endDate}"
 									style="width: 130px;">
 							</div>
 
 							<button class="action-button search-button" name="search">검색</button>
-
-							<button class="action-button reset-button">초기화</button>
+<!-- 							<button class="action-button reset-button">초기화</button>
+ -->							<input type="hidden" name="button" value="${param.button}" />
+							
+							</form>
 						</div>
 					</div>
-				<c:if test="${empty param.button or param.button eq '전체' }">
-					<div class="tab-menu">
-						<button class="tab-button active" name="button" value="전체" style="border-radius: 20px;">전체</button>
-						<button class="tab-button" name="button" value="예매완료" style="border-radius: 20px;">예매완료</button>
-						<button class="tab-button" name="button" value="취소" style="border-radius: 20px;">취소/환불</button>
-					</div>
-				</c:if>
-				<c:if test="${param.button eq '예매완료' }">
+						<div class="tab-button active" name="button" value="전체" style="border-radius: 20px; margin-bottom:10px; width:140px">티켓 예매 내역</div>
+				<%-- <form action="payhistory.jsp" method="get">
+					<c:choose>
+				<c:when test="${param.button eq '예매완료' }">
 					<div class="tab-menu">
 						<button class="tab-button" name="button" value="전체" style="border-radius: 20px;">전체</button>
 						<button class="tab-button active" name="button" value="예매완료" style="border-radius: 20px;">예매완료</button>
 						<button class="tab-button" name="button" value="취소" style="border-radius: 20px;">취소/환불</button>
 					</div>
-				</c:if>
-				<c:if test="${param.button eq '취소' }">
+				</c:when>
+				<c:when test="${param.button eq '취소' }">
 					<div class="tab-menu">
 						<button class="tab-button " name="button" value="전체" style="border-radius: 20px;">전체</button>
 						<button class="tab-button" name="button" value="예매완료" style="border-radius: 20px;">예매완료</button>
 						<button class="tab-button active" name="button" value="취소" style="border-radius: 20px;">취소/환불</button>
 					</div>
-				</c:if>
-				</form>
+				</c:when>
+				<c:otherwise>
+					<div class="tab-menu">
+						<button class="tab-button active" name="button" value="전체" style="border-radius: 20px;">전체</button>
+						<button class="tab-button" name="button" value="예매완료" style="border-radius: 20px;">예매완료</button>
+						<button class="tab-button" name="button" value="취소" style="border-radius: 20px;">취소/환불</button>
+					</div>
+				</c:otherwise>
+					</c:choose>
+					<input type="hidden" name="startDate" value="${param.startDate}" />
+					<input type="hidden" name="endDate" value="${param.endDate}" />
+				</form> --%>
 
 				<div class="content-area">
 					<div class="summary-count">총 **0**건</div>
@@ -540,65 +613,43 @@ detail-container {
 						<table class="payment-table">
 							<thead>
 								<tr>
-									<th style="width: 5%;">NO.</th>
+									<th style="width: 5%;">결제번호</th>
 									<th style="width: 15%;">결제일</th>
-									<th style="width: 30%;">결제명</th>
-									<th style="width: 10%;">인원</th>
+									<th style="width: 20%;">결제명</th>
+									<th style="width: 40%;">인원</th>
 									<th style="width: 20%;">결제 금액</th>
-									<th style="width: 20%;">예매 상태</th>
+									<th style="width: 10%;">예매 상태</th>
 								</tr>
 							</thead>
 							<tbody>
-								<%
-								//예매 상태 받아서 ui처리하는 코드
-								int dbPayState = 1;
-								String payState = null;
-								for (int i = 0; i < 5; i++) {
-									payState = "canceled";
-									if (dbPayState % 2 == 1) {
-										payState = "complete";
-									} //end if
-									dbPayState++;
-								%>
+								<c:forEach var="payDTO" items="${payList }">
 								<tr>
-									<td class="col-no"><%=i%></td>
-									<td class="col-date"><%="pay_date"%></td>
-									<td class="col-product"><span class="product-badge"><%="type"%></span>
+									<td class="col-no" >${payDTO.num}
+									<input type="hidden" value="${payDTO.num }" class="num"/>
+									 </td>
+									<td class="col-date">${payDTO.payDate}</td>
+									<td class="col-product"><span class="product-badge">${payDTO.tName}</span>
 									</td>
-									<td class="col-people"><%="personCnt"%></td>
-									<td class="col-amount"><%="price"%></td>
+									<td class="col-people">어른:${payDTO.adultCnt} 청소년:${payDTO.teenagerCnt} 어린이:${payDTO.kidsCnt}</td>
+									<td class="col-amount">${payDTO.price}</td>
 									<td class="col-status"><span
-										class="status-badge <%=payState%>"><%="payState"%></span></td>
+										class="status-badge ${payDTO.state }">${payDTO.state }</span></td>
 								</tr>
-								<%
-								} //end for
-								%>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>
 			<div id="BoardListPager">
-				<div>
-					<ul class="pagination mt-2 mb-2 justify-content-center">
-						<div class="page-item">
-							<a class="page-link" href="#">&lt;&lt;</a>
-						</div>
-						<div class="page-item">
-							<a class="page-link" href="#">&lt;</a>
-						</div>
-						<div class="page-item active">
-							<a class="page-link" data-pagenumber="1" href="#">1</a>
-						</div>
-						<div class="page-item">
-							<a class="page-link" href="#">&gt;</a>
-						</div>
-						<div class="page-item">
-							<a class="page-link" href="?cmsNo=DD0100&bgrp&page=1">&gt;&gt;</a>
-						</div>
-					</ul>
-				</div>
-			</div>
+								<div>
+										<div class="pagination" style="margin : 0px auto; width:300px;" >
+												<div class="page-item" style="display:flex; justify-content: center;width:300px;">
+													${pagination}
+												</div>
+										</div>
+									</div>
+								</div>
 			<!-- 모달 구현 -->
 			<div class="payHistoryDiv"
 				style="width: 100%; height: 100%; position: absolute; top: 0px; left: 0px;">
@@ -612,17 +663,14 @@ detail-container {
 
 						<ul class="detail-list">
 							<li class="detail-item"><span class="item-icon">📄</span> <span
-								class="item-label">상품명</span> <span class="item-value">1일
-									자유이용권</span></li>
+								class="item-label">상품명</span> <span class="item-value" id=tName></span></li>
 							<li class="detail-item"><span class="item-icon">⏱️</span> <span
-								class="item-label">결제 일시</span> <span class="item-value">2025년
-									11월 06일 22시 30분</span></li>
+								class="item-label">결제 일시</span> <span class="item-value" id=payDate></span></li>
 							<li class="detail-item"><span class="item-icon">💳</span> <span
 								class="item-label">결제 수단</span> <span class="item-value">신용카드</span>
 							</li>
 							<li class="detail-item"><span class="item-icon">👥</span> <span
-								class="item-label">인원수</span> <span class="item-value">성인
-									2명 / 청소년 1명</span></li>
+								class="item-label">인원수</span> <span class="item-value" id=personCnt></span></li>
 							<li class="detail-item"><span class="item-icon">🏢</span> <span
 								class="item-label">결제 기관</span> <span class="item-value">삼성</span>
 							</li>
@@ -630,10 +678,10 @@ detail-container {
 								class="item-label">가맹점</span> <span class="item-value">(주)VIVAPARK</span>
 							</li>
 							<li class="detail-item"><span class="item-icon">💰</span> <span
-								class="item-label">결제 금액</span> <span class="item-value">36000</span>
+								class="item-label">결제 금액</span> <span class="item-value" id="price"></span>
 							</li>
 							<li class="detail-item"><span class="item-icon">🗑️</span> <span
-								class="item-label">할부개월</span> <span class="item-value">일시불</span>
+								class="item-label">할부개월</span> <span class="item-value" id="installment"></span>
 							</li>
 						</ul>
 

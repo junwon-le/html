@@ -377,8 +377,8 @@
 
       <div class="title-text">회원가입</div>
 
-      <img src="${CommonURL}/images/login/poppy.png" class="title-character poppy">
-      <img src="${CommonURL}/images/login/bibi.png" class="title-character bibi">
+      <img src="${CommonURL}/images/poppy.png" class="title-character poppy">
+      <img src="${CommonURL}/images/bibi.png" class="title-character bibi">
       <div class="title-cover-line"></div>
    </div>
 </div>

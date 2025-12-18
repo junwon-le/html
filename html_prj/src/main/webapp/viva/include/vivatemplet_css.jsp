@@ -62,8 +62,8 @@ hr {
 
 #mainBar {
 	background: #fff;
-	min-width: 1200px;
-	width: 1300px;
+	min-width: 1300px;
+	width: 1250px;
 	height: 100%;
 	display: flex;
 	justify-content: space-between;

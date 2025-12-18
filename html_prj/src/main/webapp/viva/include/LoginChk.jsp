@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <%
-session.setAttribute("userId", "test");
+session.setAttribute("UserId", "test");
 %>
+session.setAttribute("UserNum", "1"); 
 
-<c:if test="${sessionScope.userId == null }">
-<c:redirect url="http://localhost/html_prj/viva/tempLogin.jsp"/>
+<c:if test="${sessionScope.UserId == null }">
+<c:redirect url="${CommonURL }/login/loginPg_Include.jsp"/>
 </c:if>
